@@ -11,15 +11,18 @@ function App() {
       <header id="home" className="flex flex-col h-svh font-alagard ">
         <Background backgroundImage={heroBackground} />
         <Container gap="0">
-          <h1 className="md:col-span-6 md:col-start-5 text-[4rem] font-bold leading-tight text-shadow-blue text-outline">
+          <h1 className="col-span-12 md:col-span-6 text-[4rem] font-bold leading-tight text-shadow-blue text-outline">
             Hey, I'm Silas
           </h1>
-          <p className="md:col-span-6 md:col-start-5 row-start-2 font-pressStart pb-4 text-[1.75rem] leading-tight text-shadow-blue-dark">
+          <p className="col-span-12 md:col-span-6 row-start-2 font-pressStart pb-4 text-[1.75rem] leading-tight text-shadow-blue-dark">
             Designing and developing cool stuff is what I do!
           </p>
-          <div className="md:col-span-6 md:col-start-5 row-start-3 space-x-8">
+          <div className="col-span-12 md:col-span-6 row-start-3 space-x-8">
             <LinkButton href="#projects">Projects</LinkButton>
             <LinkButton href="#contact">Contact</LinkButton>
+          </div>
+          <div className="row-span-3 bg-red-500 col-span-6">
+            placeholder box
           </div>
         </Container>
         <Nav />

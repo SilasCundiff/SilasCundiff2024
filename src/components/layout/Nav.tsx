@@ -20,49 +20,54 @@ export default function Nav() {
   }, [scrollPosition]);
 
   return (
-    <>
+    <div className="w-full bg-white selection:bg-white">
       <div
-        className="fixed bottom-8 right-8 text-3xl md:hidden z-10 bg-white rounded-md cursor-pointer w-12 h-12 flex justify-center items-center select-none"
+        className="fixed bottom-8 right-8 md:hidden z-10 bg-white rounded-md cursor-pointer w-12 h-12 flex justify-center items-center select-none"
         onClick={() => {
           setNavOpen(!navOpen);
         }}
       >
         <FontAwesomeIcon icon={faBars} height={48} width={48} />
       </div>
-      <nav
-        className={`shadow-md translate-x-full transition-transform fixed bg-white right-0 h-svh flex md:flex-row flex-col w-40 md:w-full md:h-24 md:translate-x-0 select-none font-pressStart text-lg ${
-          isSticky ? "md:fixed top-0" : "md:relative"
-        }
-            ${navOpen ? "translate-x-0" : ""}
-            `}
-      >
-        <div className="flex justify-center items-center">
-          <a
-            className="md:w-24 h-24 flex justify-center items-center"
-            href="#home"
-          >
-            <img src={logo} alt="silas cundiff logo" height={64} width={64} />
-          </a>
-        </div>
-        <ul className="flex md:flex-row flex-col flex-1 items-center w-full mt-4 md:mt-0 bg-white gap-4 md:gap-8">
-          <NavItem url="#skills">skill tree</NavItem>
-          <NavItem url="#projects">projects deck</NavItem>
-          <NavItem url="#about">lore</NavItem>
-          <NavItem url="#contact">/whisper</NavItem>
+      <div className="container mx-auto">
+        <nav
+          className={`transition-transform fixed right-0 h-svh flex md:flex-row flex-col w-40 md:w-full md:h-24 md:translate-x-0 select-none font-pressStart text-sm ${
+            isSticky ? "md:fixed top-0" : "md:relative"
+          }
+                ${navOpen ? "translate-x-0" : "translate-x-full"}
+                `}
+        >
+          <div className="flex justify-center items-center">
+            <a
+              className="md:w-24 h-24 flex justify-center items-center"
+              href="#home"
+            >
+              <img src={logo} alt="silas cundiff logo" height={64} width={64} />
+            </a>
+          </div>
+          <ul className="flex md:flex-row flex-col flex-1 items-center w-full mt-4 md:mt-0 bg-white gap-4">
+            <NavItem url="#skills">skills</NavItem>
+            <NavItem url="#projects">projects</NavItem>
+            <NavItem url="#about">lore</NavItem>
+            <NavItem url="#contact">/whisper</NavItem>
 
-          <li className="md:my-auto my-2 text-black text-2xl">
-            <a target="_blank" href="https://github.com/SilasCundiff">
-              <FontAwesomeIcon icon={faGithubAlt} />
-            </a>
-          </li>
-          <li className="md:my-auto my-2 text-black text-2xl md:mr-8">
-            <a target="_blank" href="https://www.linkedin.com/in/silascundiff/">
-              <FontAwesomeIcon icon={faLinkedin} />
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </>
+            <li className="md:my-auto my-2 text-black text-2xl">
+              <a target="_blank" href="https://github.com/SilasCundiff">
+                <FontAwesomeIcon icon={faGithubAlt} />
+              </a>
+            </li>
+            <li className="md:my-auto my-2 text-black text-2xl md:mr-8">
+              <a
+                target="_blank"
+                href="https://www.linkedin.com/in/silascundiff/"
+              >
+                <FontAwesomeIcon icon={faLinkedin} />
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
   );
 }
 
