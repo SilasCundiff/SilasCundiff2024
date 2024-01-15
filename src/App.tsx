@@ -5,7 +5,7 @@ import Section from "./components/layout/Section";
 function App() {
   return (
     <>
-      <header className="flex flex-col h-svh">
+      <header id="home" className="flex flex-col h-svh">
         <Container>
           <h1 className="w-full col-span-3 text-4xl font-bold bg-red-500">
             Hello world!
