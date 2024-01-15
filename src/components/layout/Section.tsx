@@ -1,3 +1,13 @@
-export default function Section({ children }: { children: React.ReactNode }) {
-  return <section className="h-svh flex flex-col">{children}</section>;
+export default function Section({
+  children,
+  id,
+}: {
+  children: React.ReactNode;
+  id: string;
+}) {
+  return (
+    <section id={id} className="h-svh flex flex-col">
+      {children}
+    </section>
+  );
 }

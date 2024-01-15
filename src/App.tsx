@@ -28,32 +28,24 @@ function App() {
         </Container>
         <Nav />
       </header>
-      <Section>
+      <Section id="skills">
         <Container>
-          <h2 id="skills" className="text-4xl font-bold">
-            skill tree
-          </h2>
+          <h2 className="text-4xl font-bold">skill tree</h2>
         </Container>
       </Section>
-      <Section>
+      <Section id="projects">
         <Container>
-          <h2 id="projects" className="text-4xl font-bold">
-            projects deck
-          </h2>
+          <h2 className="text-4xl font-bold">projects deck</h2>
         </Container>
       </Section>
-      <Section>
+      <Section id="about">
         <Container>
-          <h2 id="about" className="text-4xl font-bold">
-            lore
-          </h2>
+          <h2 className="text-4xl font-bold">lore</h2>
         </Container>
       </Section>
-      <Section>
+      <Section id="contact">
         <Container>
-          <h2 id="contact" className="text-4xl font-bold">
-            /whisper
-          </h2>
+          <h2 className="text-4xl font-bold">/whisper</h2>
         </Container>
       </Section>
     </>
