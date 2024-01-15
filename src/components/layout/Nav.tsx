@@ -22,7 +22,7 @@ export default function Nav() {
   return (
     <>
       <div
-        className="fixed bottom-8 right-8 text-3xl md:hidden z-10 cursor-pointer w-12 h-12 flex justify-center items-center select-none"
+        className="fixed bottom-8 right-8 text-3xl md:hidden z-10 bg-white rounded-md cursor-pointer w-12 h-12 flex justify-center items-center select-none"
         onClick={() => {
           setNavOpen(!navOpen);
         }}
@@ -30,11 +30,11 @@ export default function Nav() {
         <FontAwesomeIcon icon={faBars} height={48} width={48} />
       </div>
       <nav
-        className={`translate-x-full transition-transform fixed right-0 h-svh flex md:flex-row flex-col w-40 md:w-full md:h-24 md:translate-x-0 select-none ${
+        className={`shadow-md translate-x-full transition-transform fixed bg-white right-0 h-svh flex md:flex-row flex-col w-40 md:w-full md:h-24 md:translate-x-0 select-none font-arcade text-2xl ${
           isSticky ? "md:fixed top-0" : "md:relative"
         }
-        ${navOpen ? "translate-x-0" : ""}
-        `}
+            ${navOpen ? "translate-x-0" : ""}
+            `}
       >
         <div className="flex justify-center items-center">
           <a
@@ -44,7 +44,7 @@ export default function Nav() {
             <img src={logo} alt="silas cundiff logo" height={64} width={64} />
           </a>
         </div>
-        <ul className="flex md:flex-row flex-col flex-1 items-center w-full mt-4 md:mt-0 bg-blue-300 gap-4 md:gap-8">
+        <ul className="flex md:flex-row flex-col flex-1 items-center w-full mt-4 md:mt-0 bg-white gap-4 md:gap-8">
           <NavItem url="#skills">
             <a>skill tree</a>
           </NavItem>

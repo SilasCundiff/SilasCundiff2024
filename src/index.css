@@ -2,7 +2,42 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Alagard";
+  src: url("./assets/fonts/alagard.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "ArcadeClassic";
+  src: url("./assets/fonts/ARCADECLASSIC.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Minecraftia-Regular";
+  src: url("./assets/fonts/Minecraftia-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 *,
 html {
   scroll-behavior: smooth !important;
+}
+
+.text-shadow-blue {
+  text-shadow: 3px 3px 0px #30bce2;
+  color: white;
+}
+
+.text-shadow-blue-dark {
+  text-shadow: 2px 2px 0px #06234d;
+  color: white;
+}
+
+.text-outline {
+  -webkit-text-stroke: 0.1px #000;
 }

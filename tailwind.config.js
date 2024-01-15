@@ -3,9 +3,11 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
-      // columns: {
-      //   12: "repeat(12, minmax(0, 72px))",
-      // },
+      fontFamily: {
+        alagard: ["Alagard", "sans-serif"],
+        arcade: ["ArcadeClassic", "sans-serif"],
+        minecraft: ["Minecraftia-Regular", "sans-serif"],
+      },
     },
     container: {
       screens: {

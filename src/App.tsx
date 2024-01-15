@@ -1,30 +1,24 @@
 import Container from "./components/layout/Container";
 import Nav from "./components/layout/Nav";
 import Section from "./components/layout/Section";
+import heroBackground from "./assets/images/hero-background.png";
+import Background from "./components/common/Background";
 
 function App() {
   return (
     <>
-      <header id="home" className="flex flex-col h-svh">
-        <Container>
-          <h1 className="w-full col-span-3 text-4xl font-bold bg-red-500">
-            Hello world!
+      <header id="home" className="flex flex-col h-svh font-alagard ">
+        <Background backgroundImage={heroBackground} />
+        <Container gap="0">
+          <h1 className="md:col-span-6 md:col-start-5 text-[4rem] font-bold leading-tight text-shadow-blue text-outline">
+            Hey, I'm Silas
           </h1>
-          <h1 className="w-full col-span-9 text-4xl font-bold bg-blue-400">
-            Hello world!
-          </h1>
-          <h1 className="w-full col-span-3 text-4xl font-bold bg-black">
-            Hello world!
-          </h1>
-          <h1 className="w-full col-span-3 text-4xl font-bold bg-green-300">
-            Hello world!
-          </h1>
-          <h1 className="w-full col-span-6 text-4xl font-bold bg-slate-500">
-            Hello world!
-          </h1>
-          <h1 className="w-full col-span-12 text-4xl font-bold bg-slate-500">
-            Hello world!
-          </h1>
+          <p className="md:col-span-6 md:col-start-5 row-start-2 text-[2.5rem] leading-10 text-shadow-blue-dark">
+            Designing and developing cool stuff is what I do!
+          </p>
+          <div className="md:col-span-6 md:col-start-5 row-start-3">
+            buttons go here
+          </div>
         </Container>
         <Nav />
       </header>
