@@ -1,10 +1,11 @@
 import Container from "./components/layout/Container";
+import Nav from "./components/layout/Nav";
 import Section from "./components/layout/Section";
 
 function App() {
   return (
     <>
-      <Section>
+      <header className="flex flex-col h-svh">
         <Container>
           <h1 className="w-full col-span-3 text-4xl font-bold bg-red-500">
             Hello world!
@@ -25,18 +26,35 @@ function App() {
             Hello world!
           </h1>
         </Container>
+        <Nav />
+      </header>
+      <Section>
+        <Container>
+          <h2 id="skills" className="text-4xl font-bold">
+            skill tree
+          </h2>
+        </Container>
       </Section>
       <Section>
-        <h2 className="text-4xl font-bold">skill tree</h2>
+        <Container>
+          <h2 id="projects" className="text-4xl font-bold">
+            projects deck
+          </h2>
+        </Container>
       </Section>
       <Section>
-        <h2 className="text-4xl font-bold">projects deck</h2>
+        <Container>
+          <h2 id="about" className="text-4xl font-bold">
+            lore
+          </h2>
+        </Container>
       </Section>
       <Section>
-        <h2 className="text-4xl font-bold">lore</h2>
-      </Section>
-      <Section>
-        <h2 className="text-4xl font-bold">/whisper</h2>
+        <Container>
+          <h2 id="contact" className="text-4xl font-bold">
+            /whisper
+          </h2>
+        </Container>
       </Section>
     </>
   );
