@@ -30,7 +30,7 @@ export default function Nav() {
         <FontAwesomeIcon icon={faBars} height={48} width={48} />
       </div>
       <nav
-        className={`shadow-md translate-x-full transition-transform fixed bg-white right-0 h-svh flex md:flex-row flex-col w-40 md:w-full md:h-24 md:translate-x-0 select-none font-arcade text-2xl ${
+        className={`shadow-md translate-x-full transition-transform fixed bg-white right-0 h-svh flex md:flex-row flex-col w-40 md:w-full md:h-24 md:translate-x-0 select-none font-pressStart text-lg ${
           isSticky ? "md:fixed top-0" : "md:relative"
         }
             ${navOpen ? "translate-x-0" : ""}
@@ -45,23 +45,17 @@ export default function Nav() {
           </a>
         </div>
         <ul className="flex md:flex-row flex-col flex-1 items-center w-full mt-4 md:mt-0 bg-white gap-4 md:gap-8">
-          <NavItem url="#skills">
-            <a>skill tree</a>
-          </NavItem>
-          <NavItem url="#projects">
-            <a>projects deck</a>
-          </NavItem>
-          <NavItem url="#about">
-            <a>lore</a>
-          </NavItem>
+          <NavItem url="#skills">skill tree</NavItem>
+          <NavItem url="#projects">projects deck</NavItem>
+          <NavItem url="#about">lore</NavItem>
           <NavItem url="#contact">/whisper</NavItem>
 
-          <li className="md:my-auto my-2 text-white text-2xl">
+          <li className="md:my-auto my-2 text-black text-2xl">
             <a target="_blank" href="https://github.com/SilasCundiff">
               <FontAwesomeIcon icon={faGithubAlt} />
             </a>
           </li>
-          <li className="md:my-auto my-2 text-white text-2xl md:mr-8">
+          <li className="md:my-auto my-2 text-black text-2xl md:mr-8">
             <a target="_blank" href="https://www.linkedin.com/in/silascundiff/">
               <FontAwesomeIcon icon={faLinkedin} />
             </a>

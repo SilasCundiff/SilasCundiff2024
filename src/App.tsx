@@ -3,6 +3,7 @@ import Nav from "./components/layout/Nav";
 import Section from "./components/layout/Section";
 import heroBackground from "./assets/images/hero-background.png";
 import Background from "./components/common/Background";
+import LinkButton from "./components/common/LinkButton";
 
 function App() {
   return (
@@ -13,11 +14,12 @@ function App() {
           <h1 className="md:col-span-6 md:col-start-5 text-[4rem] font-bold leading-tight text-shadow-blue text-outline">
             Hey, I'm Silas
           </h1>
-          <p className="md:col-span-6 md:col-start-5 row-start-2 text-[2.5rem] leading-10 text-shadow-blue-dark">
+          <p className="md:col-span-6 md:col-start-5 row-start-2 font-pressStart pb-4 text-[1.75rem] leading-tight text-shadow-blue-dark">
             Designing and developing cool stuff is what I do!
           </p>
-          <div className="md:col-span-6 md:col-start-5 row-start-3">
-            buttons go here
+          <div className="md:col-span-6 md:col-start-5 row-start-3 space-x-8">
+            <LinkButton href="#projects">Projects</LinkButton>
+            <LinkButton href="#contact">Contact</LinkButton>
           </div>
         </Container>
         <Nav />

@@ -5,8 +5,8 @@ export default {
     extend: {
       fontFamily: {
         alagard: ["Alagard", "sans-serif"],
-        arcade: ["ArcadeClassic", "sans-serif"],
         minecraft: ["Minecraftia-Regular", "sans-serif"],
+        pressStart: ["PressStart2P-Regular", "sans-serif"],
       },
     },
     container: {
