@@ -1,26 +1,29 @@
-/* Tailwind directives - these will be processed separately by Tailwind CSS */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /* Font-face definitions */
 @font-face {
-  font-family: "Alagard";
-  src: url("./assets/fonts/alagard.ttf") format("truetype");
+  font-family: 'Alagard';
+  src: url('../public/fonts/alagard.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "Minecraftia-Regular";
-  src: url("./assets/fonts/Minecraftia-Regular.ttf") format("truetype");
+  font-family: 'Minecraftia-Regular';
+  src: url('../public/fonts/Minecraftia-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "PressStart2P-Regular";
-  src: url("./assets/fonts/PressStart2P-Regular.ttf") format("truetype");
+  font-family: 'PressStart2P-Regular';
+  src: url('../public/fonts/PressStart2P-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -63,25 +66,22 @@ html {
   text-align: center;
   text-decoration: none;
   color: white;
-  box-shadow: inset calc(-1 * var(--shadow-width))
-    calc(-1 * var(--shadow-width)) 0px 0px var(--shadow-color);
+  box-shadow: inset calc(-1 * var(--shadow-width)) calc(-1 * var(--shadow-width)) 0px 0px var(--shadow-color);
 }
 
 .eightbit-btn:hover,
 .eightbit-btn:focus {
   background: var(--secondary-button-background);
-  box-shadow: inset calc(-1.5 * var(--shadow-width))
-    calc(-1.5 * var(--shadow-width)) 0px 0px var(--shadow-color);
+  box-shadow: inset calc(-1.5 * var(--shadow-width)) calc(-1.5 * var(--shadow-width)) 0px 0px var(--shadow-color);
 }
 
 .eightbit-btn:active {
-  box-shadow: inset var(--shadow-width) var(--shadow-width) 0px 0px
-    var(--shadow-color);
+  box-shadow: inset var(--shadow-width) var(--shadow-width) 0px 0px var(--shadow-color);
 }
 
 .eightbit-btn:before,
 .eightbit-btn:after {
-  content: "";
+  content: '';
   position: absolute;
   width: 100%;
   height: 100%;
@@ -104,36 +104,30 @@ html {
 
 .eightbit-btn--reset {
   background: var(--reset-button-background);
-  box-shadow: inset calc(-1 * var (--shadow-width))
-    calc(-1 * var(--shadow-width)) 0px 0px var(--reset-shadow-color);
+  box-shadow: inset calc(-1 * var (--shadow-width)) calc(-1 * var(--shadow-width)) 0px 0px var(--reset-shadow-color);
 }
 
 .eightbit-btn--reset:hover,
 .eightbit-btn--reset:focus {
   background: var(--reset-secondary-button-background);
-  box-shadow: inset calc(-1.5 * var(--shadow-width))
-    calc(-1.5 * var(--shadow-width)) 0px 0px var(--reset-shadow-color);
+  box-shadow: inset calc(-1.5 * var(--shadow-width)) calc(-1.5 * var(--shadow-width)) 0px 0px var(--reset-shadow-color);
 }
 
 .eightbit-btn--reset:active {
-  box-shadow: inset var(--shadow-width) var(--shadow-width) 0px 0px
-    var(--reset-shadow-color);
+  box-shadow: inset var(--shadow-width) var(--shadow-width) 0px 0px var(--reset-shadow-color);
 }
 
 .eightbit-btn--proceed {
   background: var(--alt-button-background);
-  box-shadow: inset calc(-1 * var(--shadow-width))
-    calc(-1 * var(--shadow-width)) 0px 0px var(--alt-shadow-color);
+  box-shadow: inset calc(-1 * var(--shadow-width)) calc(-1 * var(--shadow-width)) 0px 0px var(--alt-shadow-color);
 }
 
 .eightbit-btn--proceed:hover,
 .eightbit-btn--proceed:focus {
   background: var(--alt-secondary-button-background);
-  box-shadow: inset calc(-1.5 * var(--shadow-width))
-    calc(-1.5 * var(--shadow-width)) 0px 0px var(--alt-shadow-color);
+  box-shadow: inset calc(-1.5 * var(--shadow-width)) calc(-1.5 * var(--shadow-width)) 0px 0px var(--alt-shadow-color);
 }
 
 .eightbit-btn--proceed:active {
-  box-shadow: inset var(--shadow-width) var(--shadow-width) 0px 0px
-    var(--alt-shadow-color);
+  box-shadow: inset var(--shadow-width) var(--shadow-width) 0px 0px var(--alt-shadow-color);
 }
