@@ -45,18 +45,18 @@ html {
 }
 
 .text-shadow-blue {
-  text-shadow: 3px 3px 0px #30bce2;
+  text-shadow: 4px 3px 0px #336fa0;
   color: white;
 }
 
 .text-shadow-blue-dark {
-  text-shadow: 2px 2px 0px #06234d;
+  text-shadow: 3px 2px 0px #336fa0;
   color: white;
 }
 
-.text-outline {
-  -webkit-text-stroke: 0.1px #000;
-}
+/* .text-outline {
+  -webkit-text-stroke: 1px #30b1e680;
+} */
 
 /* Button styles */
 .eightbit-btn {

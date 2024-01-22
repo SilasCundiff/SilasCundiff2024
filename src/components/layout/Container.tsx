@@ -1,13 +1,3 @@
-export default function Container({
-  children,
-  gap = "6",
-}: {
-  children: React.ReactNode;
-  gap?: string;
-}) {
-  return (
-    <div className={`container m-auto p-4 grid grid-cols-12 gap-${gap}`}>
-      {children}
-    </div>
-  );
+export default function Container({ children, gap = true }: { children: React.ReactNode; gap?: boolean }) {
+  return <div className={`container m-auto grid grid-cols-12 p-4 ${gap ? 'gap-6' : ''}`}>{children}</div>
 }
