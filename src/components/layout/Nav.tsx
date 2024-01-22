@@ -5,6 +5,7 @@ import { faGithubAlt, faLinkedin } from '@fortawesome/free-brands-svg-icons'
 
 import logo from '../../../public/img/logo.png'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
+import Image from 'next/image'
 
 export default function Nav() {
   const scrollPosition = useScroll()
@@ -22,43 +23,49 @@ export default function Nav() {
   return (
     <div className='w-full bg-white selection:bg-white'>
       <div
-        className='fixed bottom-8 right-8 md:hidden z-10 bg-white rounded-md cursor-pointer w-12 h-12 flex justify-center items-center select-none'
+        className='fixed bottom-8 right-8 z-30 flex size-12 cursor-pointer select-none items-center justify-center rounded-md bg-white md:hidden'
         onClick={() => {
           setNavOpen(!navOpen)
         }}
       >
         <FontAwesomeIcon icon={faBars} height={48} width={48} />
       </div>
-      <div className='container mx-auto'>
+      <div className='relative flex w-full bg-white'>
         <nav
-          className={`transition-transform fixed right-0 h-svh flex md:flex-row flex-col w-40 md:w-full md:h-24 md:translate-x-0 select-none font-pressStart text-sm ${
-            isSticky ? 'md:fixed top-0' : 'md:relative'
-          }
-                ${navOpen ? 'translate-x-0' : 'translate-x-full'}
-                `}
+          className={`fixed right-0 top-0 z-20 mx-auto flex 
+          h-svh w-full select-none flex-col bg-white font-pressStart
+          text-sm transition-transform md:left-0 md:h-24 md:w-full md:translate-x-0 md:flex-row 
+          ${isSticky ? 'fixed' : 'md:relative'}
+          ${navOpen ? 'translate-x-0' : 'translate-x-full'}`}
         >
-          <div className='flex justify-center items-center'>
-            <a className='md:w-24 h-24 flex justify-center items-center' href='#home'>
-              <img src={logo.src} alt='silas cundiff logo' height={64} width={64} />
-            </a>
-          </div>
-          <ul className='flex md:flex-row flex-col flex-1 items-center w-full mt-4 md:mt-0 bg-white gap-4'>
-            <NavItem url='#skills'>skills</NavItem>
-            <NavItem url='#projects'>projects</NavItem>
-            <NavItem url='#about'>lore</NavItem>
-            <NavItem url='#contact'>/whisper</NavItem>
+          <div
+            className={`
+            container my-auto flex flex-col md:mx-auto md:flex-row
+`}
+          >
+            <div className='flex items-center justify-center'>
+              <a className='flex h-24 items-center justify-center md:w-24' href='#home'>
+                <Image src={logo} alt='Silas Cundiff logo' height={64} width={64} />
+              </a>
+            </div>
+            <ul className='mt-4 flex w-full flex-1 flex-col items-center gap-4 md:mt-0 md:flex-row'>
+              <NavItem url='#skills'>skills</NavItem>
+              <NavItem url='#projects'>projects</NavItem>
+              <NavItem url='#about'>lore</NavItem>
+              <NavItem url='#contact'>/whisper</NavItem>
 
-            <li className='md:my-auto my-2 text-black text-2xl'>
-              <a target='_blank' href='https://github.com/SilasCundiff'>
-                <FontAwesomeIcon icon={faGithubAlt} />
-              </a>
-            </li>
-            <li className='md:my-auto my-2 text-black text-2xl md:mr-8'>
-              <a target='_blank' href='https://www.linkedin.com/in/silascundiff/'>
-                <FontAwesomeIcon icon={faLinkedin} />
-              </a>
-            </li>
-          </ul>
+              <li className='my-2 text-2xl text-black md:my-auto'>
+                <a target='_blank' href='https://github.com/SilasCundiff'>
+                  <FontAwesomeIcon icon={faGithubAlt} />
+                </a>
+              </li>
+              <li className='my-2 text-2xl text-black md:my-auto md:mr-8'>
+                <a target='_blank' href='https://www.linkedin.com/in/silascundiff/'>
+                  <FontAwesomeIcon icon={faLinkedin} />
+                </a>
+              </li>
+            </ul>
+          </div>
         </nav>
       </div>
     </div>
@@ -67,8 +74,8 @@ export default function Nav() {
 
 const NavItem = ({ children, url }: { children: React.ReactNode; url: string }) => {
   return (
-    <li className='md:my-auto my-4 md:first-of-type:ml-auto'>
-      <a className='py-2 px-4 rounded-sm' href={url}>
+    <li className='my-4 md:my-auto md:first-of-type:ml-auto'>
+      <a className='rounded-sm px-4 py-2' href={url}>
         {children}
       </a>
     </li>
