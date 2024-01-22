@@ -12,6 +12,7 @@ import bg3treesBushes from '../public/img/bg3-pieces/trees&bushes.png'
 import bg3jungleBG from '../public/img/bg3-pieces/jungle_bg.png'
 import bg3Fireflies from '../public/img/bg3-pieces/fireflys.png'
 import bg3Grasses from '../public/img/bg3-pieces/grasses.png'
+import SectionSpacer from '@/components/common/SectionSpacer'
 
 export default function Page() {
   return (
@@ -49,6 +50,7 @@ export default function Page() {
           <h2 className='text-4xl font-bold'>projects deck</h2>
         </Container>
       </Section>
+      <SectionSpacer />
       <Section id='about'>
         <Container>
           <h2 className='text-4xl font-bold'>lore</h2>
