@@ -4,6 +4,10 @@
 
 Welcome to the repository of my personal portfolio. This project is built using Next.js, Tailwind CSS, and Three.js. It showcases my skills, experience, and projects I've worked on.
 
+## :warning: Under Construction! :warning:
+
+View the wireframes [here!](https://www.figma.com/file/4lVo9k1MzhK1y2SqeayjGt/Zenify-UI-Revamp?type=design&node-id=48%3A215&mode=design&t=iuKOO0dkunUUl19D-1)
+
 ![Project Image](./public/img/project-image.png)
 
 ## Technologies Used :wrench:
