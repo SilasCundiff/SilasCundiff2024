@@ -1,8 +1,3 @@
-# Silas Cundiff Portfolio
+# silascundiff-2024
 
-> Made with React, Threejs, and Tailwind
-
-Notes for myself:
-Container 1124px
-12 column layout
-a column is 72px with a 24 gutter
+This project was bootstrapped with [`create-r3f-app`](https://github.com/utsuboco/create-r3f-app)
