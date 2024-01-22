@@ -23,7 +23,7 @@ export default function Page() {
             <LinkButton href='#projects'>Projects</LinkButton>
             <LinkButton href='#contact'>Contact</LinkButton>
           </div>
-          <div className='row-span-3 bg-red-500 col-span-6'>placeholder box</div>
+          {/* <div className='row-span-3 bg-red-500 col-span-6'>placeholder box</div> */}
         </Container>
         <Nav />
       </header>
