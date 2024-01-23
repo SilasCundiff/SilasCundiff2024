@@ -1,17 +1,36 @@
 import { useThree } from '@react-three/fiber'
 import { useGesture } from '@use-gesture/react'
-import { useContext, useState } from 'react'
+import { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
 import { Vector3 } from 'three'
-import { DraggingContext } from './CardGameExperience'
+import { DraggingContext, CardContext } from './CardGameExperience'
+import { gsap } from 'gsap'
 
-export default function Card({ color, positions = [0, -2, 0] }: { color: string; positions: number[] }) {
+export default function Card({
+  cardId,
+  color,
+  positions = [0, -2, 0],
+}: {
+  cardId: string
+  color: string
+  positions: number[]
+}) {
+  const { isDragging, setIsDragging } = useContext(DraggingContext)
+  const { activeCard, setActiveCard, cardDropZonePosition } = useContext(CardContext)
+  const [isCardActive, setIsCardActive] = useState(false)
   const { size, viewport } = useThree()
   const aspect = size.width / viewport.width
   const [position, setPosition] = useState(positions)
-  const { isDragging, setIsDragging } = useContext(DraggingContext)
+  const realTimePosition = useRef(positions)
   const [originalPosition, setOriginalPosition] = useState(position)
   const cardWidth = 1.75
   const cardHeight = 2.5
+
+  const checkOverlap = useCallback(() => {
+    const cardPos = new Vector3(...realTimePosition.current)
+    const dropZonePos = new Vector3(...cardDropZonePosition)
+    const distance = cardPos.distanceTo(dropZonePos)
+    return distance <= 1.5
+  }, [realTimePosition, cardDropZonePosition])
 
   const bind = useGesture(
     {
@@ -21,10 +40,21 @@ export default function Card({ color, positions = [0, -2, 0] }: { color: string;
         setPosition([x / aspect, -y / aspect, z])
         setIsDragging(true)
       },
-      onDragEnd: ({ event }) => {
+      onDragEnd: ({ offset: [x, y], event }) => {
         event.stopPropagation()
-        setPosition(originalPosition)
-        setIsDragging(false)
+        const [, , z] = position
+        realTimePosition.current = [x / aspect, -y / aspect, z]
+        if (checkOverlap()) {
+          if (!isCardActive) {
+            setActiveCard(cardId)
+            setPosition(cardDropZonePosition)
+          } else if (isCardActive) {
+            setPosition(cardDropZonePosition)
+          }
+        } else if (!checkOverlap()) {
+          setActiveCard(activeCard === cardId ? null : activeCard)
+          setPosition(originalPosition)
+        }
       },
       onHover: ({ active, event }) => {
         event.stopPropagation()
@@ -49,8 +79,19 @@ export default function Card({ color, positions = [0, -2, 0] }: { color: string;
 
   const positionVector = new Vector3(position[0], position[1], position[2])
 
+  useEffect(() => {
+    if (activeCard === cardId) {
+      if (checkOverlap()) {
+        setIsCardActive(true)
+      }
+    } else {
+      setIsCardActive(false)
+      setPosition(originalPosition)
+    }
+  }, [activeCard, cardId, originalPosition, checkOverlap])
+
   return (
-    //
+    // @ts-ignore
     <mesh position={positionVector} {...bind()}>
       <planeGeometry args={[cardWidth, cardHeight, 1]} />
       <meshBasicMaterial color={color} />
