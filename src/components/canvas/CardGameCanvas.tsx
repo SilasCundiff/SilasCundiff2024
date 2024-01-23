@@ -1,5 +1,5 @@
 import { Canvas } from '@react-three/fiber'
-import CardGameExperience from '../experiences/CardGameExperience'
+import CardGameExperience from '../experiences/CardGameExperience/CardGameExperience'
 
 export default function CardGameCanvas() {
   return (

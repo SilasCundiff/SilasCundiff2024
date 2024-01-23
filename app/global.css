@@ -45,7 +45,7 @@ html {
 }
 
 .card-game-canvas {
-  @apply w-full h-full bg-transparent;
+  @apply w-full h-full bg-transparent bg-red-500/30;
   position: absolute !important;
   inset: 0;
   z-index: 0;
