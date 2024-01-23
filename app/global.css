@@ -44,6 +44,13 @@ html {
   scroll-behavior: smooth !important;
 }
 
+.card-game-canvas {
+  @apply w-full h-full bg-transparent;
+  position: absolute !important;
+  inset: 0;
+  z-index: 0;
+}
+
 .text-shadow-blue {
   text-shadow: 4px 3px 0px #336fa0;
   color: white;

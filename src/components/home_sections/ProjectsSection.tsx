@@ -9,6 +9,7 @@ import TreesBushes from '../../../public/img/jungle_bg/trees&bushes.png'
 import JungleBG from '../../../public/img/jungle_bg/jungle_bg.png'
 import Fireflies from '../../../public/img/jungle_bg/fireflies.png'
 import Grasses from '../../../public/img/jungle_bg/grasses.png'
+import CardGameCanvas from '../canvas/CardGameCanvas'
 
 export default function ProjectsSection() {
   return (
@@ -20,9 +21,7 @@ export default function ProjectsSection() {
         <Background backgroundImage={Grasses} />
         <Background backgroundImage={GrassRoad} />
         <Background backgroundImage={Fireflies} />
-        <Container>
-          <h2 className='text-4xl font-bold'>projects deck</h2>
-        </Container>
+        <CardGameCanvas />
       </Section>
     </>
   )
