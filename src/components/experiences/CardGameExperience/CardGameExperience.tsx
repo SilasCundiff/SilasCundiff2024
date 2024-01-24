@@ -2,6 +2,7 @@
 import Card from './Card'
 import { createContext, useCallback, useState } from 'react'
 import CardDropZone from './CardDropZone'
+import Hand from './Hand'
 
 export const DraggingContext = createContext({
   isDragging: false,
@@ -37,9 +38,7 @@ export default function CardGameExperience() {
       <CardContext.Provider value={{ activeCard, setActiveCard, cardDropZonePosition }}>
         <DraggingContext.Provider value={{ isDragging, setIsDragging }}>
           <CardDropZone />
-          {tempCardMap.map(({ id, color, positions }) => (
-            <Card key={id} cardId={id} color={color} positions={positions} />
-          ))}
+          <Hand currentHand={tempCardMap} />
         </DraggingContext.Provider>
       </CardContext.Provider>
     </>
