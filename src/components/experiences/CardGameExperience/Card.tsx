@@ -1,6 +1,6 @@
 import { useFrame, useThree } from '@react-three/fiber'
 import { useGesture } from '@use-gesture/react'
-import { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
+import { use, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
 import { Vector3 } from 'three'
 import { DraggingContext, CardContext } from './CardGameExperience'
 import { gsap } from 'gsap'
@@ -29,6 +29,14 @@ export default function Card({
   const cardRef = useRef<any>(null)
   const originalPosition = useRef<Vector3 | null>(position)
 
+  console.log('cardId', cardRef.current)
+  useFrame(() => {
+    if (cardRef.current) {
+      cardRef.current.position.x = realTimePositionRef.current.x
+      cardRef.current.position.y = realTimePositionRef.current.y
+    }
+  })
+
   const checkOverlap = useCallback(() => {
     const cardPos = realTimePositionRef.current
     const dropZonePos = cardDropZonePosition
@@ -39,11 +47,10 @@ export default function Card({
   const bind = useGesture(
     {
       onDrag: ({ offset: [x, y], event }) => {
-        // event.stopPropagation()
+        event.stopPropagation()
         const newPos = new Vector3(x / aspect, -y / aspect, 0)
-
-        setIsDragging(true)
         realTimePositionRef.current = newPos
+        setIsDragging(true)
       },
       onDragEnd: ({ offset: [x, y], event }) => {
         event.stopPropagation()
@@ -51,6 +58,7 @@ export default function Card({
           if (!isCardActive) {
             setActiveCard(cardId)
             realTimePositionRef.current = cardDropZonePosition
+            console.log('realTimePositionRef after drop', realTimePositionRef.current, cardDropZonePosition)
           } else if (isCardActive) {
           }
         } else if (!checkOverlap()) {
@@ -71,7 +79,7 @@ export default function Card({
     },
     {
       drag: {
-        from: () => [position.x * aspect, -position.y * aspect],
+        from: () => [realTimePositionRef.current.x * aspect, -realTimePositionRef.current.y * aspect],
       },
     },
   )
