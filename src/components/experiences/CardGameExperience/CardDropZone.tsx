@@ -1,13 +1,21 @@
 import { useContext } from 'react'
 import { CardContext } from './CardGameExperience'
-import { Vector3 } from 'three'
+import { Html } from '@react-three/drei'
 
-export default function CardDropZone() {
+export default function CardDropZone({
+  size = {
+    cardWidth: 1.75,
+    cardHeight: 2.5,
+  },
+}) {
   const { cardDropZonePosition } = useContext(CardContext)
   return (
-    <mesh position={new Vector3(cardDropZonePosition[0], cardDropZonePosition[1], cardDropZonePosition[2])}>
-      <planeGeometry args={[1.75, 2.5, 1]} />
-      <meshBasicMaterial color='#000' />
+    <mesh position={cardDropZonePosition}>
+      <planeGeometry args={[size.cardWidth, size.cardHeight, 1]} />
+      <meshBasicMaterial color='#000' opacity={0.3} transparent={true} />
+      <Html transform sprite prepend center zIndexRange={[-1, 0]}>
+        <p className='max-w-[4ch] select-none font-pressStart text-[8px] text-white md:text-[8px]'>Card Drop Zone</p>
+      </Html>
     </mesh>
   )
 }
