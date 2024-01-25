@@ -1,5 +1,6 @@
 import { Vector3 } from 'three'
 import Card from './Card'
+import { useBounds } from '@react-three/drei'
 
 export default function Hand({
   currentHand,
@@ -10,12 +11,12 @@ export default function Hand({
   cardPositions: Vector3[]
   size: { cardWidth: number; cardHeight: number }
 }) {
+  const api = useBounds()
   return (
     <group>
       <color args={['#1e1e1e']} attach='background' />
       {currentHand.map(({ id, color }, index) => {
         const cardPosition = cardPositions[index]
-        console.log(cardPosition)
         cardPosition.z = 0.01 * index + 0.01 // fix z-fighting
         return (
           <Card
@@ -30,7 +31,7 @@ export default function Hand({
       })}
       <mesh position={[0, -2, -0.1]}>
         <planeGeometry args={[10, 2.5, 1]} />
-        <meshBasicMaterial />
+        <meshBasicMaterial color={'#000'} opacity={0.0} transparent />
       </mesh>
     </group>
   )

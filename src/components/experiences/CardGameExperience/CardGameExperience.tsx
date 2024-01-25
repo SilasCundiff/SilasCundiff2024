@@ -27,54 +27,33 @@ const tempCardMap = [
 ]
 
 const cardHandPositions = [
-  new Vector3(0, -2, 0),
-  new Vector3(-2, -2, 0),
-  new Vector3(-4, -2, 0),
-  new Vector3(2, -2, 0),
-  new Vector3(4, -2, 0),
+  new Vector3(0, -2, 1.1),
+  new Vector3(-2, -2, 1.2),
+  new Vector3(-4, -2, 1.3),
+  new Vector3(2, -2, 1.4),
+  new Vector3(4, -2, 1.5),
 ]
 
-const cardDropZonePosition = new Vector3(-2.5, 1, 0)
+const cardDropZonePosition = new Vector3(-4, 1, 0.01)
 
 export default function CardGameExperience() {
   const [isDragging, setIsDragging] = useState(false)
   const [activeCard, setActiveCard] = useState<string | null>(null)
-  const [cardSize, setCardSize] = useState({ cardWidth: 0, cardHeight: 0 })
-  const { size } = useThree()
-
-  // calculate the card sizes, they should be a ratio of 2 wide : 3 tall
-  const calculateCardSizeOnCanvasResize = useCallback(() => {
-    let cardWidth = size.width / 5
-    console.log(cardWidth)
-    let cardHeight = cardWidth * 1.5 // 2:3 aspect ratio
-
-    if (cardWidth > size.width / 5) {
-      cardWidth = size.width / 5
-      cardHeight = cardWidth * 1.5
-    }
-    if (cardHeight > size.height / 5) {
-      cardHeight = size.height / 5
-      cardWidth = cardHeight / 1.5
-    }
-
-    cardWidth = cardWidth / 100
-    cardHeight = cardHeight / 100
-    return { cardWidth, cardHeight }
-  }, [size])
-
-  // Calculate the card size on the first render
-  useEffect(() => {
-    setCardSize(calculateCardSizeOnCanvasResize())
-  }, [calculateCardSizeOnCanvasResize])
-  console.log('card size', cardSize)
-  console.log('cardHandPositions', cardHandPositions)
 
   return (
     <>
       <CardContext.Provider value={{ activeCard, setActiveCard, cardDropZonePosition }}>
         <DraggingContext.Provider value={{ isDragging, setIsDragging }}>
-          <CardDropZone size={cardSize} />
-          <Hand size={cardSize} currentHand={tempCardMap} cardPositions={cardHandPositions} />
+          <CardDropZone size={{ cardWidth: 1.75, cardHeight: 2.5 }} />
+          <mesh position={[0, 0, 0]}>
+            <planeGeometry args={[6, 2.5, 1]} />
+            <meshBasicMaterial color='#00f' opacity={0.0} transparent />
+          </mesh>
+          <Hand
+            size={{ cardWidth: 1.75, cardHeight: 2.5 }}
+            currentHand={tempCardMap}
+            cardPositions={cardHandPositions}
+          />
         </DraggingContext.Provider>
       </CardContext.Provider>
     </>
