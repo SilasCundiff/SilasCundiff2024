@@ -1,11 +1,10 @@
 'use client'
 
-import { createContext, useCallback, useEffect, useState } from 'react'
+import { createContext, useState } from 'react'
 import CardDropZone from './CardDropZone'
 import Hand from './Hand'
 
 import { Vector3 } from 'three'
-import { useThree } from '@react-three/fiber'
 
 export const DraggingContext = createContext({
   isDragging: false,

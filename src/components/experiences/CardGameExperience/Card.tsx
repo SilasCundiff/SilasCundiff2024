@@ -1,11 +1,9 @@
 import { useFrame, useThree } from '@react-three/fiber'
 import { useGesture } from '@use-gesture/react'
-import { use, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useContext, useEffect, useRef, useState } from 'react'
 import { Vector2, Vector3 } from 'three'
 import { DraggingContext, CardContext } from './CardGameExperience'
 import { gsap } from 'gsap'
-import { useBounds } from '@react-three/drei'
-import { debounce } from 'lodash'
 
 export default function Card({
   cardId,
@@ -28,7 +26,6 @@ export default function Card({
   const realTimePositionRef = useRef<Vector3 | null>(position)
   const cardRef = useRef<any>(null)
   const originalPosition = useRef<Vector3 | null>(position)
-  const api = useBounds()
 
   useFrame((state) => {
     aspect.current = size.width / viewport.width
@@ -39,11 +36,12 @@ export default function Card({
     }
   })
 
+  // used to check if the currently dragged card overlaps with the card drop zone
   const checkOverlap = useCallback(() => {
     const cardPos = realTimePositionRef.current
     const dropZonePos = cardDropZonePosition
     const distance = cardPos.distanceTo(dropZonePos)
-    return distance <= 1.5
+    return distance <= 2
   }, [realTimePositionRef, cardDropZonePosition])
 
   const bind = useGesture(
@@ -51,46 +49,42 @@ export default function Card({
       onDrag: ({ offset: [x, y], event }) => {
         event.stopPropagation()
 
-        // Adjust this to the actual offset of your canvas from the top of the screen
+        // used to adjust the card's position to the cursor after resizing
         const yOffset = 96
 
-        // Convert screen coordinates to NDC
         const ndcX = (x / size.width) * 2 - 1
         const ndcY = -(y / size.height) * 2 + 1
 
-        // Convert NDC to world coordinates
         const newPos = new Vector3(ndcX, ndcY, 0).unproject(camera)
         newPos.z = 1.01
         newPos.y += yOffset
-        console.log('Dragged', newPos)
         realTimePositionRef.current = newPos
         setIsDragging(true)
       },
       onDragEnd: ({ offset: [x, y], event }) => {
         event.stopPropagation()
-        console.log('Drag ended', realTimePositionRef.current, cardDropZonePosition)
+        const zOffset = 0.1
         if (checkOverlap()) {
           if (!isCardActive) {
             setActiveCard(cardId)
-            realTimePositionRef.current = cardDropZonePosition
+            gsap.to(realTimePositionRef.current, { ...cardDropZonePosition.clone().setZ(zOffset), duration: 0.2 })
           } else if (isCardActive) {
-            realTimePositionRef.current = cardDropZonePosition
+            gsap.to(realTimePositionRef.current, { ...cardDropZonePosition.clone().setZ(zOffset), duration: 0.2 })
           }
         } else if (!checkOverlap()) {
           setActiveCard(activeCard === cardId ? null : activeCard)
-          realTimePositionRef.current = originalPosition.current
+          gsap.to(realTimePositionRef.current, { ...originalPosition.current, duration: 0.2 })
         }
       },
-      // onHover: ({ active, event }) => {
-      //   event.stopPropagation()
-      //   if (!isDragging) {
-      //     if (active) {
-      //       gsap.to(event.target, { scale: 1.1, duration: 0.1 })
-      //     } else {
-      //       gsap.to(event.target, { scale: 1, duration: 0.1 })
-      //     }
-      //   }
-      // },
+      onHover: ({ active }: { active: boolean; event: {} }) => {
+        if ((active && activeCard !== cardId) || !isDragging) {
+          gsap.to(cardRef.current.position, { z: 1.1, duration: 0.1 })
+          gsap.to(cardRef.current.scale, { x: 1.1, y: 1.1, duration: 0.1 })
+        } else {
+          gsap.to(cardRef.current.position, { z: 1, duration: 0.1 })
+          gsap.to(cardRef.current.scale, { x: 1, y: 1, duration: 0.1 })
+        }
+      },
     },
     {
       drag: {
@@ -107,7 +101,7 @@ export default function Card({
 
           const screenSize = screenCorner2.sub(screenCorner1)
 
-          const yOffset = screenSize.y * 0.75 // Adjust this based on cursor position on the card
+          const yOffset = screenSize.y * 0.75 // Used to adjust the card's position to the cursor after resizing
 
           const screenPosition = cardRef.current.position.clone().project(camera)
           const x = ((screenPosition.x + 1) / 2) * size.width
@@ -119,6 +113,7 @@ export default function Card({
     },
   )
 
+  // checks if the card is active, and if it is, moves it to the drop zone, otherwise moves it back to its original position
   useEffect(() => {
     if (activeCard === cardId) {
       if (checkOverlap()) {
@@ -126,19 +121,13 @@ export default function Card({
       }
     } else {
       setIsCardActive(false)
-      realTimePositionRef.current = originalPosition.current
+      gsap.to(realTimePositionRef.current, { ...originalPosition.current, duration: 0.2 })
     }
   }, [activeCard, cardId, originalPosition, checkOverlap])
 
-  //update aspect ratio
+  //update aspect ratio to fix weird card cursor offset misalignment
   useEffect(() => {
     aspect.current = size.width / viewport.width
-  }, [size, viewport])
-
-  useEffect(() => {
-    console.log('Size:', size)
-    console.log('Viewport:', viewport)
-    console.log('Aspect Ratio:', aspect.current)
   }, [size, viewport])
 
   return (
