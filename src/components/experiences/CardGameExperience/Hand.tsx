@@ -30,8 +30,8 @@ export default function Hand({
         )
       })}
       <mesh position={[0, -2, -0.1]}>
-        <planeGeometry args={[10, 2.5, 1]} />
-        <meshBasicMaterial color={'#000'} opacity={0.0} transparent />
+        <planeGeometry args={[12, 2.5, 1]} />
+        <meshBasicMaterial color={'#000'} opacity={0.4} transparent />
       </mesh>
     </group>
   )
