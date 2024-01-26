@@ -14,7 +14,7 @@ export default function Hand({
   const api = useBounds()
   return (
     <group>
-      <color args={['#1e1e1e']} attach='background' />
+      {/* <color args={['#1e1e1e']} attach='background' /> */}
       {currentHand.map(({ id, color }, index) => {
         const cardPosition = cardPositions[index]
         cardPosition.z = 0.01 * index + 0.01 // fix z-fighting
@@ -29,10 +29,10 @@ export default function Hand({
           />
         )
       })}
-      <mesh position={[0, -2, -0.1]}>
+      {/* <mesh position={[0, -2, -0.1]}>
         <planeGeometry args={[12, 2.5, 1]} />
         <meshBasicMaterial color={'#000'} opacity={0.4} transparent />
-      </mesh>
+      </mesh> */}
     </group>
   )
 }

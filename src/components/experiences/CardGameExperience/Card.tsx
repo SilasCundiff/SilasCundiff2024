@@ -78,18 +78,7 @@ export default function Card({
       },
     },
     {
-      drag: {
-        filterTaps: true,
-        bounds(state) {
-          console.log(state)
-          return {
-            left: 0,
-            right: size.width,
-            top: 0,
-            bottom: size.height,
-          }
-        },
-      },
+      drag: {},
     },
   )
 
@@ -109,6 +98,9 @@ export default function Card({
   useEffect(() => {
     aspect.current = size.width / viewport.width
   }, [size, viewport])
+
+  // Animate card to it's hand position on mount
+  useEffect(() => {}, [])
 
   return (
     // @ts-ignore
