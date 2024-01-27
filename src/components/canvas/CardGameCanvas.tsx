@@ -1,7 +1,7 @@
 import { Canvas } from '@react-three/fiber'
 import CardGameExperience from '../experiences/CardGameExperience/CardGameExperience'
 import { useEffect, useState } from 'react'
-import { Bounds } from '@react-three/drei'
+import { Bounds, Text, useFont } from '@react-three/drei'
 
 const deckOfCards = [
   { id: 'card-1', color: '#FBBF24', imageUrl: 'url1', title: 'Title 1', description: 'Description 1' },
@@ -50,9 +50,17 @@ export default function CardGameCanvas() {
   return (
     <div className='relative h-svh max-h-[calc(100svh-96px)] w-full'>
       <Canvas resize={{ scroll: false }} orthographic dpr={[1, 2]} camera={{ position: [0, 0, 10], zoom: 100 }}>
-        <Bounds fit clip observe margin={1.2} maxDuration={1}>
+        {/* <Bounds fit clip observe margin={1.2} maxDuration={1}>
           <CardGameExperience hand={hand} />
-        </Bounds>
+        </Bounds> */}
+        <mesh position={[0, 0, 0]}>
+          <boxGeometry args={[1, 1, 1]} />
+          <meshNormalMaterial />
+        </mesh>
+        <Text fontSize={0.06} maxWidth={0.9} anchorY={'top'} anchorX={'left'}>
+          test
+          <meshBasicMaterial color={'#000'} />
+        </Text>
       </Canvas>
       <div className=''>
         <button
@@ -69,3 +77,5 @@ export default function CardGameCanvas() {
     </div>
   )
 }
+
+useFont.preload('/fonts/alagard.ttf')

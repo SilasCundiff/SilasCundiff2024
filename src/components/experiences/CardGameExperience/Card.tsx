@@ -4,6 +4,7 @@ import { useCallback, useContext, useEffect, useRef, useState } from 'react'
 import { Vector3 } from 'three'
 import { DraggingContext, CardContext } from './CardGameExperience'
 import { gsap } from 'gsap'
+import { Text, useFont } from '@react-three/drei'
 
 export default function Card({
   cardId,
@@ -11,6 +12,7 @@ export default function Card({
   position,
   cardWidth,
   cardHeight,
+  ...props
 }: {
   cardId: string
   color: string
@@ -47,6 +49,7 @@ export default function Card({
     {
       onDrag: ({ event }) => {
         setIsDragging(true)
+        // @ts-ignore
         realTimePositionRef.current = new Vector3(event.point.x, event.point.y, 2)
       },
       onDragEnd: ({ event }) => {
@@ -104,9 +107,17 @@ export default function Card({
 
   return (
     // @ts-ignore
-    <mesh position={realTimePositionRef.current} {...bind()} ref={cardRef}>
-      <planeGeometry args={[cardWidth, cardHeight, 1]} />
-      <meshBasicMaterial color={color} />
-    </mesh>
+    <group position={realTimePositionRef.current} {...bind()} ref={cardRef}>
+      <mesh>
+        <planeGeometry args={[cardWidth, cardHeight, 1]} />
+        <meshBasicMaterial color={color} />
+      </mesh>
+      <Text font='/fonts/alagard.ttf' fontSize={0.06} maxWidth={0.9} anchorY={'top'} anchorX={'left'}>
+        {cardId}
+        <meshBasicMaterial color={'#000'} />
+      </Text>
+    </group>
   )
 }
+
+useFont.preload('/fonts/alagard.ttf')
