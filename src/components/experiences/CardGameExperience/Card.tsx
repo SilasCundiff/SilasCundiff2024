@@ -4,6 +4,7 @@ import { useCallback, useContext, useEffect, useRef, useState } from 'react'
 import { Vector3 } from 'three'
 import { DraggingContext, CardContext } from './CardGameExperience'
 import { gsap } from 'gsap'
+import { Text, useFont } from '@react-three/drei'
 
 export default function Card({
   cardId,
@@ -11,6 +12,7 @@ export default function Card({
   position,
   cardWidth,
   cardHeight,
+  ...props
 }: {
   cardId: string
   color: string
@@ -27,8 +29,8 @@ export default function Card({
   const cardRef = useRef<any>(null)
   const originalPosition = useRef<Vector3 | null>(position)
 
-  useFrame((state) => {
-    if (cardRef.current) {
+  useFrame((_state) => {
+    if (cardRef.current && realTimePositionRef.current) {
       cardRef.current.position.x = realTimePositionRef.current.x
       cardRef.current.position.y = realTimePositionRef.current.y
       cardRef.current.position.z = realTimePositionRef.current.z
@@ -38,7 +40,9 @@ export default function Card({
   const checkOverlap = useCallback(() => {
     const cardPos = realTimePositionRef.current
     const dropZonePos = cardDropZonePosition
-    const distance = cardPos.distanceTo(dropZonePos)
+    const distance = cardPos?.distanceTo(dropZonePos)
+
+    if (!distance) return false
 
     return distance <= 2.75
   }, [realTimePositionRef, cardDropZonePosition])
@@ -47,6 +51,7 @@ export default function Card({
     {
       onDrag: ({ event }) => {
         setIsDragging(true)
+        // @ts-ignore
         realTimePositionRef.current = new Vector3(event.point.x, event.point.y, 2)
       },
       onDragEnd: ({ event }) => {
@@ -78,18 +83,7 @@ export default function Card({
       },
     },
     {
-      drag: {
-        filterTaps: true,
-        bounds(state) {
-          console.log(state)
-          return {
-            left: 0,
-            right: size.width,
-            top: 0,
-            bottom: size.height,
-          }
-        },
-      },
+      drag: {},
     },
   )
 
@@ -110,11 +104,30 @@ export default function Card({
     aspect.current = size.width / viewport.width
   }, [size, viewport])
 
+  // Animate card to it's hand position on mount
+  useEffect(() => {}, [])
+
   return (
     // @ts-ignore
-    <mesh position={realTimePositionRef.current} {...bind()} ref={cardRef}>
-      <planeGeometry args={[cardWidth, cardHeight, 1]} />
-      <meshBasicMaterial color={color} />
-    </mesh>
+    <group position={realTimePositionRef.current} {...bind()} ref={cardRef}>
+      <mesh>
+        <planeGeometry args={[cardWidth, cardHeight, 1]} />
+        <meshBasicMaterial color={color} />
+      </mesh>
+      <Text
+        font='/fonts/PressStart2P-Regular.ttf'
+        fontSize={0.1}
+        maxWidth={0.9}
+        anchorY={'middle'}
+        anchorX={'center'}
+        position={[0, 0, 3]}
+        castShadow
+      >
+        {cardId}
+        <meshBasicMaterial color={'#000'} />
+      </Text>
+    </group>
   )
 }
+
+useFont.preload('/fonts/PressStart2P-Regular.ttf')

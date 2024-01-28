@@ -13,6 +13,7 @@ View the wireframes [here!](https://www.figma.com/file/4lVo9k1MzhK1y2SqeayjGt/Ze
 ## Technologies Used :wrench:
 
 - [Next.js](https://nextjs.org/)
+  > Due to a bug with swcMinify and Drei <Text />, Next MUST be 14.0.1 or earlier until the bug is resolved.
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Three.js](https://threejs.org/)
 

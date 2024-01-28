@@ -9,21 +9,21 @@
 /* Font-face definitions */
 @font-face {
   font-family: 'Alagard';
-  src: url('../public/fonts/alagard.ttf') format('truetype');
+  src: url('../../public/fonts/alagard.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Minecraftia-Regular';
-  src: url('../public/fonts/Minecraftia-Regular.ttf') format('truetype');
+  src: url('../../public/fonts/Minecraftia-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'PressStart2P-Regular';
-  src: url('../public/fonts/PressStart2P-Regular.ttf') format('truetype');
+  src: url('../../public/fonts/PressStart2P-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
