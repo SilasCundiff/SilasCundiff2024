@@ -1,0 +1,140 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Font-face definitions */
+@font-face {
+  font-family: 'Alagard';
+  src: url('../../public/fonts/alagard.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Minecraftia-Regular';
+  src: url('../../public/fonts/Minecraftia-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PressStart2P-Regular';
+  src: url('../../public/fonts/PressStart2P-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* CSS variables */
+:root {
+  --outline-width: 4px;
+  --shadow-width: 4px;
+
+  --button-background: #30bce2;
+  --secondary-button-background: #27c9f5;
+  --shadow-color: #30bce2;
+}
+
+/* Global styles */
+*,
+html {
+  scroll-behavior: smooth !important;
+}
+
+.card-game-canvas {
+  @apply w-full h-full bg-transparent bg-red-500/30;
+  position: absolute !important;
+  inset: 0;
+  z-index: 0;
+}
+
+.text-shadow-blue {
+  text-shadow: 4px 3px 0px #336fa0;
+  color: white;
+}
+
+.text-shadow-blue-dark {
+  text-shadow: 3px 2px 0px #336fa0;
+  color: white;
+}
+
+/* .text-outline {
+  -webkit-text-stroke: 1px #30b1e680;
+} */
+
+/* Button styles */
+.eightbit-btn {
+  background: var(--button-background);
+  display: inline-block;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+  box-shadow: inset calc(-1 * var(--shadow-width)) calc(-1 * var(--shadow-width)) 0px 0px var(--shadow-color);
+}
+
+.eightbit-btn:hover,
+.eightbit-btn:focus {
+  background: var(--secondary-button-background);
+  box-shadow: inset calc(-1.5 * var(--shadow-width)) calc(-1.5 * var(--shadow-width)) 0px 0px var(--shadow-color);
+}
+
+.eightbit-btn:active {
+  box-shadow: inset var(--shadow-width) var(--shadow-width) 0px 0px var(--shadow-color);
+}
+
+.eightbit-btn:before,
+.eightbit-btn:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  box-sizing: content-box;
+}
+
+.eightbit-btn:before {
+  top: calc(-1 * var(--outline-width));
+  left: 0;
+  border-top: var(--outline-width) black solid;
+  border-bottom: var(--outline-width) black solid;
+}
+
+.eightbit-btn:after {
+  left: calc(-1 * var(--outline-width));
+  top: 0;
+  border-left: var(--outline-width) black solid;
+  border-right: var(--outline-width) black solid;
+}
+
+.eightbit-btn--reset {
+  background: var(--reset-button-background);
+  box-shadow: inset calc(-1 * var (--shadow-width)) calc(-1 * var(--shadow-width)) 0px 0px var(--reset-shadow-color);
+}
+
+.eightbit-btn--reset:hover,
+.eightbit-btn--reset:focus {
+  background: var(--reset-secondary-button-background);
+  box-shadow: inset calc(-1.5 * var(--shadow-width)) calc(-1.5 * var(--shadow-width)) 0px 0px var(--reset-shadow-color);
+}
+
+.eightbit-btn--reset:active {
+  box-shadow: inset var(--shadow-width) var(--shadow-width) 0px 0px var(--reset-shadow-color);
+}
+
+.eightbit-btn--proceed {
+  background: var(--alt-button-background);
+  box-shadow: inset calc(-1 * var(--shadow-width)) calc(-1 * var(--shadow-width)) 0px 0px var(--alt-shadow-color);
+}
+
+.eightbit-btn--proceed:hover,
+.eightbit-btn--proceed:focus {
+  background: var(--alt-secondary-button-background);
+  box-shadow: inset calc(-1.5 * var(--shadow-width)) calc(-1.5 * var(--shadow-width)) 0px 0px var(--alt-shadow-color);
+}
+
+.eightbit-btn--proceed:active {
+  box-shadow: inset var(--shadow-width) var(--shadow-width) 0px 0px var(--alt-shadow-color);
+}
