@@ -120,8 +120,7 @@ export default function Card({
         maxWidth={0.9}
         anchorY={'middle'}
         anchorX={'center'}
-        position={[0, 0, 3]}
-        castShadow
+        position={new Vector3(0, 0, 0.1)}
       >
         {cardId}
         <meshBasicMaterial color={'#000'} />

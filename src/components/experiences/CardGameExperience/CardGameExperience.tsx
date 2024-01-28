@@ -5,6 +5,7 @@ import CardDropZone from './CardDropZone'
 import Hand from './Hand'
 
 import { Vector3 } from 'three'
+import useCards from '@/helpers/hooks/useCardsFromDeckAndHand'
 
 export const DraggingContext = createContext({
   isDragging: false,
@@ -20,23 +21,23 @@ export const CardContext = createContext({
 })
 
 const cardHandPositions = [
-  new Vector3(0, -2, 1.1),
-  new Vector3(-2, -2, 1.2),
   new Vector3(-4, -2, 1.3),
+  new Vector3(-2, -2, 1.2),
+  new Vector3(0, -2, 1.1),
   new Vector3(2, -2, 1.4),
   new Vector3(4, -2, 1.5),
 ]
 
 const cardDropZonePosition = new Vector3(-4, 1, 0.01)
 
-export default function CardGameExperience({ hand }) {
+export default function CardGameExperience() {
   const [isDragging, setIsDragging] = useState(false)
   const [currentlyDraggingCard, setCurrentlyDraggingCard] = useState(null)
-  const [activeCard, setActiveCard] = useState<string | null>(null)
+  const { hand, drawPile, discardPile, drawUntilHandIsFull } = useCards()
 
   return (
     <>
-      <CardContext.Provider value={{ activeCard, setActiveCard, cardDropZonePosition }}>
+      <CardContext.Provider value={{ cardDropZonePosition }}>
         <DraggingContext.Provider
           value={{ isDragging, setIsDragging, currentlyDraggingCard, setCurrentlyDraggingCard }}
         >
