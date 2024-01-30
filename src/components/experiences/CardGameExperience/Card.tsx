@@ -2,9 +2,9 @@ import { useFrame, useThree } from '@react-three/fiber'
 import { useGesture } from '@use-gesture/react'
 import { useCallback, useContext, useEffect, useRef, useState } from 'react'
 import { Vector3 } from 'three'
-import { DraggingContext, CardContext } from './CardGameExperience'
 import { gsap } from 'gsap'
 import { Text, useFont } from '@react-three/drei'
+import { useCardPositionUtilsContext } from '@/helpers/contexts/CardPositionUtilsContext'
 
 export default function Card({
   cardId,
@@ -20,8 +20,15 @@ export default function Card({
   cardWidth: number
   cardHeight: number
 }) {
-  const { isDragging, setIsDragging } = useContext(DraggingContext)
-  const { activeCard, setActiveCard, cardDropZonePosition } = useContext(CardContext)
+  const {
+    cardInDropZone,
+    isCardBeingDragged,
+    cardBeingDragged,
+    cardDropZonePosition,
+    setCardInDropZone,
+    setIsCardBeingDragged,
+    setCardBeingDragged,
+  } = useCardPositionUtilsContext()
   const [isCardActive, setIsCardActive] = useState(false)
   const { size, viewport } = useThree()
   const aspect = useRef(size.width / viewport.width)
@@ -50,7 +57,7 @@ export default function Card({
   const bind = useGesture(
     {
       onDrag: ({ event }) => {
-        setIsDragging(true)
+        setIsCardBeingDragged(true)
         // @ts-ignore
         realTimePositionRef.current = new Vector3(event.point.x, event.point.y, 2)
       },
@@ -59,20 +66,20 @@ export default function Card({
         const zOffset = 0.1
         if (checkOverlap()) {
           if (!isCardActive) {
-            setActiveCard(cardId)
+            setCardInDropZone(cardId)
             gsap.to(realTimePositionRef.current, { ...cardDropZonePosition.clone().setZ(zOffset), duration: 0.2 })
           } else if (isCardActive) {
             gsap.to(realTimePositionRef.current, { ...cardDropZonePosition.clone().setZ(zOffset), duration: 0.2 })
           }
         } else if (!checkOverlap()) {
-          setActiveCard(activeCard === cardId ? null : activeCard)
+          setCardInDropZone(cardInDropZone === cardId ? null : cardInDropZone)
           gsap.to(realTimePositionRef.current, { ...originalPosition.current, duration: 0.2 })
         }
-        setIsDragging(false)
+        setIsCardBeingDragged(false)
       },
       onHover: ({ active, event }) => {
         event.stopPropagation()
-        if (isDragging) return
+        if (isCardBeingDragged) return
         if (active) {
           gsap.to(cardRef.current.position, { z: 1.1, duration: 0.1 })
           gsap.to(cardRef.current.scale, { x: 1.1, y: 1.1, duration: 0.1 })
@@ -89,7 +96,7 @@ export default function Card({
 
   // checks if the card is active, and if it is, moves it to the drop zone, otherwise moves it back to its original position
   useEffect(() => {
-    if (activeCard === cardId) {
+    if (cardInDropZone === cardId) {
       if (checkOverlap()) {
         setIsCardActive(true)
       }
@@ -97,7 +104,7 @@ export default function Card({
       setIsCardActive(false)
       gsap.to(realTimePositionRef.current, { ...originalPosition.current, duration: 0.2 })
     }
-  }, [activeCard, cardId, originalPosition, checkOverlap])
+  }, [cardInDropZone, cardId, originalPosition, checkOverlap])
 
   //update aspect ratio to fix weird card cursor offset misalignment
   useEffect(() => {
