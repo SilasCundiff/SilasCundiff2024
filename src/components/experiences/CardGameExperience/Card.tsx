@@ -1,39 +1,34 @@
 import { useFrame, useThree } from '@react-three/fiber'
 import { useGesture } from '@use-gesture/react'
-import { useCallback, useContext, useEffect, useRef, useState } from 'react'
+import { useCallback, useContext, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Euler, Vector3 } from 'three'
 import { gsap } from 'gsap'
 import { Text, useFont } from '@react-three/drei'
 import { useCardDropZoneContext } from '@/helpers/contexts/CardDropZoneContext'
 import { useCardDraggingContext } from '@/helpers/contexts/CardDraggingContext'
+import { a, useTransition, useSpring } from '@react-spring/three'
 
-export default function Card({
-  cardId,
-  color,
-  position,
-  rotation,
-  cardWidth,
-  cardHeight,
-  ...props
-}: {
+type CardProps = {
   cardId: string
   color: string
+  index: number
   position: Vector3
   rotation: Euler
   cardWidth: number
   cardHeight: number
-}) {
+}
+
+export default function Card({ cardId, index, color, position, rotation, cardWidth, cardHeight, ...props }: CardProps) {
   const { cardInDropZone, setCardInDropZone, cardDropZonePosition, cardDropZoneRotation } = useCardDropZoneContext()
   const { isCardBeingDragged, setIsCardBeingDragged } = useCardDraggingContext()
   const [isCardActive, setIsCardActive] = useState(false)
   const { size, viewport } = useThree()
   const aspect = useRef(size.width / viewport.width)
   const cardRef = useRef<any>(null)
-  const realTimePositionRef = useRef<Vector3 | null>(position)
   const originalPosition = useRef<Vector3 | null>(position)
-  const realTimeRotationRef = useRef<Euler | null>(rotation)
   const originalRotation = useRef<Euler | null>(rotation)
-  console.log('realTimeRotationRef.current', originalRotation.current, cardId)
+  const realTimePositionRef = useRef<Vector3 | null>(position)
+  const realTimeRotationRef = useRef<Euler | null>(rotation)
 
   useFrame((_state) => {
     if (cardRef.current && realTimePositionRef.current) {
@@ -65,14 +60,7 @@ export default function Card({
         setIsCardBeingDragged(true)
         // @ts-ignore
         realTimePositionRef.current = new Vector3(event.point.x, event.point.y, 2)
-        const newRotation = new Euler(0, 0, 0)
-        gsap.to(realTimeRotationRef.current, {
-          x: newRotation.x,
-          y: newRotation.y,
-          z: newRotation.z,
-          duration: 0.2,
-          ease: 'power1.out',
-        })
+        realTimeRotationRef.current = new Euler(0, 0, 0)
       },
       onDragEnd: ({ event }) => {
         event.stopPropagation()
@@ -108,7 +96,7 @@ export default function Card({
   )
 
   // Swaps out the active card when a new card is dragged over the drop zone while it has a card already
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (cardInDropZone === cardId) {
       if (checkOverlap()) {
         setIsCardActive(true)
@@ -126,7 +114,27 @@ export default function Card({
   }, [size, viewport])
 
   // Animate card to it's hand position on mount
-  useEffect(() => {}, [])
+  useLayoutEffect(() => {
+    const delay = 0.2 * index
+    // Define the offscreen position
+    const offScreenPosition = { x: -window.innerWidth, y: -window.innerHeight, z: position.z }
+    const offScreenRotation = { x: rotation.x, y: rotation.y, z: rotation.z }
+
+    // Animate the card from the offscreen position to its final position
+    gsap.fromTo(
+      realTimePositionRef.current,
+      { ...offScreenPosition },
+      { ...position, duration: 0.75, delay, ease: 'power1.out' },
+    )
+    gsap.fromTo(
+      realTimeRotationRef.current,
+      { ...offScreenRotation },
+      { ...rotation, duration: 0.75, delay, ease: 'power1.out' },
+    )
+
+    return () => {}
+  }, [index, position, rotation, realTimePositionRef, realTimeRotationRef])
+  console.log('Card rendered')
 
   return (
     // @ts-ignore

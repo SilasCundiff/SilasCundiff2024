@@ -30,6 +30,7 @@ export default function Hand() {
             <Card
               key={id}
               cardId={id}
+              index={index}
               color={color}
               position={cardPosition}
               rotation={cardsInHandRotations[index]}
