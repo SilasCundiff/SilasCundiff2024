@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 
-type Card = {
+export type Card = {
   id: string
   color: string
   imageUrl: string
@@ -8,7 +8,9 @@ type Card = {
   description: string
 }
 
-type DeckOfCards = Card[]
+// an array of cards
+export type DeckOfCards = Array<Card>
+export type Hand = Array<Card>
 
 const deckOfCards = [
   { id: 'card-1', color: '#FBBF24', imageUrl: 'url1', title: 'Title 1', description: 'Description 1' },
@@ -33,8 +35,7 @@ const deckOfCards = [
 const useCardsFromDeckAndHand = () => {
   const [hand, setHand] = useState<Card[]>([])
   const [drawPile, setDrawPile] = useState<DeckOfCards>(deckOfCards)
-  const [discardPile, setDiscardPile] = useState<Card[] | []>([])
-  const [activeCard, setActiveCard] = useState<string | null>(null)
+  const [discardPile, setDiscardPile] = useState<Card[]>([])
 
   const discardHandAndDrawFive = useCallback(() => {
     const tempDiscardPile = [...discardPile, ...hand]
@@ -72,6 +73,8 @@ const useCardsFromDeckAndHand = () => {
       drawUntilHandIsFull()
     }
   }, [drawUntilHandIsFull, hand])
+
+  console.log('hand in hook', hand, 'draw', drawPile, 'discard', discardPile)
 
   return {
     hand,

@@ -1,20 +1,31 @@
 'use client'
 
-import { createContext, useEffect, useState } from 'react'
+import { createContext, useContext, useState } from 'react'
 import CardDropZone from './CardDropZone'
 import Hand from './Hand'
-
 import { Vector3 } from 'three'
-import useCards from '@/helpers/hooks/useCardsFromDeckAndHand'
 
-export const DraggingContext = createContext({
+type DraggingContextType = {
+  isDragging: boolean
+  currentlyDraggingCard: string | null
+  setIsDragging: (isDragging: boolean) => void
+  setCurrentlyDraggingCard: (cardId: string) => void
+}
+
+type CardContextType = {
+  activeCard: string | null
+  setActiveCard: (id: string | null) => void
+  cardDropZonePosition: Vector3
+}
+
+export const DraggingContext = createContext<DraggingContextType>({
   isDragging: false,
   currentlyDraggingCard: null,
   setIsDragging: (isDragging: boolean) => {},
   setCurrentlyDraggingCard: (cardId: string) => {},
 })
 
-export const CardContext = createContext({
+export const CardContext = createContext<CardContextType>({
   activeCard: null,
   setActiveCard: (id: string | null) => {},
   cardDropZonePosition: new Vector3(0, 0, 0),
@@ -32,12 +43,12 @@ const cardDropZonePosition = new Vector3(-4, 1, 0.01)
 
 export default function CardGameExperience() {
   const [isDragging, setIsDragging] = useState(false)
-  const [currentlyDraggingCard, setCurrentlyDraggingCard] = useState(null)
-  const { hand, drawPile, discardPile, drawUntilHandIsFull } = useCards()
+  const [currentlyDraggingCard, setCurrentlyDraggingCard] = useState<string | null>(null)
+  const [activeCard, setActiveCard] = useState<string | null>(null)
 
   return (
     <>
-      <CardContext.Provider value={{ cardDropZonePosition }}>
+      <CardContext.Provider value={{ activeCard, setActiveCard, cardDropZonePosition }}>
         <DraggingContext.Provider
           value={{ isDragging, setIsDragging, currentlyDraggingCard, setCurrentlyDraggingCard }}
         >
@@ -46,9 +57,7 @@ export default function CardGameExperience() {
             <planeGeometry args={[6, 2.5, 1]} />
             <meshBasicMaterial color='#00f' opacity={0.0} transparent />
           </mesh>
-          {hand.length > 0 && (
-            <Hand size={{ cardWidth: 1.75, cardHeight: 2.5 }} currentHand={hand} cardPositions={cardHandPositions} />
-          )}
+          <Hand size={{ cardWidth: 1.75, cardHeight: 2.5 }} cardPositions={cardHandPositions} />
         </DraggingContext.Provider>
       </CardContext.Provider>
     </>
