@@ -1,7 +1,7 @@
 import { useFrame, useThree } from '@react-three/fiber'
 import { useGesture } from '@use-gesture/react'
 import { useCallback, useContext, useEffect, useRef, useState } from 'react'
-import { Vector3 } from 'three'
+import { Euler, Vector3 } from 'three'
 import { gsap } from 'gsap'
 import { Text, useFont } from '@react-three/drei'
 import { useCardDropZoneContext } from '@/helpers/contexts/CardDropZoneContext'
@@ -11,6 +11,7 @@ export default function Card({
   cardId,
   color,
   position,
+  rotation,
   cardWidth,
   cardHeight,
   ...props
@@ -18,23 +19,32 @@ export default function Card({
   cardId: string
   color: string
   position: Vector3
+  rotation: Euler
   cardWidth: number
   cardHeight: number
 }) {
-  const { cardInDropZone, setCardInDropZone, cardDropZonePosition } = useCardDropZoneContext()
+  const { cardInDropZone, setCardInDropZone, cardDropZonePosition, cardDropZoneRotation } = useCardDropZoneContext()
   const { isCardBeingDragged, setIsCardBeingDragged } = useCardDraggingContext()
   const [isCardActive, setIsCardActive] = useState(false)
   const { size, viewport } = useThree()
   const aspect = useRef(size.width / viewport.width)
-  const realTimePositionRef = useRef<Vector3 | null>(position)
   const cardRef = useRef<any>(null)
+  const realTimePositionRef = useRef<Vector3 | null>(position)
   const originalPosition = useRef<Vector3 | null>(position)
+  const realTimeRotationRef = useRef<Euler | null>(rotation)
+  const originalRotation = useRef<Euler | null>(rotation)
+  console.log('realTimeRotationRef.current', originalRotation.current, cardId)
 
   useFrame((_state) => {
     if (cardRef.current && realTimePositionRef.current) {
       cardRef.current.position.x = realTimePositionRef.current.x
       cardRef.current.position.y = realTimePositionRef.current.y
       cardRef.current.position.z = realTimePositionRef.current.z
+    }
+    if (cardRef.current && realTimeRotationRef.current) {
+      cardRef.current.rotation.x = realTimeRotationRef.current.x
+      cardRef.current.rotation.y = realTimeRotationRef.current.y
+      cardRef.current.rotation.z = realTimeRotationRef.current.z
     }
   })
 
@@ -51,25 +61,34 @@ export default function Card({
   const bind = useGesture(
     {
       onDrag: ({ event }) => {
+        event.stopPropagation()
         setIsCardBeingDragged(true)
         // @ts-ignore
         realTimePositionRef.current = new Vector3(event.point.x, event.point.y, 2)
+        const newRotation = new Euler(0, 0, 0)
+        gsap.to(realTimeRotationRef.current, {
+          x: newRotation.x,
+          y: newRotation.y,
+          z: newRotation.z,
+          duration: 0.2,
+          ease: 'power1.out',
+        })
       },
       onDragEnd: ({ event }) => {
         event.stopPropagation()
         const zOffset = 0.1
+        setIsCardBeingDragged(false)
         if (checkOverlap()) {
           if (!isCardActive) {
             setCardInDropZone(cardId)
-            gsap.to(realTimePositionRef.current, { ...cardDropZonePosition.clone().setZ(zOffset), duration: 0.2 })
-          } else if (isCardActive) {
-            gsap.to(realTimePositionRef.current, { ...cardDropZonePosition.clone().setZ(zOffset), duration: 0.2 })
           }
+          gsap.to(realTimePositionRef.current, { ...cardDropZonePosition.clone().setZ(zOffset), duration: 0.2 })
+          gsap.to(realTimeRotationRef.current, { ...cardDropZoneRotation.clone(), duration: 0.2 })
         } else if (!checkOverlap()) {
           setCardInDropZone(cardInDropZone === cardId ? null : cardInDropZone)
           gsap.to(realTimePositionRef.current, { ...originalPosition.current, duration: 0.2 })
+          gsap.to(realTimeRotationRef.current, { ...originalRotation.current, duration: 0.2 })
         }
-        setIsCardBeingDragged(false)
       },
       onHover: ({ active, event }) => {
         event.stopPropagation()
@@ -88,7 +107,7 @@ export default function Card({
     },
   )
 
-  // checks if the card is active, and if it is, moves it to the drop zone, otherwise moves it back to its original position
+  // Swaps out the active card when a new card is dragged over the drop zone while it has a card already
   useEffect(() => {
     if (cardInDropZone === cardId) {
       if (checkOverlap()) {
@@ -97,8 +116,9 @@ export default function Card({
     } else {
       setIsCardActive(false)
       gsap.to(realTimePositionRef.current, { ...originalPosition.current, duration: 0.2 })
+      gsap.to(realTimeRotationRef.current, { ...originalRotation.current, duration: 0.2 })
     }
-  }, [cardInDropZone, cardId, originalPosition, checkOverlap])
+  }, [cardInDropZone, cardId, originalPosition, originalRotation, checkOverlap])
 
   //update aspect ratio to fix weird card cursor offset misalignment
   useEffect(() => {
@@ -110,7 +130,7 @@ export default function Card({
 
   return (
     // @ts-ignore
-    <group position={realTimePositionRef.current} {...bind()} ref={cardRef}>
+    <group position={realTimePositionRef.current} rotation={realTimeRotationRef.current} {...bind()} ref={cardRef}>
       <mesh>
         <planeGeometry args={[cardWidth, cardHeight, 1]} />
         <meshBasicMaterial color={color} />
