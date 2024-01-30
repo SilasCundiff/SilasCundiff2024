@@ -1,7 +1,6 @@
 import { Vector3 } from 'three'
 import Card from './Card'
 import { useDeckAndHandContext } from '@/helpers/contexts/DeckAndHandContext'
-import { useCardPositionUtilsContext } from '@/helpers/contexts/CardPositionUtilsContext'
 
 export default function Hand({
   size: { cardWidth = 1.75, cardHeight = 2.5 },
@@ -9,7 +8,13 @@ export default function Hand({
   size: { cardWidth: number; cardHeight: number }
 }) {
   const { hand } = useDeckAndHandContext()
-  const { cardsInHandPositions } = useCardPositionUtilsContext()
+  const cardsInHandPositions = [
+    new Vector3(-4, -2, 1.3),
+    new Vector3(-2, -2, 1.2),
+    new Vector3(0, -2, 1.1),
+    new Vector3(2, -2, 1.4),
+    new Vector3(4, -2, 1.5),
+  ]
 
   return (
     <group>

@@ -4,7 +4,8 @@ import { useCallback, useContext, useEffect, useRef, useState } from 'react'
 import { Vector3 } from 'three'
 import { gsap } from 'gsap'
 import { Text, useFont } from '@react-three/drei'
-import { useCardPositionUtilsContext } from '@/helpers/contexts/CardPositionUtilsContext'
+import { useCardDropZoneContext } from '@/helpers/contexts/CardDropZoneContext'
+import { useCardDraggingContext } from '@/helpers/contexts/CardDraggingContext'
 
 export default function Card({
   cardId,
@@ -20,15 +21,8 @@ export default function Card({
   cardWidth: number
   cardHeight: number
 }) {
-  const {
-    cardInDropZone,
-    isCardBeingDragged,
-    cardBeingDragged,
-    cardDropZonePosition,
-    setCardInDropZone,
-    setIsCardBeingDragged,
-    setCardBeingDragged,
-  } = useCardPositionUtilsContext()
+  const { cardInDropZone, setCardInDropZone, cardDropZonePosition } = useCardDropZoneContext()
+  const { isCardBeingDragged, setIsCardBeingDragged } = useCardDraggingContext()
   const [isCardActive, setIsCardActive] = useState(false)
   const { size, viewport } = useThree()
   const aspect = useRef(size.width / viewport.width)

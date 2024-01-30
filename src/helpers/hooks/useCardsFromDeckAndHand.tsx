@@ -74,8 +74,6 @@ const useCardsFromDeckAndHand = () => {
     }
   }, [drawUntilHandIsFull, hand])
 
-  console.log('hand in hook', hand, 'draw', drawPile, 'discard', discardPile)
-
   return {
     hand,
     drawPile,

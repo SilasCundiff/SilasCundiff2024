@@ -1,5 +1,5 @@
+import { useCardDropZoneContext } from '@/helpers/contexts/CardDropZoneContext'
 import { Html } from '@react-three/drei'
-import { useCardPositionUtilsContext } from '@/helpers/contexts/CardPositionUtilsContext'
 
 export default function CardDropZone({
   size = {
@@ -7,7 +7,7 @@ export default function CardDropZone({
     cardHeight: 2.5,
   },
 }) {
-  const { cardDropZonePosition } = useCardPositionUtilsContext()
+  const { cardDropZonePosition } = useCardDropZoneContext()
   return (
     <mesh position={cardDropZonePosition}>
       <planeGeometry args={[size.cardWidth, size.cardHeight, 1]} />

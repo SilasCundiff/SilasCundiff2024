@@ -1,24 +1,15 @@
 'use client'
 import useCardsFromDeckAndHand, { Card } from '../hooks/useCardsFromDeckAndHand'
-import { createContext, useContext } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 
 export type DeckAndHandContextType = {
   hand: Card[]
-  drawPile: Card[]
-  discardPile: Card[]
-  drawUntilHandIsFull: () => void
 }
 
 export const DeckAndHandContext = createContext<DeckAndHandContextType | null>(null)
 
-export default function DeckAndHandContextProvider({ children }: { children: React.ReactNode }) {
-  const { hand, drawPile, discardPile, drawUntilHandIsFull } = useCardsFromDeckAndHand()
-
-  return (
-    <DeckAndHandContext.Provider value={{ hand, drawPile, discardPile, drawUntilHandIsFull }}>
-      {children}
-    </DeckAndHandContext.Provider>
-  )
+export default function DeckAndHandContextProvider({ children, hand }: { children: React.ReactNode; hand: Card[] }) {
+  return <DeckAndHandContext.Provider value={{ hand }}>{children}</DeckAndHandContext.Provider>
 }
 
 export const useDeckAndHandContext = () => {

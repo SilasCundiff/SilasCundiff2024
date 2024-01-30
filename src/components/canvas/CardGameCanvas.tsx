@@ -7,11 +7,11 @@ import DeckAndHandContextProvider, { DeckAndHandContext } from '@/helpers/contex
 import { useContext } from 'react'
 
 export default function CardGameCanvas() {
-  const { drawPile, discardPile, drawUntilHandIsFull } = useCardsFromDeckAndHand()
+  const { hand, drawPile, discardPile, drawUntilHandIsFull } = useCardsFromDeckAndHand()
 
   return (
     <div className='relative h-svh max-h-[calc(100svh-96px)] w-full'>
-      <DeckAndHandContextProvider>
+      <DeckAndHandContextProvider hand={hand}>
         <Canvas resize={{ scroll: false }} orthographic dpr={[1, 2]} camera={{ position: [0, 0, 10], zoom: 100 }}>
           <Bounds fit clip observe margin={1.2} maxDuration={1}>
             <CardGameExperience />
