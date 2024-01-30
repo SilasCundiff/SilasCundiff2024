@@ -1,12 +1,9 @@
 import { Vector3 } from 'three'
 import Card from './Card'
 import { useDeckAndHandContext } from '@/helpers/contexts/DeckAndHandContext'
+import { CARD_HEIGHT, CARD_WIDTH } from '@/helpers/constants'
 
-export default function Hand({
-  size: { cardWidth = 1.75, cardHeight = 2.5 },
-}: {
-  size: { cardWidth: number; cardHeight: number }
-}) {
+export default function Hand() {
   const { hand } = useDeckAndHandContext()
   const cardsInHandPositions = [
     new Vector3(-4, -2, 1.3),
@@ -28,8 +25,8 @@ export default function Hand({
               cardId={id}
               color={color}
               position={cardPosition}
-              cardWidth={cardWidth}
-              cardHeight={cardHeight}
+              cardWidth={CARD_WIDTH}
+              cardHeight={CARD_HEIGHT}
             />
           )
         })}
