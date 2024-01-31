@@ -4,11 +4,10 @@ import { useDeckAndHandContext } from '@/helpers/contexts/DeckAndHandContext'
 import { CARD_HEIGHT, CARD_WIDTH } from '@/helpers/constants'
 import { animated, useSpringRef, useTransition } from '@react-spring/three'
 import { useEffect } from 'react'
-import { useBounds } from '@react-three/drei'
 
 export default function Hand() {
   const { hand } = useDeckAndHandContext()
-  const bounds = useBounds()
+
   const cardsInHandPositions = [
     new Vector3(-2, -2.4, 1.3),
     new Vector3(-1, -2.15, 1.2),
@@ -44,21 +43,19 @@ export default function Hand() {
   const transition = useTransition(hand, {
     ref: transitionRef,
     keys: hand.map(({ id }) => id),
-    from: { position: new Vector3(-window.innerWidth, -window.innerHeight, 0), rotation: new Euler(0, 0, 0) },
+    from: { position: new Vector3(-4, -2, 0).toArray() },
     enter: (card) => {
       const index = hand.indexOf(card)
       console.log('index', index, card, cardsInHandPositions[index])
-      return { position: cardsInHandPositions[index], rotation: cardsInHandRotations[index] }
+      return { position: cardsInHandPositions[index].toArray(), rotation: cardsInHandRotations[index] }
     },
-    leave: { position: new Vector3(window.innerWidth, window.innerHeight, 0), rotation: new Euler(0, 0, 0) },
-    update: (card) => {
-      const index = hand.indexOf(card)
-      return { position: cardsInHandPositions[index], rotation: cardsInHandRotations[index] }
-    },
+    leave: { position: new Vector3(4, -2, 0).toArray() },
     config: {
-      mass: 5,
-      friction: 120,
-      tension: 120,
+      mass: 2,
+      friction: 60,
+      tension: 360,
+      precision: 0.0001,
+      clamp: true,
     },
     trail: 100,
   })
@@ -66,6 +63,10 @@ export default function Hand() {
 
   useEffect(() => {
     transitionRef.start()
+
+    return () => {
+      transitionRef.stop()
+    }
   }, [hand, transitionRef])
 
   return (

@@ -8,14 +8,15 @@ import { useContext } from 'react'
 
 export default function CardGameCanvas() {
   const { hand, drawPile, discardPile, drawUntilHandIsFull } = useCardsFromDeckAndHand()
+  console.log('hand', drawPile, discardPile)
 
   return (
     <div className='relative h-svh max-h-[calc(100svh-96px)] w-full'>
       <DeckAndHandContextProvider hand={hand}>
         <Canvas resize={{ scroll: false }} orthographic dpr={[1, 2]} camera={{ position: [0, 0, 10], zoom: 100 }}>
-          {/* <Bounds fit clip observe margin={1}> */}
-          <CardGameExperience />
-          {/* </Bounds> */}
+          <Bounds fit clip observe margin={1}>
+            <CardGameExperience />
+          </Bounds>
         </Canvas>
         <div className='absolute bottom-0'>
           <button
