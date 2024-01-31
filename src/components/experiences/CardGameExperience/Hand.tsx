@@ -2,15 +2,18 @@ import { Euler, Vector3 } from 'three'
 import Card from './Card'
 import { useDeckAndHandContext } from '@/helpers/contexts/DeckAndHandContext'
 import { CARD_HEIGHT, CARD_WIDTH } from '@/helpers/constants'
+import { useSpringRef, useTransition } from '@react-spring/three'
+import { useEffect } from 'react'
 
 export default function Hand() {
   const { hand } = useDeckAndHandContext()
+
   const cardsInHandPositions = [
-    new Vector3(-2, -2.4, 1.3),
-    new Vector3(-1, -2.15, 1.2),
-    new Vector3(0, -2, 1.1),
-    new Vector3(1, -2.15, 1.4),
-    new Vector3(2, -2.4, 1.5),
+    new Vector3(-2, -2.4, 1.5),
+    new Vector3(-1, -2.15, 1.4),
+    new Vector3(0, -2, 1.3),
+    new Vector3(1, -2.15, 1.2),
+    new Vector3(2, -2.4, 1.1),
   ]
   const cardsInHandRotations = [
     new Euler(0, 0, 0.25),
@@ -20,25 +23,65 @@ export default function Hand() {
     new Euler(0, 0, -0.25),
   ]
 
+  const transitionRef = useSpringRef()
+
+  const transition = useTransition(hand, {
+    ref: transitionRef,
+    keys: hand.map(({ id }) => id),
+    from: (card) => {
+      const index = hand.indexOf(card)
+      return {
+        position: new Vector3(-window.innerWidth / 2, -2, index * 0.1).toArray(),
+        rotation: cardsInHandRotations[index],
+      }
+    },
+    enter: (card) => {
+      const index = hand.indexOf(card)
+      return { position: cardsInHandPositions[index].toArray(), rotation: cardsInHandRotations[index] }
+    },
+    leave: (card) => {
+      const index = hand.indexOf(card)
+      return {
+        position: new Vector3(window.innerWidth / 2, -2, index * 0.5).toArray(),
+        rotation: cardsInHandRotations[index],
+      }
+    },
+    config: {
+      mass: 2,
+      friction: 40,
+      tension: 360,
+      precision: 0.0001,
+    },
+    trail: 100,
+  })
+
+  useEffect(() => {
+    transitionRef.start()
+
+    return () => {
+      transitionRef.stop()
+    }
+  }, [hand, transitionRef])
+
   return (
     <group>
-      {hand &&
-        hand.map(({ id, color }, index) => {
-          const cardPosition = cardsInHandPositions[index]
-          cardPosition.z = 0.01 * index + 0.01 // fix z-fighting
-          return (
+      {transition((props, card) => {
+        return (
+          // @ts-ignore
+          <>
             <Card
-              key={id}
-              cardId={id}
-              index={index}
-              color={color}
-              position={cardPosition}
-              rotation={cardsInHandRotations[index]}
+              key={card.id}
+              cardId={card.id}
+              index={hand.indexOf(card)}
+              color={card.color}
               cardWidth={CARD_WIDTH}
               cardHeight={CARD_HEIGHT}
+              position={props.position}
+              rotation={props.rotation}
             />
-          )
-        })}
+          </>
+        )
+      })}
     </group>
   )
 }
