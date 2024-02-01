@@ -17,7 +17,7 @@ export const CardDropZoneContextType = createContext<CardDropZoneContextType>({
 
 export const CardDropZoneContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [cardInDropZone, setCardInDropZone] = useState<string | null>(null)
-  const cardDropZonePosition = new Vector3(-4, 1, 0.01)
+  const cardDropZonePosition = new Vector3(0, 1.5, 0.01)
   const cardDropZoneRotation = new Euler(0, 0, 0)
 
   return (

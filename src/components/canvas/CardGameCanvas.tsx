@@ -1,25 +1,37 @@
 import { Canvas } from '@react-three/fiber'
 import CardGameExperience from '../experiences/CardGameExperience/CardGameExperience'
-
+import { CardDraggingContextProvider } from '@/helpers/contexts/CardDraggingContext'
+import { CardDropZoneContextProvider } from '@/helpers/contexts/CardDropZoneContext'
 import { Bounds, useFont } from '@react-three/drei'
 import useCardsFromDeckAndHand from '@/helpers/hooks/useCardsFromDeckAndHand'
 import DeckAndHandContextProvider, { DeckAndHandContext } from '@/helpers/contexts/DeckAndHandContext'
+import { useCardDropZoneContext } from '@/helpers/contexts/CardDropZoneContext'
 
 export default function CardGameCanvas() {
   const { hand, drawPile, discardPile, drawUntilHandIsFull } = useCardsFromDeckAndHand()
-  console.log('hand', drawPile, discardPile)
+  const { cardInDropZone, setCardInDropZone } = useCardDropZoneContext()
+
+  const handleEndTurn = () => {
+    setCardInDropZone(null)
+    drawUntilHandIsFull()
+  }
 
   return (
-    <div className='relative h-svh max-h-[calc(100svh-96px)] w-full'>
+    <div className='relative h-svh md:max-h-[calc(100svh-96px)] w-full my-auto'>
       <DeckAndHandContextProvider hand={hand}>
         <Canvas resize={{ scroll: false }} orthographic dpr={[1, 2]} camera={{ position: [0, 0, 10], zoom: 100 }}>
           {/* <Bounds fit clip observe margin={1}> */}
-          <CardGameExperience />
+          {/* <color attach='background' args={['#fee']} /> */}
+          <CardDraggingContextProvider>
+            <CardDropZoneContextProvider>
+              <CardGameExperience />
+            </CardDropZoneContextProvider>
+          </CardDraggingContextProvider>
           {/* </Bounds> */}
         </Canvas>
         <div className='absolute bottom-0 container mx-auto'>
           <button
-            onClick={() => drawUntilHandIsFull()}
+            onClick={handleEndTurn}
             className='eightbit-btn pointer-events-auto px-4 py-2 font-pressStart text-sm text-white'
           >
             End turn
@@ -29,6 +41,7 @@ export default function CardGameCanvas() {
           <div className='font-pressStart text-white'>Draw Pile: {drawPile.length}</div>
           <div className='font-pressStart text-white'>Discard Pile: {discardPile.length}</div>
         </div>
+        <img src='../../../public/img/winter_bg/bg_trees_1.png' alt='' />
       </DeckAndHandContextProvider>
     </div>
   )
