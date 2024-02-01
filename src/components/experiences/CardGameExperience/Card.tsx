@@ -1,12 +1,10 @@
-import { useFrame, useThree } from '@react-three/fiber'
+import { useThree } from '@react-three/fiber'
 import { useGesture } from '@use-gesture/react'
-import { useCallback, useContext, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { Euler, Vector3, Vector3Tuple } from 'three'
-import { gsap } from 'gsap'
 import { Text, useFont } from '@react-three/drei'
 import { useCardDropZoneContext } from '@/helpers/contexts/CardDropZoneContext'
-import { useCardDraggingContext } from '@/helpers/contexts/CardDraggingContext'
-import { a, useTransition, useSpring, animated, SpringValue } from '@react-spring/three'
+import { useSpring, animated, SpringValue } from '@react-spring/three'
 
 type CardProps = {
   cardId: string
@@ -18,10 +16,10 @@ type CardProps = {
   rotation: Euler
 }
 
-export default function Card({ cardId, index, color, cardWidth, cardHeight, position, rotation, ...props }: CardProps) {
+export default function Card({ cardId, index, color, cardWidth, cardHeight, position, rotation }: CardProps) {
   const { cardInDropZone, setCardInDropZone, cardDropZonePosition, cardDropZoneRotation } = useCardDropZoneContext()
   const [isCardActive, setIsCardActive] = useState(false)
-  const { size, viewport } = useThree()
+  const { viewport } = useThree()
   const cardRef = useRef<any>(null)
 
   const [{ cardPosition, cardRotation, cardScale }, api] = useSpring(() => ({
@@ -73,6 +71,7 @@ export default function Card({ cardId, index, color, cardWidth, cardHeight, posi
         } else {
           newPosition = position
           newRotation = rotation
+          setCardInDropZone(null)
         }
         api.start({
           cardPosition: newPosition,

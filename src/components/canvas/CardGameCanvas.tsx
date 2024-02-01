@@ -4,7 +4,6 @@ import CardGameExperience from '../experiences/CardGameExperience/CardGameExperi
 import { Bounds, useFont } from '@react-three/drei'
 import useCardsFromDeckAndHand from '@/helpers/hooks/useCardsFromDeckAndHand'
 import DeckAndHandContextProvider, { DeckAndHandContext } from '@/helpers/contexts/DeckAndHandContext'
-import { useContext } from 'react'
 
 export default function CardGameCanvas() {
   const { hand, drawPile, discardPile, drawUntilHandIsFull } = useCardsFromDeckAndHand()
@@ -18,7 +17,7 @@ export default function CardGameCanvas() {
           <CardGameExperience />
           {/* </Bounds> */}
         </Canvas>
-        <div className='absolute bottom-0'>
+        <div className='absolute bottom-0 container mx-auto'>
           <button
             onClick={() => drawUntilHandIsFull()}
             className='eightbit-btn pointer-events-auto px-4 py-2 font-pressStart text-sm text-white'
