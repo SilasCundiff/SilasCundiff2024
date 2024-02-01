@@ -9,11 +9,11 @@ export default function Hand() {
   const { hand } = useDeckAndHandContext()
 
   const cardsInHandPositions = [
-    new Vector3(-2, -3.5, 1.5),
-    new Vector3(-1, -3.25, 1.4),
-    new Vector3(0, -3.1, 1.3),
-    new Vector3(1, -3.25, 1.2),
-    new Vector3(2, -3.5, 1.1),
+    new Vector3(-2, -4.5, 1.5),
+    new Vector3(-1, -4.25, 1.4),
+    new Vector3(0, -4.1, 1.3),
+    new Vector3(1, -4.25, 1.2),
+    new Vector3(2, -4.5, 1.1),
   ]
   const cardsInHandRotations = [
     new Euler(0, 0, 0.25),

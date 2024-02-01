@@ -44,17 +44,58 @@ html {
   scroll-behavior: smooth !important;
 }
 
-.cardInfo-wrapper {
-  background: #00f;
-  max-width: 50%;
-  height: 400px;
-  top: 0;
-  left: 0;
+/* .project-html {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background: #fff;
+} */
+
+.project-html--wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
-.cardInfo-html {
-  background: #000;
-  /* width: 100%; */
-  height: 200px;
+.project-html {
+  max-width: 100%;
+  background: #fff;
+  max-height: 100%;
+  border-radius: 6px;
+}
+.project-html--wrapper > div {
+  position: absolute;
+  width: 50svw;
+  height: 100%;
+  left: 0;
+  z-index: 1;
+}
+
+.project-html--wrapper div > div {
+  /* pointer-events: none; */
+  position: absolute;
+  width: 100%;
+  @apply container mx-auto;
+  height: 80svh;
+  left: 0;
+  z-index: 10;
+  border-radius: 8px;
+}
+
+.project-iframe {
+  height: 100%;
+  max-height: calc(100% - 128px);
+  margin-top: 128px;
+  width: 100%;
+  border: none;
+  border-radius: 0 0 6px 6px;
+  pointer-events: auto;
+  z-index: 10;
+  position: relative;
 }
 
 .card-game-canvas {
