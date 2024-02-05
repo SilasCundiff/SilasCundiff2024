@@ -1,7 +1,7 @@
 import { useThree } from '@react-three/fiber'
 import { useGesture } from '@use-gesture/react'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { Euler, Vector3, Vector3Tuple } from 'three'
+import THREE, { DoubleSide, Euler, NoBlending, Vector3, Vector3Tuple } from 'three'
 import { Bounds, Html, MeshPortalMaterial, Text, useFont } from '@react-three/drei'
 import { useCardDropZoneContext } from '@/helpers/contexts/CardDropZoneContext'
 import { useSpring, animated, SpringValue } from '@react-spring/three'
@@ -107,9 +107,6 @@ export default function Card({ cardId, index, color, cardWidth, cardHeight, posi
 
   // Swaps out the active card when a new card is dragged over the drop zone while it has a card already
   useEffect(() => {
-    if (position.id === 26) {
-      console.log('position', position.animation)
-    }
     if (cardInDropZone === cardId) {
       if (checkOverlap()) {
         setIsCardActive(true)
@@ -136,7 +133,7 @@ export default function Card({ cardId, index, color, cardWidth, cardHeight, posi
           ]}
         />
         <MeshPortalMaterial>
-          <ProjectStage isCardActive={isCardActive} isCardBeingDragged={isCardBeingDragged} />
+          <ProjectStage isCardActive={isCardActive} />
         </MeshPortalMaterial>
       </mesh>
     </animated.group>
@@ -145,44 +142,44 @@ export default function Card({ cardId, index, color, cardWidth, cardHeight, posi
 
 useFont.preload('/fonts/PressStart2P-Regular.ttf')
 
-const ProjectStage = ({ isCardActive, isCardBeingDragged }: { isCardActive: boolean; isCardBeingDragged: boolean }) => {
-  const { cardDropZonePosition } = useCardDropZoneContext()
+const ProjectStage = ({ isCardActive }: { isCardActive: boolean }) => {
   const [z, setZ] = useState(0)
-  console.log('isCardBeingDragged', isCardBeingDragged)
   const viewport = useThree((state) => state.viewport)
   const distanceFactor = Math.min(Math.max(window.innerWidth / 1900, 1), 1.5)
-
-  useEffect(() => {
-    setZ(isCardBeingDragged ? -1 : 0)
-  }, [isCardBeingDragged])
+  const [loading, setLoading] = useState(true)
 
   return (
     <>
       {isCardActive ? (
-        <Html
-          className='project-html pointer-events-auto'
-          wrapperClass={`project-html--wrapper pointer-events-auto ${isCardBeingDragged ? 'opacity-0' : 'opacity-100'}`}
-          center
-          occlude
-          transform
-          sprite
-          zIndexRange={[-1]}
-          distanceFactor={distanceFactor * 2.5}
-          position={[0, 1.25, -1]}
-        >
-          <div className='bg-white max-h-32 max-w-full p-4 font-pressStart rounded-t-md'>
-            <h2 className='text-4xl text-black font-alagard mb-2'>Zenify</h2>
-            <p className='text-xs mb-2'>
-              An audio visualizer that uses the Spotify API to create a unique experience for each song.
-            </p>
-            <p className='text-xs'>React | Nextjs | ThreeJs | SpotifyAPI | SpotifyWebSDK</p>
-          </div>
-          <iframe
-            className='project-iframe container mx-auto pointer-events-auto z-10'
-            src='https://zenify.silascundiff.com'
-            frameBorder='0'
-          ></iframe>
-        </Html>
+        <mesh>
+          <Html transform prepend zIndexRange={[0, 0]} distanceFactor={distanceFactor * 2.5}>
+            <div className='bg-white max-h-32 max-w-full p-4 font-pressStart rounded-t-md'>
+              <h2 className='text-4xl text-black font-alagard mb-2'>Zenify</h2>
+              <p className='text-xs mb-2'>
+                An audio visualizer that uses the Spotify API to create a unique experience for each song.
+              </p>
+              <p className='text-xs'>React | Nextjs | ThreeJs | SpotifyAPI | SpotifyWebSDK</p>
+            </div>
+            {loading ? (
+              <div className='project-iframe-loading text-4xl text-black absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
+                loading
+              </div>
+            ) : null}
+            (
+            <iframe
+              className=''
+              src='https://zenify.silascundiff.com'
+              onLoad={() => {
+                setLoading(false)
+              }}
+              frameBorder='0'
+              style={{ verticalAlign: 'top' }}
+              width={560 * 2}
+              height={315 * 2}
+            />
+            )
+          </Html>
+        </mesh>
       ) : (
         <mesh position={[0, 0, 0]}>
           <planeGeometry args={[10, 10, 1]} />

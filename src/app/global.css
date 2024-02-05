@@ -6,6 +6,15 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 /* Font-face definitions */
 @font-face {
   font-family: 'Alagard';
@@ -39,22 +48,11 @@
 }
 
 /* Global styles */
-*,
+/* *,
 html {
   scroll-behavior: smooth !important;
-}
-
-/* .project-html {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  background: #fff;
 } */
-
+/* 
 .project-html--wrapper {
   position: relative;
   width: 100%;
@@ -73,10 +71,9 @@ html {
   height: 100%;
   left: 0;
   z-index: 1;
-}
+} */
 
-.project-html--wrapper div > div {
-  /* pointer-events: none; */
+/* .project-html--wrapper div > div {
   position: absolute;
   width: 100%;
   @apply container mx-auto;
@@ -84,9 +81,9 @@ html {
   left: 0;
   z-index: 10;
   border-radius: 8px;
-}
+} */
 
-.project-iframe {
+/* .project-iframe {
   height: 100%;
   max-height: calc(100% - 128px);
   margin-top: 128px;
@@ -96,14 +93,14 @@ html {
   pointer-events: auto;
   z-index: 10;
   position: relative;
-}
-
+} */
+/* 
 .card-game-canvas {
   @apply w-full h-full bg-transparent bg-red-500/30;
   position: absolute !important;
   inset: 0;
   z-index: 0;
-}
+} */
 
 .text-shadow-blue {
   text-shadow: 4px 3px 0px #336fa0;

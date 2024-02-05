@@ -1,3 +1,4 @@
+'use client'
 import { Canvas } from '@react-three/fiber'
 import CardGameExperience from '../experiences/CardGameExperience/CardGameExperience'
 import { CardDraggingContextProvider } from '@/helpers/contexts/CardDraggingContext'
@@ -6,10 +7,24 @@ import { Bounds, useFont } from '@react-three/drei'
 import useCardsFromDeckAndHand from '@/helpers/hooks/useCardsFromDeckAndHand'
 import DeckAndHandContextProvider, { DeckAndHandContext } from '@/helpers/contexts/DeckAndHandContext'
 import { useCardDropZoneContext } from '@/helpers/contexts/CardDropZoneContext'
+import { useEffect, useLayoutEffect, useRef } from 'react'
 
 export default function CardGameCanvas() {
   const { hand, drawPile, discardPile, drawUntilHandIsFull } = useCardsFromDeckAndHand()
   const { cardInDropZone, setCardInDropZone } = useCardDropZoneContext()
+  const canvasRef = useRef()
+  const bodyRef = useRef()
+  useLayoutEffect(() => {
+    // @ts-ignore
+    canvasRef.current.parentNode.style.position = 'absolute'
+    // @ts-ignore
+    canvasRef.current.parentNode.style.zIndex = 3
+  }, [])
+
+  useEffect(() => {
+    // @ts-ignore
+    bodyRef.current = document.querySelector('.cardGameRoot')
+  }, [])
 
   const handleEndTurn = () => {
     setCardInDropZone(null)
@@ -21,10 +36,12 @@ export default function CardGameCanvas() {
   }
 
   return (
-    <div className='relative h-svh md:max-h-[calc(100svh-96px)] w-full my-auto'>
+    <div className='cardGameRoot relative h-svh md:max-h-[calc(100svh-96px)] w-full my-auto'>
       <DeckAndHandContextProvider hand={hand}>
         <Canvas
-          className='pointer-events-none visible'
+          // @ts-ignore
+          ref={canvasRef}
+          eventSource={bodyRef && bodyRef.current}
           resize={{ scroll: false }}
           orthographic
           dpr={[1, 2]}
@@ -39,7 +56,7 @@ export default function CardGameCanvas() {
           </CardDraggingContextProvider>
           {/* </Bounds> */}
         </Canvas>
-        <div className='absolute bottom-0 container mx-auto pointer-events-none'>
+        <div className='absolute bottom-0 container mx-auto pointer-events-none z-20'>
           <button
             onClick={handleEndTurn}
             className='eightbit-btn pointer-events-auto px-4 py-2 font-pressStart text-sm text-white'

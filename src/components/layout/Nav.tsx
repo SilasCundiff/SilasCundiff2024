@@ -23,7 +23,7 @@ export default function Nav() {
   return (
     <div className='w-full bg-white selection:bg-white'>
       <div
-        className='fixed bottom-8 right-8 z-30 flex size-12 cursor-pointer select-none items-center justify-center rounded-md bg-white md:hidden'
+        className='fixed bottom-8 right-8 z-50 flex size-12 cursor-pointer select-none items-center justify-center rounded-md bg-white md:hidden'
         onClick={() => {
           setNavOpen(!navOpen)
         }}
@@ -32,7 +32,7 @@ export default function Nav() {
       </div>
       <div className='relative flex w-full bg-white'>
         <nav
-          className={`fixed right-0 top-0 z-20 mx-auto flex 
+          className={`fixed right-0 top-0 z-40 mx-auto flex 
           h-svh w-full select-none flex-col bg-white font-pressStart
           text-sm transition-transform md:left-0 md:h-24 md:w-full md:translate-x-0 md:flex-row 
           ${isSticky ? 'fixed' : 'md:relative'}
