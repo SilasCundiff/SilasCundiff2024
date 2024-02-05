@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useState } from 'react'
-import { Vector3 } from 'three'
 
 type CardDraggingContextType = {
   isCardBeingDragged: boolean

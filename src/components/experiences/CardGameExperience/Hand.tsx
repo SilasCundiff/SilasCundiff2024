@@ -76,6 +76,12 @@ export default function Hand() {
               color={card.color}
               cardWidth={CARD_WIDTH}
               cardHeight={CARD_HEIGHT}
+              description={card.description}
+              title={card.title}
+              imageUrl={card.imageUrl}
+              // @ts-ignore
+              siteUrl={card.siteUrl}
+              techStack={card.techStack}
               // @ts-ignore
               position={props.position}
               // @ts-ignore

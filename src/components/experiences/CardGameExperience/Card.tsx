@@ -2,10 +2,9 @@ import { useThree } from '@react-three/fiber'
 import { useGesture } from '@use-gesture/react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import THREE, { DoubleSide, Euler, NoBlending, Vector3, Vector3Tuple } from 'three'
-import { Bounds, Html, MeshPortalMaterial, Text, useFont } from '@react-three/drei'
+import { Bounds, Html, Image, MeshPortalMaterial, Text, useFont } from '@react-three/drei'
 import { useCardDropZoneContext } from '@/helpers/contexts/CardDropZoneContext'
 import { useSpring, animated, SpringValue } from '@react-spring/three'
-import { useCardDraggingContext } from '@/helpers/contexts/CardDraggingContext'
 
 type CardProps = {
   cardId: string
@@ -15,9 +14,28 @@ type CardProps = {
   cardHeight: number
   position: SpringValue<Vector3Tuple>
   rotation: Euler
+  // project data
+  imageUrl: string
+  title: string
+  description: string
+  siteUrl: string
+  techStack?: string[]
 }
 
-export default function Card({ cardId, index, color, cardWidth, cardHeight, position, rotation }: CardProps) {
+export default function Card({
+  cardId,
+  index,
+  color,
+  cardWidth,
+  cardHeight,
+  position,
+  rotation,
+  title,
+  description,
+  imageUrl,
+  siteUrl,
+  techStack,
+}: CardProps) {
   const { cardInDropZone, setCardInDropZone, cardDropZonePosition, cardDropZoneRotation } = useCardDropZoneContext()
   const [isCardActive, setIsCardActive] = useState(false)
   const { viewport } = useThree()
@@ -121,6 +139,10 @@ export default function Card({ cardId, index, color, cardWidth, cardHeight, posi
     }
   }, [cardInDropZone, cardId, api, position, rotation, checkOverlap])
 
+  useEffect(() => {
+    console.log('cardInDropZone', cardInDropZone)
+  }, [cardInDropZone])
+
   return (
     // @ts-ignore
     <animated.group position={cardPosition} rotation={cardRotation} scale={cardScale} {...bind()} ref={cardRef}>
@@ -133,7 +155,14 @@ export default function Card({ cardId, index, color, cardWidth, cardHeight, posi
           ]}
         />
         <MeshPortalMaterial>
-          <ProjectStage isCardActive={isCardActive} />
+          <ProjectStage
+            isCardActive={isCardActive}
+            title={title}
+            description={description}
+            techStack={techStack}
+            siteUrl={siteUrl}
+            imageUrl={imageUrl}
+          />
         </MeshPortalMaterial>
       </mesh>
     </animated.group>
@@ -142,7 +171,21 @@ export default function Card({ cardId, index, color, cardWidth, cardHeight, posi
 
 useFont.preload('/fonts/PressStart2P-Regular.ttf')
 
-const ProjectStage = ({ isCardActive }: { isCardActive: boolean }) => {
+const ProjectStage = ({
+  isCardActive,
+  title,
+  description,
+  techStack = [],
+  siteUrl,
+  imageUrl = './img/project-image.png',
+}: {
+  isCardActive: boolean
+  title: string
+  description: string
+  techStack?: string[]
+  siteUrl: string
+  imageUrl?: string
+}) => {
   const [z, setZ] = useState(0)
   const viewport = useThree((state) => state.viewport)
   const distanceFactor = Math.min(Math.max(window.innerWidth / 1900, 1), 1.5)
@@ -154,21 +197,21 @@ const ProjectStage = ({ isCardActive }: { isCardActive: boolean }) => {
         <mesh>
           <Html transform prepend zIndexRange={[0, 0]} distanceFactor={distanceFactor * 2.5}>
             <div className='bg-white max-h-32 max-w-full p-4 font-pressStart rounded-t-md'>
-              <h2 className='text-4xl text-black font-alagard mb-2'>Zenify</h2>
-              <p className='text-xs mb-2'>
-                An audio visualizer that uses the Spotify API to create a unique experience for each song.
+              <h2 className='text-4xl text-black font-alagard mb-2'>{title}</h2>
+              <p className='text-xs mb-2'>{description}</p>
+
+              <p className='flex space-x-2'>
+                {techStack.map((tech, i) => (
+                  <span className='text-xs ' key={`${title}-${tech}-${i}`}>
+                    {tech}
+                  </span>
+                ))}
               </p>
-              <p className='text-xs'>React | Nextjs | ThreeJs | SpotifyAPI | SpotifyWebSDK</p>
             </div>
-            {loading ? (
-              <div className='project-iframe-loading text-4xl text-black absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
-                loading
-              </div>
-            ) : null}
-            (
+
             <iframe
               className=''
-              src='https://zenify.silascundiff.com'
+              src={siteUrl}
               onLoad={() => {
                 setLoading(false)
               }}
@@ -177,22 +220,38 @@ const ProjectStage = ({ isCardActive }: { isCardActive: boolean }) => {
               width={560 * 2}
               height={315 * 2}
             />
-            )
           </Html>
         </mesh>
       ) : (
         <mesh position={[0, 0, 0]}>
           <planeGeometry args={[10, 10, 1]} />
           <meshBasicMaterial color='#000' />
+
+          <Image scale={3} position={[0, 0, 0.01]} url={imageUrl} />
+          <mesh position={new Vector3(0, 0, 0.02)}>
+            <planeGeometry args={[10, 10, 1]} />
+            <meshBasicMaterial color='#000' opacity={0.75} transparent={true} />
+          </mesh>
           <Text
             font='/fonts/PressStart2P-Regular.ttf'
             fontSize={0.1}
-            maxWidth={0.5}
-            anchorY={'middle'}
-            anchorX={'center'}
-            position={new Vector3(0, 0, 0.01)}
+            maxWidth={1.5}
+            anchorY={'top-baseline'}
+            anchorX={'left'}
+            position={new Vector3(-0.75, 1, 0.03)}
           >
-            Card Drop Zone
+            {title}
+            <meshBasicMaterial color={'#fff'} />
+          </Text>
+          <Text
+            font='/fonts/PressStart2P-Regular.ttf'
+            fontSize={0.08}
+            maxWidth={1.5}
+            anchorY={'top-baseline'}
+            anchorX={'left'}
+            position={new Vector3(-0.75, 0.5, 0.03)}
+          >
+            {description}
             <meshBasicMaterial color={'#fff'} />
           </Text>
         </mesh>

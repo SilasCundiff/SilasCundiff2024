@@ -48,11 +48,11 @@ body,
 }
 
 /* Global styles */
-/* *,
+
 html {
   scroll-behavior: smooth !important;
-} */
-/* 
+}
+
 .project-html--wrapper {
   position: relative;
   width: 100%;
@@ -71,9 +71,9 @@ html {
   height: 100%;
   left: 0;
   z-index: 1;
-} */
+}
 
-/* .project-html--wrapper div > div {
+.project-html--wrapper div > div {
   position: absolute;
   width: 100%;
   @apply container mx-auto;
@@ -81,9 +81,9 @@ html {
   left: 0;
   z-index: 10;
   border-radius: 8px;
-} */
+}
 
-/* .project-iframe {
+.project-iframe {
   height: 100%;
   max-height: calc(100% - 128px);
   margin-top: 128px;
@@ -93,14 +93,14 @@ html {
   pointer-events: auto;
   z-index: 10;
   position: relative;
-} */
-/* 
+}
+
 .card-game-canvas {
   @apply w-full h-full bg-transparent bg-red-500/30;
   position: absolute !important;
   inset: 0;
   z-index: 0;
-} */
+}
 
 .text-shadow-blue {
   text-shadow: 4px 3px 0px #336fa0;

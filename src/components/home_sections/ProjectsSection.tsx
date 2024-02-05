@@ -11,6 +11,10 @@ import Fireflies from '../../../public/img/jungle_bg/fireflies.png'
 import Grasses from '../../../public/img/jungle_bg/grasses.png'
 import CardGameCanvas from '../canvas/CardGameCanvas'
 
+import { CardDraggingContextProvider } from '@/helpers/contexts/CardDraggingContext'
+import { CardDropZoneContextProvider } from '@/helpers/contexts/CardDropZoneContext'
+import DeckAndHandContextProvider from '@/helpers/contexts/DeckAndHandContext'
+
 export default function ProjectsSection() {
   return (
     <>
@@ -21,7 +25,13 @@ export default function ProjectsSection() {
         <Background backgroundImage={Grasses} />
         <Background backgroundImage={GrassRoad} />
         <Background backgroundImage={Fireflies} />
-        <CardGameCanvas />
+        <DeckAndHandContextProvider>
+          <CardDraggingContextProvider>
+            <CardDropZoneContextProvider>
+              <CardGameCanvas />
+            </CardDropZoneContextProvider>
+          </CardDraggingContextProvider>
+        </DeckAndHandContextProvider>
       </Section>
     </>
   )
