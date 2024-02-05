@@ -5,6 +5,7 @@ import THREE, { DoubleSide, Euler, NoBlending, Vector3, Vector3Tuple } from 'thr
 import { Bounds, Html, Image, MeshPortalMaterial, Text, useFont } from '@react-three/drei'
 import { useCardDropZoneContext } from '@/helpers/contexts/CardDropZoneContext'
 import { useSpring, animated, SpringValue } from '@react-spring/three'
+import { useCardDraggingContext } from '@/helpers/contexts/CardDraggingContext'
 
 type CardProps = {
   cardId: string
@@ -40,7 +41,7 @@ export default function Card({
   const [isCardActive, setIsCardActive] = useState(false)
   const { viewport } = useThree()
   const cardRef = useRef<any>(null)
-  const [isCardBeingDragged, setIsCardBeingDragged] = useState(false)
+  const { isCardBeingDragged, setIsCardBeingDragged } = useCardDraggingContext()
 
   const [{ cardPosition, cardRotation, cardScale }, api] = useSpring(() => ({
     from: {
@@ -73,9 +74,9 @@ export default function Card({
   const bind = useGesture(
     {
       onDrag: ({ down, event, active }) => {
+        event.stopPropagation()
         if (isCardActive) return
         setIsCardBeingDragged(active)
-        event.stopPropagation()
         // @ts-ignore
         let newPosition: SpringValue<Vector3Tuple> = new Vector3(event.point.x, event.point.y, 1.8)
         let newRotation: Euler = rotation
@@ -154,7 +155,7 @@ export default function Card({
             1,
           ]}
         />
-        <MeshPortalMaterial>
+        <MeshPortalMaterial side={DoubleSide}>
           <ProjectStage
             isCardActive={isCardActive}
             title={title}
@@ -225,12 +226,12 @@ const ProjectStage = ({
       ) : (
         <mesh position={[0, 0, 0]}>
           <planeGeometry args={[10, 10, 1]} />
-          <meshBasicMaterial color='#000' />
+          <meshBasicMaterial color='#000' side={DoubleSide} />
 
           <Image scale={3} position={[0, 0, 0.01]} url={imageUrl} />
           <mesh position={new Vector3(0, 0, 0.02)}>
             <planeGeometry args={[10, 10, 1]} />
-            <meshBasicMaterial color='#000' opacity={0.75} transparent={true} />
+            <meshBasicMaterial color='#000' opacity={0.75} transparent={true} side={DoubleSide} />
           </mesh>
           <Text
             font='/fonts/PressStart2P-Regular.ttf'
@@ -241,7 +242,7 @@ const ProjectStage = ({
             position={new Vector3(-0.75, 1, 0.03)}
           >
             {title}
-            <meshBasicMaterial color={'#fff'} />
+            <meshBasicMaterial color={'#fff'} side={DoubleSide} />
           </Text>
           <Text
             font='/fonts/PressStart2P-Regular.ttf'
@@ -252,7 +253,7 @@ const ProjectStage = ({
             position={new Vector3(-0.75, 0.5, 0.03)}
           >
             {description}
-            <meshBasicMaterial color={'#fff'} />
+            <meshBasicMaterial color={'#fff'} side={DoubleSide} />
           </Text>
         </mesh>
       )}
