@@ -84,15 +84,8 @@ html {
 }
 
 .project-iframe {
-  height: 100%;
-  max-height: calc(100% - 128px);
-  margin-top: 128px;
-  width: 100%;
   border: none;
   border-radius: 0 0 6px 6px;
-  pointer-events: auto;
-  z-index: 10;
-  position: relative;
 }
 
 .card-game-canvas {

@@ -1,5 +1,3 @@
-'use client'
-
 import { useThree } from '@react-three/fiber'
 import CardDropZone from './CardDropZone'
 import Hand from './Hand'
@@ -10,8 +8,8 @@ export default function CardGameExperience({
   discardPile,
   handleEndTurn,
 }: {
-  drawPile: number
-  discardPile: number
+  drawPile: []
+  discardPile: []
   handleEndTurn: () => void
 }) {
   const viewport = useThree((state) => state.viewport)

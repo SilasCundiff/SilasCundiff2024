@@ -31,7 +31,7 @@ export default function Hand() {
     from: (card) => {
       const index = hand.indexOf(card)
       return {
-        position: new Vector3(-5, -3.5, 0.95).toArray(),
+        position: new Vector3(-5, -4.5, 0.95).toArray(),
         rotation: cardsInHandRotations[index],
         scale: 0.1,
       }
@@ -47,7 +47,7 @@ export default function Hand() {
     leave: (card) => {
       const index = hand.indexOf(card)
       return {
-        position: new Vector3(5, -3.5, 0.95).toArray(),
+        position: new Vector3(5, -4.5, 0.95).toArray(),
         rotation: cardsInHandRotations[index],
         scale: 0.1,
         opacity: 0,

@@ -1,16 +1,12 @@
 'use client'
-import { Canvas, useThree } from '@react-three/fiber'
+import { Canvas } from '@react-three/fiber'
 import CardGameExperience from '../experiences/CardGameExperience/CardGameExperience'
 
-import { Bounds, Hud, OrbitControls, OrthographicCamera, Text, useFont } from '@react-three/drei'
-import useCardsFromDeckAndHand from '@/helpers/hooks/useCardsFromDeckAndHand'
+import { Bounds, Environment, Hud, OrbitControls, OrthographicCamera, Text, useFont } from '@react-three/drei'
 import { useCardDropZoneContext } from '@/helpers/contexts/CardDropZoneContext'
 import { useEffect, useLayoutEffect, useRef } from 'react'
 import { useDeckAndHandContext } from '@/helpers/contexts/DeckAndHandContext'
-import CardGameUI from '../experiences/CardGameExperience/CardGameUI'
 import { useCardDraggingContext } from '@/helpers/contexts/CardDraggingContext'
-import { Vector3 } from 'three'
-import CardGameHUD from '../experiences/CardGameExperience/CardGameHUD'
 
 export default function CardGameCanvas() {
   const { hand, drawPile, discardPile, drawUntilHandIsFull } = useDeckAndHandContext()
@@ -53,12 +49,11 @@ export default function CardGameCanvas() {
         camera={{ position: [0, 0, 10], zoom: 100 }}
       >
         <Bounds clip fit observe>
-          <CardGameExperience
-            drawPile={drawPile.length}
-            discardPile={discardPile.length}
-            handleEndTurn={handleEndTurn}
-          />
+          <CardGameExperience drawPile={drawPile} discardPile={discardPile} handleEndTurn={handleEndTurn} />
         </Bounds>
+        <Environment preset='sunset' />
+        {/* lights */}
+        <ambientLight intensity={1.5} />
         <OrbitControls makeDefault enabled={!isCardBeingDragged} />
       </Canvas>
     </div>
