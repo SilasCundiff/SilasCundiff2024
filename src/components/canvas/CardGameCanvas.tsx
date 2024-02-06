@@ -1,19 +1,21 @@
 'use client'
-import { Canvas } from '@react-three/fiber'
+import { Canvas, useThree } from '@react-three/fiber'
 import CardGameExperience from '../experiences/CardGameExperience/CardGameExperience'
 
-import { Bounds, Hud, OrbitControls, OrthographicCamera, useFont } from '@react-three/drei'
+import { Bounds, Hud, OrbitControls, OrthographicCamera, Text, useFont } from '@react-three/drei'
 import useCardsFromDeckAndHand from '@/helpers/hooks/useCardsFromDeckAndHand'
 import { useCardDropZoneContext } from '@/helpers/contexts/CardDropZoneContext'
 import { useEffect, useLayoutEffect, useRef } from 'react'
 import { useDeckAndHandContext } from '@/helpers/contexts/DeckAndHandContext'
 import CardGameUI from '../experiences/CardGameExperience/CardGameUI'
 import { useCardDraggingContext } from '@/helpers/contexts/CardDraggingContext'
+import { Vector3 } from 'three'
+import CardGameHUD from '../experiences/CardGameExperience/CardGameHUD'
 
 export default function CardGameCanvas() {
   const { hand, drawPile, discardPile, drawUntilHandIsFull } = useDeckAndHandContext()
   const { cardInDropZone, setCardInDropZone } = useCardDropZoneContext()
-  const { isCardBeingDragged, setIsCardBeingDragged } = useCardDraggingContext()
+
   const canvasRef = useRef()
   const bodyRef = useRef()
   useLayoutEffect(() => {
@@ -49,15 +51,10 @@ export default function CardGameCanvas() {
         dpr={[1, 2]}
         camera={{ position: [0, 0, 10], zoom: 100 }}
       >
-        <group>
-          <OrbitControls makeDefault enabled={!isCardBeingDragged} />
-          <Hud renderPriority={1}>
-            <mesh>
-              <boxGeometry />
-            </mesh>
-          </Hud>
-        </group>
-        <CardGameExperience />
+        <Bounds clip fit observe>
+          <CardGameExperience drawPile={drawPile.length} discardPile={discardPile.length} />
+        </Bounds>
+        <OrbitControls makeDefault enabled={false} />
       </Canvas>
       <CardGameUI
         handleClearActiveCard={handleClearActiveCard}

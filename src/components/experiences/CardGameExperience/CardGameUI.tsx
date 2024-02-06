@@ -30,10 +30,10 @@ export default function CardGameUI({
           Clear Active Card
         </button>
       </div>
-      <div className='pointer-events-none inset-0 z-0 absolute flex size-full items-end justify-center space-x-4 pb-4'>
+      {/* <div className='pointer-events-none inset-0 z-0 absolute flex size-full items-end justify-center space-x-4 pb-4'>
         <div className='font-pressStart text-white'>Draw Pile: {drawPile.length}</div>
         <div className='font-pressStart text-white'>Discard Pile: {discardPile.length}</div>
-      </div>
+      </div> */}
     </>
   )
 }

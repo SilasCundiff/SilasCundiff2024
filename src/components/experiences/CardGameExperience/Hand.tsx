@@ -31,19 +31,26 @@ export default function Hand() {
     from: (card) => {
       const index = hand.indexOf(card)
       return {
-        position: new Vector3(-window.innerWidth / 2, -2, index * 0.1).toArray(),
+        position: new Vector3(-5, -3.5, 0.95).toArray(),
         rotation: cardsInHandRotations[index],
+        scale: 0.1,
       }
     },
     enter: (card) => {
       const index = hand.indexOf(card)
-      return { position: cardsInHandPositions[index].toArray(), rotation: cardsInHandRotations[index] }
+      return {
+        position: cardsInHandPositions[index].toArray(),
+        rotation: cardsInHandRotations[index],
+        scale: 1,
+      }
     },
     leave: (card) => {
       const index = hand.indexOf(card)
       return {
-        position: new Vector3(window.innerWidth / 2, -2, index * 0.5).toArray(),
+        position: new Vector3(5, -3.5, 0.95).toArray(),
         rotation: cardsInHandRotations[index],
+        scale: 0.1,
+        opacity: 0,
       }
     },
     config: {
@@ -86,6 +93,8 @@ export default function Hand() {
               position={props.position}
               // @ts-ignore
               rotation={props.rotation}
+              // @ts-ignore
+              scale={props.scale}
             />
           </>
         )

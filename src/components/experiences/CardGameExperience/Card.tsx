@@ -15,6 +15,7 @@ type CardProps = {
   cardHeight: number
   position: SpringValue<Vector3Tuple>
   rotation: Euler
+  scale: number
   // project data
   imageUrl: string
   title: string
@@ -31,6 +32,7 @@ export default function Card({
   cardHeight,
   position,
   rotation,
+  scale,
   title,
   description,
   imageUrl,
@@ -41,7 +43,7 @@ export default function Card({
   const [isCardActive, setIsCardActive] = useState(false)
   const { viewport } = useThree()
   const cardRef = useRef<any>(null)
-  const { isCardBeingDragged, setIsCardBeingDragged } = useCardDraggingContext()
+  const { setIsCardBeingDragged } = useCardDraggingContext()
 
   const [{ cardPosition, cardRotation, cardScale }, api] = useSpring(() => ({
     from: {
@@ -52,7 +54,7 @@ export default function Card({
     to: {
       cardPosition: position,
       cardRotation: rotation,
-      cardScale: 1,
+      cardScale: scale,
     },
     config: {
       mass: 1,
@@ -108,7 +110,7 @@ export default function Card({
         event.stopPropagation()
         if (isCardActive) return
         api.start({
-          cardScale: hovering ? 1.1 : 1,
+          cardScale: hovering ? 1.1 : scale,
         })
       },
     },
@@ -136,13 +138,10 @@ export default function Card({
       api.start({
         cardPosition: newPosition,
         cardRotation: rotation,
+        cardScale: scale,
       })
     }
   }, [cardInDropZone, cardId, api, position, rotation, checkOverlap])
-
-  useEffect(() => {
-    console.log('cardInDropZone', cardInDropZone)
-  }, [cardInDropZone])
 
   return (
     // @ts-ignore
