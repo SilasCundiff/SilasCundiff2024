@@ -49,7 +49,7 @@ export default function Card({
   const cardRef = useRef<any>(null)
   const { setIsCardBeingDragged } = useCardDraggingContext()
   const { nodes, materials } = useGLTF('/models/card.glb')
-  const texture = useTexture(`cards/react.jpg`)
+  const texture = useTexture(`img/project-image.png`)
   const discardTexture = useTexture(`img/logo.png`)
 
   const [{ cardPosition, cardRotation, cardScale }, api] = useSpring(() => ({
@@ -247,7 +247,7 @@ const ProjectStage = ({
   description,
   techStack = [],
   siteUrl,
-  imageUrl = './img/project-image.png',
+  imageUrl = 'cards/project-image.png',
 }: {
   isCardActive: boolean
   title: string
@@ -327,7 +327,7 @@ const ProjectStage = ({
           </group>
         ) : (
           <>
-            <Image scale={3} position={[0, 0, 0.01]} url={imageUrl} />
+            <Image scale={3} position={[0, 0, 0.01]} url={`./${imageUrl}`} />
             <mesh position={new Vector3(0, 0, 0.02)}>
               <planeGeometry args={[10, 10, 1]} />
               <meshBasicMaterial color='#000' opacity={0.5} transparent={true} side={DoubleSide} />
