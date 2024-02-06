@@ -15,6 +15,7 @@ import CardGameHUD from '../experiences/CardGameExperience/CardGameHUD'
 export default function CardGameCanvas() {
   const { hand, drawPile, discardPile, drawUntilHandIsFull } = useDeckAndHandContext()
   const { cardInDropZone, setCardInDropZone } = useCardDropZoneContext()
+  const { isCardBeingDragged } = useCardDraggingContext()
 
   const canvasRef = useRef()
   const bodyRef = useRef()
@@ -52,16 +53,14 @@ export default function CardGameCanvas() {
         camera={{ position: [0, 0, 10], zoom: 100 }}
       >
         <Bounds clip fit observe>
-          <CardGameExperience drawPile={drawPile.length} discardPile={discardPile.length} />
+          <CardGameExperience
+            drawPile={drawPile.length}
+            discardPile={discardPile.length}
+            handleEndTurn={handleEndTurn}
+          />
         </Bounds>
-        <OrbitControls makeDefault enabled={false} />
+        <OrbitControls makeDefault enabled={!isCardBeingDragged} />
       </Canvas>
-      <CardGameUI
-        handleClearActiveCard={handleClearActiveCard}
-        handleEndTurn={handleEndTurn}
-        drawPile={drawPile.length}
-        discardPile={discardPile.length}
-      />
     </div>
   )
 }
