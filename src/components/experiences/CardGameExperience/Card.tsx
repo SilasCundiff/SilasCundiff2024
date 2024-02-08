@@ -2,47 +2,24 @@ import { useThree } from '@react-three/fiber'
 import { useGesture } from '@use-gesture/react'
 import { useSpringRef, useTransition } from '@react-spring/three'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import THREE, { DoubleSide, Euler, NoBlending, Vector3, Vector3Tuple } from 'three'
-import { Bounds, Html, Image, MeshPortalMaterial, Text, useFont, useGLTF, useTexture } from '@react-three/drei'
+import THREE, { DoubleSide, Euler, NoBlending, Vector3, Vector3Tuple, Color } from 'three'
+import { Html, Image, MeshPortalMaterial, Text, useFont, useGLTF, useTexture } from '@react-three/drei'
 import { useCardDropZoneContext } from '@/helpers/contexts/CardDropZoneContext'
 import { useSpring, animated, SpringValue } from '@react-spring/three'
 import { useCardDraggingContext } from '@/helpers/contexts/CardDraggingContext'
-import { faChrome, faGitSquare, faGithub } from '@fortawesome/free-brands-svg-icons'
+import { faChrome, faGithub } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Font } from 'three-stdlib'
+import { ProjectData } from '@/helpers/hooks/useCardsFromDeckAndHand'
 
 type CardProps = {
-  cardId: string
-  color: string
-  index: number
-  cardWidth: number
-  cardHeight: number
   position: SpringValue<Vector3Tuple>
   rotation: Euler
   scale: number
-  // project data
-  imageUrl: string
-  title: string
-  description: string
-  siteUrl: string
-  techStack?: string[]
+  cardId: string
+  projectData: ProjectData
 }
 
-export default function Card({
-  cardId,
-  index,
-  color,
-  cardWidth,
-  cardHeight,
-  position,
-  rotation,
-  scale,
-  title,
-  description,
-  imageUrl,
-  siteUrl,
-  techStack,
-}: CardProps) {
+export default function Card({ cardId, position, rotation, scale, projectData }: CardProps) {
   const { cardInDropZone, setCardInDropZone, cardDropZonePosition, cardDropZoneRotation } = useCardDropZoneContext()
   const [isCardActive, setIsCardActive] = useState(false)
   const { viewport } = useThree()
@@ -51,6 +28,8 @@ export default function Card({
   const { nodes, materials } = useGLTF('/models/card.glb')
   const texture = useTexture(`img/project-image.png`)
   const discardTexture = useTexture(`img/logo.png`)
+  const [iFrameLoaded, setIFrameLoaded] = useState(false)
+  const { title, description, disableIframe, imageUrl, roles, siteUrl, githubUrl, techStack } = projectData
 
   const [{ cardPosition, cardRotation, cardScale }, api] = useSpring(() => ({
     from: {
@@ -148,13 +127,19 @@ export default function Card({
         cardScale: scale,
       })
     }
-  }, [cardInDropZone, cardId, api, position, rotation, checkOverlap])
+  }, [cardInDropZone, cardId, api, position, rotation, checkOverlap, scale])
+
+  if (materials) {
+    console.log('material', materials.Borders.color)
+    materials.Borders.color = new Color(0x60371b)
+  }
 
   return (
     // @ts-ignore
     <animated.group position={cardPosition} rotation={cardRotation} scale={cardScale} {...bind()} ref={cardRef}>
       <mesh scale={1.5}>
         <mesh position={[0, 0, 1]} rotation={[0, 0, 0]}>
+          {/* @ts-ignore */}
           <mesh castShadow receiveShadow geometry={nodes.Plane.geometry}>
             {isCardActive && (
               <group>
@@ -186,21 +171,68 @@ export default function Card({
                   {description}
                   <meshBasicMaterial color={'#fff'} side={DoubleSide} />
                 </Text>
+                <Text
+                  font='/fonts/PressStart2P-Regular.ttf'
+                  fontSize={0.08}
+                  maxWidth={3.5}
+                  anchorY={'top-baseline'}
+                  anchorX={'center'}
+                  position={new Vector3(0, 0.15, 0.03)}
+                  outlineColor={'#000'}
+                  outlineWidth={0.03}
+                  textAlign='center'
+                  lineHeight={2}
+                >
+                  My roles:{' '}
+                  {roles?.map((role, i, { length }) => {
+                    return role + (i !== length - 1 ? ', ' : '')
+                  })}
+                  <meshBasicMaterial color={'#fff'} side={DoubleSide} />
+                </Text>
+                <Text
+                  font='/fonts/PressStart2P-Regular.ttf'
+                  fontSize={0.08}
+                  maxWidth={3}
+                  anchorY={'top-baseline'}
+                  anchorX={'center'}
+                  position={new Vector3(0, -0.5, 0.03)}
+                  outlineColor={'#000'}
+                  outlineWidth={0.03}
+                  textAlign='center'
+                  lineHeight={2}
+                >
+                  Tech stack:{' '}
+                  {techStack?.map((tech, i, { length }) => {
+                    return tech + (i !== length - 1 ? ', ' : '')
+                  })}
+                  <meshBasicMaterial color={'#fff'} side={DoubleSide} />
+                </Text>
+                {!iFrameLoaded && !disableIframe && (
+                  <Text
+                    font='/fonts/PressStart2P-Regular.ttf'
+                    fontSize={0.28}
+                    maxWidth={3}
+                    anchorY={'top-baseline'}
+                    anchorX={'center'}
+                    position={new Vector3(0, -1, 1)}
+                    outlineColor={'#000'}
+                    outlineWidth={0.03}
+                    textAlign='center'
+                    lineHeight={2}
+                  >
+                    loading...
+                    <meshBasicMaterial color={'#fff'} side={DoubleSide} />
+                  </Text>
+                )}
               </group>
             )}
             <MeshPortalMaterial side={DoubleSide}>
-              <ProjectStage
-                isCardActive={isCardActive}
-                title={title}
-                description={description}
-                techStack={techStack}
-                siteUrl={siteUrl}
-                imageUrl={imageUrl}
-              />
+              <ProjectStage projectData={projectData} isCardActive={isCardActive} setIFrameLoaded={setIFrameLoaded} />
             </MeshPortalMaterial>
           </mesh>
           {!isCardActive && (
             <group>
+              {/* @ts-ignore */}
               <mesh castShadow receiveShadow geometry={nodes.Plane_1.geometry} material={materials.Borders} />
               <Text
                 font='/fonts/alagard.ttf'
@@ -231,7 +263,10 @@ export default function Card({
             </group>
           )}
           {!isCardActive && (
-            <mesh castShadow receiveShadow geometry={nodes.Plane_2.geometry} material={materials.Back} />
+            // @ts-ignore
+            <mesh castShadow receiveShadow geometry={nodes.Plane_2.geometry}>
+              <meshStandardMaterial color='black' />
+            </mesh>
           )}
         </mesh>
       </mesh>
@@ -243,23 +278,17 @@ useFont.preload('/fonts/PressStart2P-Regular.ttf')
 
 const ProjectStage = ({
   isCardActive,
-  title,
-  description,
-  techStack = [],
-  siteUrl,
-  imageUrl = 'cards/project-image.png',
+  projectData,
+  setIFrameLoaded,
 }: {
   isCardActive: boolean
-  title: string
-  description: string
-  techStack?: string[]
-  siteUrl: string
-  imageUrl?: string
+  projectData: ProjectData
+  setIFrameLoaded: (value: boolean) => void
 }) => {
   const [z, setZ] = useState(0)
   const viewport = useThree((state) => state.viewport)
   const distanceFactor = Math.min(Math.max(window.innerWidth / 1900, 0.9), 1.5)
-  const [loading, setLoading] = useState(true)
+  const { title, description, siteUrl, imageUrl, githubUrl, techStack, roles, disableIframe } = projectData
 
   return (
     <>
@@ -267,67 +296,65 @@ const ProjectStage = ({
         {/* <planeGeometry args={[10, 10, 1]} /> */}
         {isCardActive ? (
           <group>
-            <Html transform prepend zIndexRange={[0, 0]} distanceFactor={distanceFactor * 2.5}>
-              <iframe
-                className='rounded-lg border-4 border-teal-200'
-                src={siteUrl}
-                onLoad={() => {
-                  setLoading(false)
-                }}
-                frameBorder='0'
-                style={{ verticalAlign: 'top' }}
-                width={560 * 2}
-                height={315 * 2}
-              />
-            </Html>
-            <Html position={[-3 * distanceFactor, -2.35 * distanceFactor, 0]} transform>
-              <div className='flex  rounded-sm space-x-1'>
+            {disableIframe ? (
+              <Html transform prepend zIndexRange={[0, 0]} distanceFactor={distanceFactor * 2.5}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img className='max-w-[1100px]' src={`./${imageUrl}`} alt={`image of ${title} website`} />
+                <span className='font-alagard text-white text-2xl'>Please visit the live site for full demo!</span>
+              </Html>
+            ) : (
+              <group>
+                <Html transform prepend zIndexRange={[0, 0]} distanceFactor={distanceFactor * 2.5} className='relative'>
+                  <iframe
+                    className='rounded-lg border-4 border-teal-200'
+                    src={siteUrl}
+                    frameBorder='0'
+                    style={{ verticalAlign: 'top' }}
+                    width={560 * 2}
+                    height={315 * 2}
+                    onLoad={() => {
+                      setIFrameLoaded(true)
+                    }}
+                  />
+                  <span className='text-2xl text-white font-alagard'>
+                    Please note: Some features may be disabled due to iframe limitations, <br /> visit live site for
+                    full functionality
+                  </span>
+                </Html>
+              </group>
+            )}
+            <Html zIndexRange={[0, 0]} position={[3.05 * distanceFactor, -2.15 * distanceFactor, 0]} transform>
+              <div className='flex rounded-sm space-x-1 justify-end bg-black/25 px-1 py-.5'>
                 <a
-                  className='text-white bg-black/30 rounded-full flex p-0.5 hover:text-slate-200'
-                  href={siteUrl}
+                  className={`text-white rounded-full flex hover:text-slate-200 ${
+                    !siteUrl && 'cursor-not-allowed opacity-15 pointer-events-none'
+                  }`}
+                  href={siteUrl ? siteUrl : ''}
                   target='_blank'
+                  title={siteUrl ? 'View live site' : 'Live site not available'}
+                  aria-disabled={!siteUrl}
                 >
-                  <FontAwesomeIcon icon={faChrome} height={48} width={16} />
+                  <FontAwesomeIcon icon={faChrome} height={48} width={12} />
                 </a>
+
                 <a
-                  className='text-white bg-black/30 rounded-full flex p-0.5 hover:text-slate-200'
-                  href={siteUrl}
+                  className={`text-white  rounded-full flex  hover:text-slate-200 ${
+                    !githubUrl && 'cursor-not-allowed opacity-25 pointer-events-none'
+                  }`}
+                  title={githubUrl ? 'View on GitHub' : 'Source code not available'}
+                  href={githubUrl ? githubUrl : ''}
                   target='_blank'
+                  aria-disabled={!githubUrl}
                 >
-                  <FontAwesomeIcon icon={faGithub} height={48} width={16} />
+                  <FontAwesomeIcon icon={faGithub} height={12} width={12} />
                 </a>
               </div>
             </Html>
-            {/* <Text
-              font='/fonts/alagard.ttf'
-              fontSize={0.2}
-              maxWidth={0.9}
-              anchorY={'top-baseline'}
-              anchorX={'center'}
-              position={new Vector3(0, 0.5, 1)}
-              outlineColor={'#000'}
-              outlineWidth={0.03}
-            >
-              {title}
-              <meshBasicMaterial color={'#fff'} side={DoubleSide} />
-            </Text>
-            <Text
-              font='/fonts/PressStart2P-Regular.ttf'
-              fontSize={0.1}
-              maxWidth={5}
-              anchorY={'top-baseline'}
-              anchorX={'center'}
-              position={new Vector3(-0.75, -2.5, 1)}
-              outlineColor={'#000'}
-              outlineWidth={0.03}
-            >
-              {description}
-              <meshBasicMaterial color={'#fff'} side={DoubleSide} />
-            </Text> */}
           </group>
         ) : (
           <>
-            <Image scale={3} position={[0, 0, 0.01]} url={`./${imageUrl}`} />
+            {/* @ts-ignore */}
+            <Image scale={3} position={[0, 0, 0.01]} url={`./${imageUrl}`} alt={`image of ${title} website`} />
             <mesh position={new Vector3(0, 0, 0.02)}>
               <planeGeometry args={[10, 10, 1]} />
               <meshBasicMaterial color='#000' opacity={0.5} transparent={true} side={DoubleSide} />

@@ -1,15 +1,17 @@
 import { Text, useFont, useGLTF, useTexture } from '@react-three/drei'
-import { use, useEffect, useRef } from 'react'
 import { DoubleSide, Vector3 } from 'three'
+import { Card } from '@/helpers/hooks/useCardsFromDeckAndHand'
 
 export default function CardGameHUD({
   drawPile,
   discardPile,
   handleEndTurn,
+  handleLockControls,
 }: {
-  drawPile: []
-  discardPile: []
+  drawPile: Card[]
+  discardPile: Card[]
   handleEndTurn: () => void
+  handleLockControls: () => void
 }) {
   const { nodes, materials } = useGLTF('/models/card.glb')
   const texture = useTexture(`img/project-image.png`)
@@ -22,19 +24,25 @@ export default function CardGameHUD({
           {discardPile.map((card, i) => {
             return (
               <mesh key={i} position={[0, 0, 1.01 + i * 0.01]} rotation={[0, 0, Math.random() * 0.4 - 0.2]}>
+                {/* @ts-ignore */}
                 <mesh castShadow receiveShadow geometry={nodes.Plane.geometry}>
                   <meshStandardMaterial {...materials.Front} map={texture} color='white' />
                 </mesh>
+                {/* @ts-ignore */}
                 <mesh castShadow receiveShadow geometry={nodes.Plane_1.geometry} material={materials.Borders} />
+                {/* @ts-ignore */}
                 <mesh castShadow receiveShadow geometry={nodes.Plane_2.geometry} material={materials.Back} />
               </mesh>
             )
           })}
           <mesh position={[0, 0, 1]} rotation={[0, 0, 0.2]}>
+            {/* @ts-ignore */}
             <mesh castShadow receiveShadow geometry={nodes.Plane.geometry}>
               <meshStandardMaterial {...materials.Front} map={discardTexture} color='white' />
             </mesh>
+            {/* @ts-ignore */}
             <mesh castShadow receiveShadow geometry={nodes.Plane_1.geometry} material={materials.Borders} />
+            {/* @ts-ignore */}
             <mesh castShadow receiveShadow geometry={nodes.Plane_2.geometry} material={materials.Back} />
           </mesh>
           <mesh position={[0, 0, 0.2]} rotation={[0, 0, 0.2]}>
@@ -64,38 +72,28 @@ export default function CardGameHUD({
 
       <group position={new Vector3(-5, -4.5, 1)}>
         <group rotation={[0, 0, 0.1]}>
-          {/* <mesh position={[0, 0, 1.01]}>
-            <planeGeometry args={[1, 1.25, 1]} />
-            <meshBasicMaterial color={'#2e484f'} side={DoubleSide} />
-          </mesh>
-          <mesh position={[0, 0, 1.02]} rotation={[0, 0, 0.1]}>
-            <planeGeometry args={[1, 1.25, 1]} />
-            <meshBasicMaterial color={'#ff0'} side={DoubleSide} />
-          </mesh>
-          <mesh position={[0, 0, 1.03]} rotation={[0, 0, 0.05]}>
-            <planeGeometry args={[1, 1.25, 1]} />
-            <meshBasicMaterial color={'#f0f'} side={DoubleSide} />
-          </mesh>
-          <mesh position={[0, 0, 1.04]} rotation={[0, 0, 0.08]}>
-            <planeGeometry args={[1, 1.25, 1]} />
-            <meshBasicMaterial color={'#f00'} side={DoubleSide} />
-          </mesh> */}
           {drawPile.map((card, i) => {
             return (
               <mesh key={i} position={[0, 0, 1.01 + i * 0.01]} rotation={[0, 0, Math.random() * 0.2 - 0.1]}>
+                {/* @ts-ignore */}
                 <mesh castShadow receiveShadow geometry={nodes.Plane.geometry}>
                   <meshStandardMaterial {...materials.Front} map={texture} color='white' />
                 </mesh>
+                {/* @ts-ignore */}
                 <mesh castShadow receiveShadow geometry={nodes.Plane_1.geometry} material={materials.Borders} />
+                {/* @ts-ignore */}
                 <mesh castShadow receiveShadow geometry={nodes.Plane_2.geometry} material={materials.Back} />
               </mesh>
             )
           })}
           <mesh position={[0, 0, 1]} rotation={[0, 0, -0.1]}>
+            {/* @ts-ignore */}
             <mesh castShadow receiveShadow geometry={nodes.Plane.geometry}>
               <meshStandardMaterial {...materials.Front} map={discardTexture} color='white' />
             </mesh>
+            {/* @ts-ignore */}
             <mesh castShadow receiveShadow geometry={nodes.Plane_1.geometry} material={materials.Borders} />
+            {/* @ts-ignore */}
             <mesh castShadow receiveShadow geometry={nodes.Plane_2.geometry} material={materials.Back} />
           </mesh>
           <mesh position={[0, -0.05, 0.2]} rotation={[0, 0, -0.1]}>
@@ -122,7 +120,25 @@ export default function CardGameHUD({
           <meshBasicMaterial color={'#fff'} side={DoubleSide} />
         </Text>
       </group>
-      <group position={new Vector3(5, -5.6, 1)} onClick={handleEndTurn}>
+      <group position={new Vector3(-5, -5.75, 1)} onClick={handleLockControls}>
+        <mesh>
+          <planeGeometry args={[0.99, 0.33, 1]} />
+          <meshBasicMaterial color={'#55e'} side={DoubleSide} />
+        </mesh>
+        <Text
+          anchorX={'center'}
+          anchorY={'middle'}
+          font='/fonts/PressStart2P-Regular.ttf'
+          fontSize={0.1}
+          position={[0, 0, 0.01]}
+          outlineColor={'#000'}
+          outlineWidth={0.02}
+        >
+          Enable Controls
+          <meshBasicMaterial color={'#fff'} side={DoubleSide} />
+        </Text>
+      </group>
+      <group position={new Vector3(5, -5.75, 1)} onClick={handleEndTurn}>
         <mesh>
           <planeGeometry args={[0.99, 0.33, 1]} />
           <meshBasicMaterial color={'#55e'} side={DoubleSide} />

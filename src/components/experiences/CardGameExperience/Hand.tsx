@@ -72,7 +72,7 @@ export default function Hand() {
 
   return (
     <group>
-      {transition((props, card) => {
+      {transition((props: {}, card) => {
         return (
           // @ts-ignore
           <>
@@ -83,18 +83,10 @@ export default function Hand() {
               color={card.color}
               cardWidth={CARD_WIDTH}
               cardHeight={CARD_HEIGHT}
-              description={card.description}
-              title={card.title}
-              imageUrl={card.imageUrl}
-              // @ts-ignore
-              siteUrl={card.siteUrl}
-              techStack={card.techStack}
-              // @ts-ignore
-              position={props.position}
-              // @ts-ignore
-              rotation={props.rotation}
-              // @ts-ignore
               scale={props.scale}
+              position={props.position}
+              rotation={props.rotation}
+              projectData={card.projectData}
             />
           </>
         )

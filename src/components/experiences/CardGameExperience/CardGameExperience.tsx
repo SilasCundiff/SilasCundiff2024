@@ -2,15 +2,20 @@ import { useThree } from '@react-three/fiber'
 import CardDropZone from './CardDropZone'
 import Hand from './Hand'
 import CardGameHUD from './CardGameHUD'
+import { Card } from '@/helpers/hooks/useCardsFromDeckAndHand'
+import { PresentationControls } from '@react-three/drei'
+import { useCardDraggingContext } from '@/helpers/contexts/CardDraggingContext'
 
 export default function CardGameExperience({
   drawPile,
   discardPile,
   handleEndTurn,
+  handleLockControls,
 }: {
-  drawPile: []
-  discardPile: []
+  drawPile: Card[]
+  discardPile: Card[]
   handleEndTurn: () => void
+  handleLockControls: () => void
 }) {
   const viewport = useThree((state) => state.viewport)
   const gameScalingFactor = Math.min(Math.max(window.innerWidth / 1900, 0.65), 1.1)
@@ -20,7 +25,12 @@ export default function CardGameExperience({
       <group scale={gameScalingFactor}>
         <CardDropZone />
         <Hand />
-        <CardGameHUD drawPile={drawPile} discardPile={discardPile} handleEndTurn={handleEndTurn} />
+        <CardGameHUD
+          drawPile={drawPile}
+          discardPile={discardPile}
+          handleEndTurn={handleEndTurn}
+          handleLockControls={handleLockControls}
+        />
       </group>
     </>
   )

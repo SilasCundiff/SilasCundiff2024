@@ -2,9 +2,18 @@
 import { Canvas } from '@react-three/fiber'
 import CardGameExperience from '../experiences/CardGameExperience/CardGameExperience'
 
-import { Bounds, Environment, Hud, OrbitControls, OrthographicCamera, Text, useFont } from '@react-three/drei'
+import {
+  Bounds,
+  Environment,
+  Hud,
+  OrbitControls,
+  OrthographicCamera,
+  PresentationControls,
+  Text,
+  useFont,
+} from '@react-three/drei'
 import { useCardDropZoneContext } from '@/helpers/contexts/CardDropZoneContext'
-import { useEffect, useLayoutEffect, useRef } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { useDeckAndHandContext } from '@/helpers/contexts/DeckAndHandContext'
 import { useCardDraggingContext } from '@/helpers/contexts/CardDraggingContext'
 
@@ -12,6 +21,7 @@ export default function CardGameCanvas() {
   const { hand, drawPile, discardPile, drawUntilHandIsFull } = useDeckAndHandContext()
   const { cardInDropZone, setCardInDropZone } = useCardDropZoneContext()
   const { isCardBeingDragged } = useCardDraggingContext()
+  const [isControlsLocked, setIsControlsLocked] = useState(false)
 
   const canvasRef = useRef()
   const bodyRef = useRef()
@@ -33,8 +43,8 @@ export default function CardGameCanvas() {
     drawUntilHandIsFull()
   }
 
-  const handleClearActiveCard = () => {
-    setCardInDropZone(null)
+  const handleLockControls = () => {
+    setIsControlsLocked(!isControlsLocked)
   }
 
   return (
@@ -49,12 +59,27 @@ export default function CardGameCanvas() {
         camera={{ position: [0, 0, 10], zoom: 100 }}
       >
         <Bounds clip fit observe>
-          <CardGameExperience drawPile={drawPile} discardPile={discardPile} handleEndTurn={handleEndTurn} />
+          <CardGameExperience
+            drawPile={drawPile}
+            discardPile={discardPile}
+            handleEndTurn={handleEndTurn}
+            handleLockControls={handleLockControls}
+          />
         </Bounds>
         <Environment preset='sunset' />
         {/* lights */}
         <ambientLight intensity={1.5} />
-        <OrbitControls makeDefault enabled={!isCardBeingDragged} />
+        <OrbitControls
+          makeDefault
+          enabled={!isCardBeingDragged && !isControlsLocked}
+          enableDamping
+          minZoom={40}
+          maxZoom={130}
+          maxPolarAngle={Math.PI / 1.5}
+          minPolarAngle={Math.PI / 4}
+          maxAzimuthAngle={Math.PI / 4}
+          minAzimuthAngle={-Math.PI / 4}
+        />
       </Canvas>
     </div>
   )
