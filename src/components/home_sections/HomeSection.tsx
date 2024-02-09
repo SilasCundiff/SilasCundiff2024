@@ -7,7 +7,7 @@ import heroBackground from '../../../public/img/hero-background-high-res.png'
 export default function HomeSection() {
   return (
     <>
-      <header id='home' className='flex h-svh flex-col font-alagard'>
+      <header id='home' className='scroll-snap-child flex h-svh flex-col font-alagard'>
         <Background backgroundImage={heroBackground} />
         <Container gap={false}>
           <h1 className='text-shadow-blue text-outline col-span-12 transform-gpu text-center text-4xl font-bold leading-tight sm:text-6xl md:col-span-6 md:col-start-4 md:text-8xl'>

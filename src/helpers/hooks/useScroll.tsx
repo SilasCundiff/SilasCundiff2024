@@ -1,27 +1,35 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from 'react'
 
 interface ScrollPosition {
-  y: number;
+  y: number
 }
 
 const useScroll = (): ScrollPosition => {
   const [scrollPosition, setScrollPosition] = useState<ScrollPosition>({
     y: 0,
-  });
+  })
+  const scrollContainerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    // @ts-ignore
+    scrollContainerRef.current = document.querySelector('.scroll-snap-parent')
+  }, [])
 
   useEffect(() => {
     const handleScroll = (): void => {
-      setScrollPosition({ y: window.scrollY });
-    };
+      if (scrollContainerRef.current) setScrollPosition({ y: scrollContainerRef.current?.scrollTop })
+    }
 
-    window.addEventListener("scroll", handleScroll);
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.addEventListener('scroll', handleScroll)
+    }
 
     return (): void => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+      if (scrollContainerRef.current) scrollContainerRef.current.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
 
-  return scrollPosition;
-};
+  return scrollPosition
+}
 
-export default useScroll;
+export default useScroll

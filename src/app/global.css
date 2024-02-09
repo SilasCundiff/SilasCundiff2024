@@ -52,6 +52,26 @@ body,
 html {
   scroll-behavior: smooth !important;
 }
+body {
+  overflow: hidden;
+}
+
+.scroll-snap-parent {
+  scroll-snap-type: mandatory;
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  height: 100svh;
+  scroll-behavior: smooth !important;
+}
+
+.scroll-snap-child {
+  scroll-snap-align: start;
+}
+@media (max-width: 768px) {
+  .scroll-snap-child {
+    scroll-margin-top: 0;
+  }
+}
 
 .project-html--wrapper {
   position: relative;
