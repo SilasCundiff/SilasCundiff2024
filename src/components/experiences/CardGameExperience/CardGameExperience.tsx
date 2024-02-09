@@ -11,11 +11,13 @@ export default function CardGameExperience({
   discardPile,
   handleEndTurn,
   handleLockControls,
+  areControlsLocked,
 }: {
   drawPile: Card[]
   discardPile: Card[]
   handleEndTurn: () => void
   handleLockControls: () => void
+  areControlsLocked: boolean
 }) {
   const viewport = useThree((state) => state.viewport)
   const gameScalingFactor = Math.min(Math.max(window.innerWidth / 1900, 0.65), 1.1)
@@ -30,6 +32,7 @@ export default function CardGameExperience({
           discardPile={discardPile}
           handleEndTurn={handleEndTurn}
           handleLockControls={handleLockControls}
+          areControlsLocked={areControlsLocked}
         />
       </group>
     </>

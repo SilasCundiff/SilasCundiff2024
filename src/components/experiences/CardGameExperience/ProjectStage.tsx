@@ -1,10 +1,16 @@
 import { ProjectData } from '@/helpers/hooks/useCardsFromDeckAndHand'
 import { faChrome, faGithub } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Html, Image } from '@react-three/drei'
+import { Html, Image, useTexture } from '@react-three/drei'
 import { useThree } from '@react-three/fiber'
 import { useState } from 'react'
 import { DoubleSide, Vector3 } from 'three'
+
+import deckOfCards from '@/helpers/Projects'
+
+deckOfCards.forEach((card) => {
+  useTexture.preload(`./cards/thumbnail-${card.projectData.imageUrl}`)
+})
 
 const ProjectStage = ({
   isCardActive,
@@ -91,6 +97,7 @@ const ProjectStage = ({
             <Image
               scale={2}
               position={[0, 0, 0.01]}
+              // @ts-ignore
               alt={`image of ${title} website`}
               url={`./cards/thumbnail-${imageUrl}`}
             />

@@ -13,7 +13,7 @@ import {
   useFont,
 } from '@react-three/drei'
 import { useCardDropZoneContext } from '@/helpers/contexts/CardDropZoneContext'
-import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { use, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { useDeckAndHandContext } from '@/helpers/contexts/DeckAndHandContext'
 import { useCardDraggingContext } from '@/helpers/contexts/CardDraggingContext'
 
@@ -21,7 +21,8 @@ export default function CardGameCanvas() {
   const { hand, drawPile, discardPile, drawUntilHandIsFull } = useDeckAndHandContext()
   const { cardInDropZone, setCardInDropZone } = useCardDropZoneContext()
   const { isCardBeingDragged } = useCardDraggingContext()
-  const [isControlsLocked, setIsControlsLocked] = useState(false)
+  const [areControlsLocked, setAreControlsLocked] = useState(true)
+  const [disableControls, setDisableControls] = useState(true)
 
   const canvasRef = useRef()
   const bodyRef = useRef()
@@ -37,13 +38,23 @@ export default function CardGameCanvas() {
     bodyRef.current = document.querySelector('.cardGameRoot')
   }, [])
 
+  useEffect(() => {
+    if (isCardBeingDragged && !areControlsLocked) {
+      setDisableControls(true)
+    } else if (areControlsLocked && !isCardBeingDragged) {
+      setDisableControls(true)
+    } else {
+      setDisableControls(false)
+    }
+  }, [isCardBeingDragged, areControlsLocked])
+
   const handleEndTurn = () => {
     setCardInDropZone(null)
     drawUntilHandIsFull()
   }
 
   const handleLockControls = () => {
-    setIsControlsLocked(!isControlsLocked)
+    setAreControlsLocked(!areControlsLocked)
   }
 
   return (
@@ -63,6 +74,7 @@ export default function CardGameCanvas() {
             discardPile={discardPile}
             handleEndTurn={handleEndTurn}
             handleLockControls={handleLockControls}
+            areControlsLocked={areControlsLocked}
           />
         </Bounds>
         <Environment preset='sunset' />
@@ -70,7 +82,7 @@ export default function CardGameCanvas() {
         <ambientLight intensity={1.5} />
         <OrbitControls
           makeDefault
-          enabled={!isCardBeingDragged}
+          enabled={!disableControls}
           enableDamping
           minZoom={40}
           maxZoom={130}

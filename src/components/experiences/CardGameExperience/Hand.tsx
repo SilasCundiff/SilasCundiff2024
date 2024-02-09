@@ -83,9 +83,13 @@ export default function Hand() {
               color={card.color}
               cardWidth={CARD_WIDTH}
               cardHeight={CARD_HEIGHT}
+              // @ts-ignore
               scale={props.scale}
+              // @ts-ignore
               position={props.position}
+              // @ts-ignore
               rotation={props.rotation}
+              // @ts-ignore
               projectData={card.projectData}
             />
           </>

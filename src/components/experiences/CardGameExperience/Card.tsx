@@ -130,6 +130,7 @@ export default function Card({ cardId, position, rotation, scale, projectData }:
   }, [cardInDropZone, cardId, api, position, rotation, checkOverlap, scale])
 
   if (materials) {
+    // @ts-ignore
     materials.Borders.color = new Color(0x05375f)
   }
 
