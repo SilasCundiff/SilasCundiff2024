@@ -39,7 +39,6 @@ export default function CardGameCanvas() {
 
   const handleEndTurn = () => {
     setCardInDropZone(null)
-    console.log('end turn', cardInDropZone)
     drawUntilHandIsFull()
   }
 
@@ -71,7 +70,7 @@ export default function CardGameCanvas() {
         <ambientLight intensity={1.5} />
         <OrbitControls
           makeDefault
-          enabled={!isCardBeingDragged && !isControlsLocked}
+          enabled={!isCardBeingDragged}
           enableDamping
           minZoom={40}
           maxZoom={130}

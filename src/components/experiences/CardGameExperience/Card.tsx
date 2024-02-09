@@ -130,8 +130,7 @@ export default function Card({ cardId, position, rotation, scale, projectData }:
   }, [cardInDropZone, cardId, api, position, rotation, checkOverlap, scale])
 
   if (materials) {
-    console.log('material', materials.Borders.color)
-    materials.Borders.color = new Color(0x60371b)
+    materials.Borders.color = new Color(0x05375f)
   }
 
   return (
@@ -143,70 +142,74 @@ export default function Card({ cardId, position, rotation, scale, projectData }:
           <mesh castShadow receiveShadow geometry={nodes.Plane.geometry}>
             {isCardActive && (
               <group>
-                <Text
-                  font='/fonts/alagard.ttf'
-                  fontSize={0.3}
-                  maxWidth={5}
-                  anchorY={'top-baseline'}
-                  anchorX={'center'}
-                  position={new Vector3(0, 0.75, 0.01)}
-                  outlineColor={'#000'}
-                  outlineWidth={0.03}
-                  textAlign='center'
-                >
-                  {title}
-                  <meshBasicMaterial color={'#fff'} side={DoubleSide} />
-                </Text>
-                <Text
-                  font='/fonts/PressStart2P-Regular.ttf'
-                  fontSize={0.1}
-                  maxWidth={5}
-                  anchorY={'top-baseline'}
-                  anchorX={'center'}
-                  position={new Vector3(0, 0.5, 0.03)}
-                  outlineColor={'#000'}
-                  outlineWidth={0.03}
-                  textAlign='center'
-                >
-                  {description}
-                  <meshBasicMaterial color={'#fff'} side={DoubleSide} />
-                </Text>
-                <Text
-                  font='/fonts/PressStart2P-Regular.ttf'
-                  fontSize={0.08}
-                  maxWidth={3.5}
-                  anchorY={'top-baseline'}
-                  anchorX={'center'}
-                  position={new Vector3(0, 0.15, 0.03)}
-                  outlineColor={'#000'}
-                  outlineWidth={0.03}
-                  textAlign='center'
-                  lineHeight={2}
-                >
-                  My roles:{' '}
-                  {roles?.map((role, i, { length }) => {
-                    return role + (i !== length - 1 ? ', ' : '')
-                  })}
-                  <meshBasicMaterial color={'#fff'} side={DoubleSide} />
-                </Text>
-                <Text
-                  font='/fonts/PressStart2P-Regular.ttf'
-                  fontSize={0.08}
-                  maxWidth={3}
-                  anchorY={'top-baseline'}
-                  anchorX={'center'}
-                  position={new Vector3(0, -0.5, 0.03)}
-                  outlineColor={'#000'}
-                  outlineWidth={0.03}
-                  textAlign='center'
-                  lineHeight={2}
-                >
-                  Tech stack:{' '}
-                  {techStack?.map((tech, i, { length }) => {
-                    return tech + (i !== length - 1 ? ', ' : '')
-                  })}
-                  <meshBasicMaterial color={'#fff'} side={DoubleSide} />
-                </Text>
+                {(iFrameLoaded || disableIframe) && (
+                  <group>
+                    <Text
+                      font='/fonts/alagard.ttf'
+                      fontSize={0.3}
+                      maxWidth={5}
+                      anchorY={'top-baseline'}
+                      anchorX={'center'}
+                      position={new Vector3(0, 0.75, 0.01)}
+                      outlineColor={'#000'}
+                      outlineWidth={0.03}
+                      textAlign='center'
+                    >
+                      {title}
+                      <meshBasicMaterial color={'#fff'} side={DoubleSide} />
+                    </Text>
+                    <Text
+                      font='/fonts/PressStart2P-Regular.ttf'
+                      fontSize={0.1}
+                      maxWidth={5}
+                      anchorY={'top-baseline'}
+                      anchorX={'center'}
+                      position={new Vector3(0, 0.5, 0.03)}
+                      outlineColor={'#000'}
+                      outlineWidth={0.03}
+                      textAlign='center'
+                    >
+                      {description}
+                      <meshBasicMaterial color={'#fff'} side={DoubleSide} />
+                    </Text>
+                    <Text
+                      font='/fonts/PressStart2P-Regular.ttf'
+                      fontSize={0.08}
+                      maxWidth={3.5}
+                      anchorY={'top-baseline'}
+                      anchorX={'center'}
+                      position={new Vector3(0, 0.15, 0.03)}
+                      outlineColor={'#000'}
+                      outlineWidth={0.03}
+                      textAlign='center'
+                      lineHeight={2}
+                    >
+                      My roles:{' '}
+                      {roles?.map((role, i, { length }) => {
+                        return role + (i !== length - 1 ? ', ' : '')
+                      })}
+                      <meshBasicMaterial color={'#fff'} side={DoubleSide} />
+                    </Text>
+                    <Text
+                      font='/fonts/PressStart2P-Regular.ttf'
+                      fontSize={0.08}
+                      maxWidth={3}
+                      anchorY={'top-baseline'}
+                      anchorX={'center'}
+                      position={new Vector3(0, -0.5, 0.03)}
+                      outlineColor={'#000'}
+                      outlineWidth={0.03}
+                      textAlign='center'
+                      lineHeight={2}
+                    >
+                      Tech stack:{' '}
+                      {techStack?.map((tech, i, { length }) => {
+                        return tech + (i !== length - 1 ? ', ' : '')
+                      })}
+                      <meshBasicMaterial color={'#fff'} side={DoubleSide} />
+                    </Text>
+                  </group>
+                )}
                 {!iFrameLoaded && !disableIframe && (
                   <Text
                     font='/fonts/PressStart2P-Regular.ttf'
@@ -299,14 +302,14 @@ const ProjectStage = ({
             {disableIframe ? (
               <Html transform prepend zIndexRange={[0, 0]} distanceFactor={distanceFactor * 2.5}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img className='max-w-[1100px]' src={`./${imageUrl}`} alt={`image of ${title} website`} />
+                <img className='max-w-[1100px] max-h-[600px]' src={`./${imageUrl}`} alt={`image of ${title} website`} />
                 <span className='font-alagard text-white text-2xl'>Please visit the live site for full demo!</span>
               </Html>
             ) : (
               <group>
                 <Html transform prepend zIndexRange={[0, 0]} distanceFactor={distanceFactor * 2.5} className='relative'>
                   <iframe
-                    className='rounded-lg border-4 border-teal-200'
+                    className='rounded-lg border-4 border-teal-200 bg-white'
                     src={siteUrl}
                     frameBorder='0'
                     style={{ verticalAlign: 'top' }}
