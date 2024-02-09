@@ -1,13 +1,11 @@
 import { useTexture } from '@react-three/drei'
 
 export default function DrawDiscardCard({
-  key,
   position,
   rotation,
   materials,
   nodes,
 }: {
-  key: number
   position: number[]
   rotation: number[]
   materials: any
@@ -17,7 +15,7 @@ export default function DrawDiscardCard({
 
   return (
     // @ts-ignore
-    <mesh key={key} position={position} rotation={rotation}>
+    <mesh position={position} rotation={rotation}>
       {/* @ts-ignore */}
       <mesh castShadow receiveShadow geometry={nodes.Plane.geometry}>
         <meshStandardMaterial {...materials.Front} map={texture} color='white' />
