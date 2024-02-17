@@ -24,6 +24,8 @@ const rowPositions: Record<number, number> = {
 
 type Skill = {
   name: string
+  description?: string
+  unlocks?: string
   investment?: number
   position: [number, number]
   linkPosition?: [number, number]
@@ -52,9 +54,12 @@ const skillsDesign: Skill[] = [
 const skillsProgramming: Skill[] = [
   {
     name: 'JavaScript',
+    description: 'The language of the web',
+    unlocks: 'TypeScript',
     position: [columnPositions[1], rowPositions[0]],
     linkPosition: [columnPositions[1], rowPositions[1]],
     fill: 'yellow',
+    iconUrl: './img/React-icon.png',
   },
   { name: 'TypeScript', position: [columnPositions[1], rowPositions[1]], fill: 'blue' },
   { name: 'HTML', position: [columnPositions[0], rowPositions[0]], fill: '#5f34ff' },
@@ -63,7 +68,7 @@ const skillsProgramming: Skill[] = [
 const skillsTooling: Skill[] = [
   { name: 'Git', position: [columnPositions[1], rowPositions[0]], fill: '#66ffff' },
   { name: 'Docker', position: [columnPositions[0], rowPositions[0]], fill: '#fff466' },
-  { name: 'Webpack', position: [columnPositions[2], rowPositions[0]], fill: '#ff346f' },
+  { name: 'Webpack', position: [columnPositions[2], rowPositions[0]], fill: '#ff346f', description: 'Bundler' },
 ]
 
 export default function SkillsSection() {
@@ -120,13 +125,19 @@ const SkillTree = ({ title, imgUrl, treeData }: { title: string; imgUrl: string;
           <Tooltip
             id='tooltip'
             place='top'
-            render={({ content, activeAnchor }) => (
-              <div role='tooltip'>
-                {content} {activeAnchor?.getAttribute('data-some-relevant-attr') || 'no data'}
-              </div>
-            )}
+            className='node-tooltip'
+            render={({ content, activeAnchor }) => {
+              return (
+                <div role='tooltip'>
+                  <h3 className='text-xl font-bold'>{activeAnchor?.getAttribute('data-node-tooltip') || 'no data'}</h3>
+                  {content && <p className='my-4 text-md'>{content}</p>}
+                  {activeAnchor?.getAttribute('data-tooltip-unlocks') && (
+                    <p className='text-xs'>{activeAnchor?.getAttribute('data-tooltip-unlocks')}</p>
+                  )}
+                </div>
+              )
+            }}
           />
-
           <svg viewBox='0 0 100 200' width={'100%'} height={svgSize * 1.5}>
             <rect x={-50} y={0} width={'200%'} height={'100%'} fill='black' opacity={0.5} />
             {treeData.map((skill, i) => (
@@ -139,9 +150,10 @@ const SkillTree = ({ title, imgUrl, treeData }: { title: string; imgUrl: string;
   )
 }
 
-const SkillNode = ({ name, position, linkPosition, fill }: Skill) => {
+const SkillNode = ({ name, position, linkPosition, fill, iconUrl, description, unlocks }: Skill) => {
   const xPos = position[0]
   const yPos = position[1]
+  console.log('data', iconUrl, name, description, unlocks)
   return (
     <>
       {linkPosition && (
@@ -154,17 +166,31 @@ const SkillNode = ({ name, position, linkPosition, fill }: Skill) => {
           strokeWidth={2}
         />
       )}
-      <rect
+      <g
         data-tooltip-id='tooltip'
-        data-some-relevant-attr={name}
-        x={xPos + SKILL_NODE_PADDING}
-        y={yPos + SKILL_NODE_PADDING}
-        width={SKILL_NODE_SIZE}
-        height={SKILL_NODE_SIZE}
-        fill={fill}
-        stroke='cyan'
-      />
-      <h1>test</h1>
+        data-node-tooltip={name}
+        data-tooltip-content={description}
+        data-tooltip-unlocks={`${unlocks ? 'Unlocks: ' + unlocks : ''}`}
+        className='outline-none cursor-pointer'
+      >
+        <rect
+          x={xPos + SKILL_NODE_PADDING}
+          y={yPos + SKILL_NODE_PADDING}
+          width={SKILL_NODE_SIZE}
+          height={SKILL_NODE_SIZE}
+          fill={fill}
+          stroke='cyan'
+        />
+        {iconUrl && (
+          <image
+            x={xPos + SKILL_NODE_PADDING}
+            y={yPos + SKILL_NODE_PADDING}
+            width={SKILL_NODE_SIZE}
+            height={SKILL_NODE_SIZE}
+            xlinkHref={iconUrl}
+          />
+        )}
+      </g>
     </>
   )
 }

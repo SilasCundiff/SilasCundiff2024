@@ -203,3 +203,14 @@ body {
 .eightbit-btn--proceed:active {
   box-shadow: inset var(--shadow-width) var(--shadow-width) 0px 0px var(--alt-shadow-color);
 }
+
+.svg-wrapper .node-tooltip {
+  background: #82eddb;
+  color: #041237;
+  border-radius: 0;
+  border: 2px solid #041237;
+}
+
+.svg-wrapper .node-tooltip .arrow {
+  background-color: #041237;
+}
