@@ -32,6 +32,7 @@ export default function AboutSection() {
 
         <Container>
           <h2 className='text-4xl font-bold'>lore (about)</h2>
+          <iframe className='w-full col-span-12 min-h-[600px]' src='./godot/test.html' frameBorder='0'></iframe>
         </Container>
       </Section>
     </>
