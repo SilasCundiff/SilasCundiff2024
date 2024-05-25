@@ -10,10 +10,12 @@ export default function Page() {
   return (
     <>
       <HomeSection />
-      <SkillsSection />
-      <ProjectsSection />
-      <AboutSection />
-      <ContactSection />
+      <div className='page-wrapper max-w-[1180px] bg-white mx-auto'>
+        <SkillsSection />
+        <ProjectsSection />
+        <AboutSection />
+        <ContactSection />
+      </div>
     </>
   )
 }

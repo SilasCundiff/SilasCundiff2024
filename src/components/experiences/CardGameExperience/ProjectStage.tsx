@@ -36,7 +36,7 @@ const ProjectStage = ({
               <Html transform prepend zIndexRange={[0, 0]} distanceFactor={distanceFactor * 2.5}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  className='max-w-[1100px] max-h-[600px]'
+                  className='max-w-[1180px] max-h-[600px]'
                   src={`./cards/${imageUrl}`}
                   alt={`image of ${title} website`}
                 />

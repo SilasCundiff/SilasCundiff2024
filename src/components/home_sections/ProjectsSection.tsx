@@ -19,12 +19,12 @@ export default function ProjectsSection() {
   return (
     <>
       <Section id='projects'>
-        <Background backgroundImage={Sky} />
+        {/* <Background backgroundImage={Sky} />
         <Background backgroundImage={JungleBG} />
         <Background backgroundImage={TreesBushes} />
         <Background backgroundImage={Grasses} />
         <Background backgroundImage={GrassRoad} />
-        <Background backgroundImage={Fireflies} />
+        <Background backgroundImage={Fireflies} /> */}
         <DeckAndHandContextProvider>
           <CardDraggingContextProvider>
             <CardDropZoneContextProvider>

@@ -19,8 +19,8 @@ export default function AboutSection() {
   return (
     <>
       <Section id='about'>
-        <Background backgroundImage={Sky} />
-        <Background backgroundImage={BGTrees2} />
+        {/* <Background backgroundImage={Sky} /> */}
+        {/* <Background backgroundImage={BGTrees2} />
         <Background backgroundImage={SnowMountains} />
         <Background backgroundImage={BGTrees1} />
         <Background backgroundImage={BGTrees5} />
@@ -28,11 +28,15 @@ export default function AboutSection() {
         <Background backgroundImage={BGTrees4} />
         <Background backgroundImage={BGTrees3} />
         <Background backgroundImage={SnowPath} />
-        <Background backgroundImage={ForegroundTrees} />
+        <Background backgroundImage={ForegroundTrees} /> */}
 
         <Container>
           <h2 className='text-4xl font-bold'>lore (about)</h2>
-          <iframe className='w-full col-span-12 min-h-[600px]' src='./godot/test.html' frameBorder='0'></iframe>
+          <iframe
+            className='w-full col-span-12 min-h-[600px]'
+            src='./godot/Silvanus_Lore.html'
+            frameBorder='0'
+          ></iframe>
         </Container>
       </Section>
     </>

@@ -32,6 +32,7 @@ type Skill = {
   iconUrl?: string
   active?: boolean
   fill?: string
+  tree?: string
 }
 
 const skillsDesign: Skill[] = [
@@ -112,11 +113,13 @@ const SkillTree = ({ title, imgUrl, treeData }: { title: string; imgUrl: string;
 
   return (
     <div
-      className={`flex-1  p-2 md:p-4 relative z-10 ${
+      className={`flex-1 img-border-blue p-2 md:p-4 relative z-10 ${
         imgUrl === 'aurora.png' ? 'text-white' : 'text-black'
+      } ${imgUrl === 'ocean.png' && 'img-border-red'} ${
+        imgUrl === 'mountain.png' && 'img-border-green'
       } max-w-[360px] m-auto`}
     >
-      <div className='absolute inset-0  -z-10'>
+      <div className='absolute inset-2.5  -z-10'>
         <img className='h-full object-cover' src={`./img/${imgUrl}`} alt='background' />
       </div>
       <p className='uppercase text-center  text-sm mt-2 md:mb-4 mb-2'>{title}</p>
@@ -141,7 +144,7 @@ const SkillTree = ({ title, imgUrl, treeData }: { title: string; imgUrl: string;
           <svg viewBox='0 0 100 200' width={'100%'} height={svgSize * 1.5}>
             <rect x={-50} y={0} width={'200%'} height={'100%'} fill='black' opacity={0.5} />
             {treeData.map((skill, i) => (
-              <SkillNode key={i} {...skill} />
+              <SkillNode key={i} {...skill} tree={title} />
             ))}
           </svg>
         </div>
@@ -149,11 +152,18 @@ const SkillTree = ({ title, imgUrl, treeData }: { title: string; imgUrl: string;
     </div>
   )
 }
-
-const SkillNode = ({ name, position, linkPosition, fill, iconUrl, description, unlocks }: Skill) => {
+const getStrokeColor = (treeType = 'string') => {
+  console.log(treeType)
+  if (treeType === 'Design') return '#56a4e9'
+  if (treeType === 'Programming') return '#a9e46d'
+  return '#f88e87'
+}
+const SkillNode = ({ name, position, linkPosition, fill, iconUrl, description, unlocks, tree }: Skill) => {
   const xPos = position[0]
   const yPos = position[1]
-  console.log('data', iconUrl, name, description, unlocks)
+  console.log('data', iconUrl, name, description, unlocks, tree)
+  const stroke = getStrokeColor(tree)
+
   return (
     <>
       {linkPosition && (
@@ -179,7 +189,7 @@ const SkillNode = ({ name, position, linkPosition, fill, iconUrl, description, u
           width={SKILL_NODE_SIZE}
           height={SKILL_NODE_SIZE}
           fill={fill}
-          stroke='cyan'
+          stroke={stroke}
         />
         {iconUrl && (
           <image
