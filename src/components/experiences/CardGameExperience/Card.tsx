@@ -27,7 +27,7 @@ export default function Card({ cardId, position, rotation, scale, projectData }:
   const { setIsCardBeingDragged } = useCardDraggingContext()
   const { nodes, materials } = useGLTF('/models/card.glb')
   const texture = useTexture(`img/project-image.png`)
-  const discardTexture = useTexture(`img/logo.png`)
+  const discardTexture = useTexture(`img/8-bit-logo.png`)
   const [iFrameLoaded, setIFrameLoaded] = useState(false)
   const { title, description, disableIframe, imageUrl, roles, siteUrl, githubUrl, techStack } = projectData
 
@@ -131,7 +131,7 @@ export default function Card({ cardId, position, rotation, scale, projectData }:
 
   if (materials) {
     // @ts-ignore
-    materials.Borders.color = new Color(0x05375f)
+    materials.Borders.color = new Color(0xffffff)
   }
 
   return (
@@ -152,9 +152,10 @@ export default function Card({ cardId, position, rotation, scale, projectData }:
                       anchorY={'top-baseline'}
                       anchorX={'center'}
                       position={new Vector3(0, 0.75, 0.01)}
-                      outlineColor={'#000'}
+                      outlineColor={'#20d3c8'}
                       outlineWidth={0.03}
                       textAlign='center'
+                      color={'#211f27'}
                     >
                       {title}
                       <meshBasicMaterial color={'#fff'} side={DoubleSide} />
@@ -166,9 +167,10 @@ export default function Card({ cardId, position, rotation, scale, projectData }:
                       anchorY={'top-baseline'}
                       anchorX={'center'}
                       position={new Vector3(0, 0.5, 0.03)}
-                      outlineColor={'#000'}
+                      outlineColor={'#20d3c8'}
                       outlineWidth={0.03}
                       textAlign='center'
+                      color={'#211f27'}
                     >
                       {description}
                       <meshBasicMaterial color={'#fff'} side={DoubleSide} />
@@ -180,9 +182,10 @@ export default function Card({ cardId, position, rotation, scale, projectData }:
                       anchorY={'top-baseline'}
                       anchorX={'center'}
                       position={new Vector3(0, 0.15, 0.03)}
-                      outlineColor={'#000'}
+                      outlineColor={'#20d3c8'}
                       outlineWidth={0.03}
                       textAlign='center'
+                      color={'#211f27'}
                       lineHeight={2}
                     >
                       My roles:{' '}
@@ -198,9 +201,10 @@ export default function Card({ cardId, position, rotation, scale, projectData }:
                       anchorY={'top-baseline'}
                       anchorX={'center'}
                       position={new Vector3(0, -0.5, 0.03)}
-                      outlineColor={'#000'}
+                      outlineColor={'#20d3c8'}
                       outlineWidth={0.03}
                       textAlign='center'
+                      color={'#211f27'}
                       lineHeight={2}
                     >
                       Tech stack:{' '}
@@ -219,9 +223,10 @@ export default function Card({ cardId, position, rotation, scale, projectData }:
                     anchorY={'top-baseline'}
                     anchorX={'center'}
                     position={new Vector3(0, -1, 1)}
-                    outlineColor={'#000'}
+                    outlineColor={'#20d3c8'}
                     outlineWidth={0.03}
                     textAlign='center'
+                    color={'#211f27'}
                     lineHeight={2}
                   >
                     loading...
@@ -245,7 +250,8 @@ export default function Card({ cardId, position, rotation, scale, projectData }:
                 anchorY={'top-baseline'}
                 anchorX={'left'}
                 position={new Vector3(-0.4, 0.5, 0.01)}
-                outlineColor={'#000'}
+                outlineColor={'#20d3c8'}
+                color={'#211f27'}
                 outlineWidth={0.03}
               >
                 {title}
@@ -258,8 +264,9 @@ export default function Card({ cardId, position, rotation, scale, projectData }:
                 anchorY={'top-baseline'}
                 anchorX={'left'}
                 position={new Vector3(-0.4, -0.4, 0.03)}
-                outlineColor={'#000'}
-                outlineWidth={0.02}
+                outlineColor={'#fff'}
+                color={'#211f27'}
+                outlineWidth={0.01}
               >
                 {description}
                 <meshBasicMaterial color={'#fff'} side={DoubleSide} />

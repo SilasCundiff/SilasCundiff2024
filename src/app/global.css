@@ -66,7 +66,7 @@ body {
 
 .scroll-snap-child {
   scroll-snap-align: center;
-  scroll-margin-top: 180px;
+  scroll-margin-top: 0px;
 }
 @media (max-width: 768px) {
   .scroll-snap-child {
@@ -110,7 +110,7 @@ body {
 }
 
 .card-game-canvas {
-  @apply w-full h-full bg-transparent bg-red-500/30;
+  @apply w-full h-full bg-red-500/30;
   position: absolute !important;
   inset: 0;
   z-index: 0;
@@ -214,16 +214,25 @@ body {
   border-image-outset: 0px 0px 0px 0px;
   border-image-source: url('../../public/img/borders/pixel-border-black.png');
   border-style: solid;
+  max-width: 400px;
+  
 }
 
 .svg-wrapper .node-tooltip .arrow {
-  background-color: #041237;
+  background-color: #04123700;
 }
 
 .img-border-black {
   border-image-slice: 10 10 10 10;
   border-image-width: 16px 16px 16px 16px;
   border-image-outset: 8px 8px 8px 8px;
+  border-image-source: url('../../public/img/borders/pixel-border-black.png');
+  border-style: solid;
+}
+.img-border-black--small {
+  border-image-slice: 10 10 10 10;
+  border-image-width: 8px 8px 8px 8px;
+  border-image-outset: 0px 0px 0px 0px;
   border-image-source: url('../../public/img/borders/pixel-border-black.png');
   border-style: solid;
 }
@@ -257,7 +266,7 @@ body {
 }
 .img-border-pink {
   border-image-slice: 10 10 10 10;
-  border-image-width: 16px 16px 16px 16px;
+  border-image-width: 8px 8px 8px 8px;
   border-image-outset: 0px 0px 0px 0px;
   border-image-source: url('../../public/img/borders/pixel-border-pink.png');
   border-style: solid;

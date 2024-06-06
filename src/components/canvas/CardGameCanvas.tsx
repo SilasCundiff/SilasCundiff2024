@@ -77,9 +77,15 @@ export default function CardGameCanvas() {
             areControlsLocked={areControlsLocked}
           />
         </Bounds>
-        <Environment preset='sunset' />
-        {/* lights */}
-        <ambientLight intensity={1.5} />
+        <Environment
+          background={false} // can be true, false or "only" (which only sets the background) (default: false) // optional blur factor between 0 and 1 (default: 0, only works with three 0.146 and up)
+          files={['px.png', 'nx.png', 'py.png', 'ny.png', 'pz.png', 'nz.png']}
+          path='/'
+          preset='warehouse'
+          scene={undefined} // adds the ability to pass a custom THREE.Scene, can also be a ref
+          encoding={undefined} // adds the ability to pass a custom THREE.TextureEncoding (default: THREE.sRGBEncoding for an array of files and THREE.LinearEncoding for a single texture)
+        />
+
         <OrbitControls
           makeDefault
           enabled={!disableControls}

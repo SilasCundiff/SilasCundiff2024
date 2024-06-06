@@ -2,7 +2,7 @@ import Background from '@/components/common/Background'
 import LinkButton from '@/components/common/LinkButton'
 import Container from '@/components/layout/Container'
 import Nav from '@/components/layout/Nav'
-import heroBackground from '../../../public/img/hero-background-high-res.png'
+import heroBackground from '../../../public/img/new_background.png'
 
 export default function HomeSection() {
   return (
@@ -10,7 +10,7 @@ export default function HomeSection() {
       <header id='home' className='scroll-snap-child flex h-svh flex-col font-alagard'>
         <Background backgroundImage={heroBackground} />
         <Container gap={false}>
-          <h1 className='text-shadow-blue text-outline col-span-12 transform-gpu text-center text-4xl font-bold leading-tight sm:text-6xl md:col-span-6 md:col-start-4 md:text-8xl'>
+          <h1 className='text-shadow-blue text-outline col-span-12 transform-gpu text-center text-4xl font-bold leading-tight sm:text-6xl md:col-span-6 md:col-start-4 md:text-8xl mt-44'>
             Silas&apos;s Saga
           </h1>
           <p className='text-shadow-blue-dark col-span-12 row-start-2 pb-8 text-center font-pressStart text-xl leading-tight sm:text-2xl md:col-span-6 md:col-start-4 md:text-2xl'>

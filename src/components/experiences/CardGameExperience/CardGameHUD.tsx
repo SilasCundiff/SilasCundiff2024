@@ -18,14 +18,13 @@ export default function CardGameHUD({
 }) {
   const { nodes, materials } = useGLTF('/models/card.glb')
   const texture = useTexture(`img/project-image.png`)
-  const discardTexture = useTexture(`img/logo.png`)
+  const discardTexture = useTexture(`img/project-image.png`)
 
   return (
     <group>
       <group position={new Vector3(5, -4.5, 1)}>
         <group rotation={[0, 0, -0.2]}>
           {discardPile.map((card, i) => {
-            console.log('card', card)
             return (
               <DrawDiscardCard
                 key={i}
@@ -118,7 +117,7 @@ export default function CardGameHUD({
           <meshBasicMaterial color={'#fff'} side={DoubleSide} />
         </Text>
       </group>
-      <group position={new Vector3(-5, -5.75, 1)} onClick={handleLockControls}>
+      {/* <group position={new Vector3(-5, -5.75, 1)} onClick={handleLockControls}>
         <mesh>
           <planeGeometry args={[0.99, 0.33, 1]} />
           <meshBasicMaterial color={'#55e'} side={DoubleSide} />
@@ -135,11 +134,11 @@ export default function CardGameHUD({
           {areControlsLocked ? 'Unlock Controls' : 'Lock Controls'}
           <meshBasicMaterial color={'#fff'} side={DoubleSide} />
         </Text>
-      </group>
+      </group> */}
       <group position={new Vector3(5, -5.75, 1)} onClick={handleEndTurn}>
         <mesh>
           <planeGeometry args={[0.99, 0.33, 1]} />
-          <meshBasicMaterial color={'#55e'} side={DoubleSide} />
+          <meshBasicMaterial color={'#20d3c8'} side={DoubleSide} />
         </mesh>
         <Text
           anchorX={'center'}

@@ -33,20 +33,20 @@ const ProjectStage = ({
         {isCardActive ? (
           <group>
             {disableIframe ? (
-              <Html transform prepend zIndexRange={[0, 0]} distanceFactor={distanceFactor * 2.5}>
+              <Html transform prepend zIndexRange={[0, 0]} distanceFactor={distanceFactor * 3.6}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  className='max-w-[1180px] max-h-[600px]'
+                  className='max-w-[1180px] max-h-[600px]  border-4 img-border-black'
                   src={`./cards/${imageUrl}`}
                   alt={`image of ${title} website`}
                 />
-                <span className='font-alagard text-white text-2xl'>Please visit the live site for full demo!</span>
+                {/* <span className='font-alagard text-white text-2xl'>Please visit the live site for full demo!</span> */}
               </Html>
             ) : (
               <group>
                 <Html transform prepend zIndexRange={[0, 0]} distanceFactor={distanceFactor * 2.5} className='relative'>
                   <iframe
-                    className='rounded-lg border-4 border-teal-200 bg-white'
+                    className='img-border-cyan bg-white'
                     src={siteUrl}
                     frameBorder='0'
                     style={{ verticalAlign: 'top' }}
@@ -63,8 +63,8 @@ const ProjectStage = ({
                 </Html>
               </group>
             )}
-            <Html zIndexRange={[0, 0]} position={[3.05 * distanceFactor, -2.15 * distanceFactor, 0]} transform>
-              <div className='flex rounded-sm space-x-1 justify-end bg-black/25 px-1 py-.5'>
+            <Html zIndexRange={[0, 0]} position={[0, -1.5 * distanceFactor, 0]} transform>
+              <div className='flex rounded-sm space-x-1 justify-end bg-[#211f27] border-1 img-border-black--small px-2 py-2'>
                 <a
                   className={`text-white rounded-full flex hover:text-slate-200 ${
                     !siteUrl && 'cursor-not-allowed opacity-15 pointer-events-none'
@@ -74,7 +74,7 @@ const ProjectStage = ({
                   title={siteUrl ? 'View live site' : 'Live site not available'}
                   aria-disabled={!siteUrl}
                 >
-                  <FontAwesomeIcon icon={faChrome} height={48} width={12} />
+                  <FontAwesomeIcon icon={faChrome} height={24} width={24} />
                 </a>
 
                 <a
@@ -86,7 +86,7 @@ const ProjectStage = ({
                   target='_blank'
                   aria-disabled={!githubUrl}
                 >
-                  <FontAwesomeIcon icon={faGithub} height={12} width={12} />
+                  <FontAwesomeIcon icon={faGithub} height={24} width={24} />
                 </a>
               </div>
             </Html>

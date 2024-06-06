@@ -10,7 +10,7 @@ const deckOfCards = [
       githubUrl: 'https://github.com/SilasCundiff/day-night-portfolio/tree/main',
       techStack: ['React', 'Framer Motion', 'Nextjs', 'Styled Components', 'Lottie'],
       roles: ['Frontend Developer', 'Designer'],
-      disableIframe: false,
+      disableIframe: true,
     },
   },
   {
@@ -24,7 +24,7 @@ const deckOfCards = [
       githubUrl: 'https://github.com/SilasCundiff/zenify-three',
       techStack: ['React', 'TypeScript', 'Three.js', 'Tailwind CSS', 'SpotifyAPI', 'Vercel', 'Nextjs'],
       roles: ['Frontend Developer', 'Designer'],
-      disableIframe: false,
+      disableIframe: true,
     },
   },
   {
@@ -37,7 +37,7 @@ const deckOfCards = [
       siteUrl: 'https://avanos.com/',
       techStack: ['WordPress', 'PHP', 'JavaScript', 'HTML', 'CSS', 'Sass', 'Bitbucket'],
       roles: ['Frontend Developer', 'Content Manager', 'Advisor', 'Security Administrator'],
-      disableIframe: false,
+      disableIframe: true,
     },
   },
   {
@@ -50,7 +50,7 @@ const deckOfCards = [
       siteUrl: 'https://dalrc.org/',
       techStack: ['WordPress', 'PHP', 'JavaScript', 'HTML', 'CSS', 'Sass', 'Bitbucket'],
       roles: ['Frontend Developer', 'Content Manager', 'Advisor'],
-      disableIframe: false,
+      disableIframe: true,
     },
   },
   {
@@ -76,7 +76,7 @@ const deckOfCards = [
       siteUrl: 'https://beacham.com/',
       techStack: ['WordPress', 'PHP', 'JavaScript', 'HTML', 'CSS', 'Sass', 'Gulp', 'Docker'],
       roles: ['Frontend Developer', 'Theme Developer', 'Plugin Developer'],
-      disableIframe: false,
+      disableIframe: true,
     },
   },
   {
@@ -101,7 +101,7 @@ const deckOfCards = [
       siteUrl: 'https://earthsally.com/',
       techStack: ['WordPress', 'PHP', 'JavaScript', 'HTML', 'CSS', 'Sass', 'Gulp', 'Docker'],
       roles: ['Frontend Developer', 'Theme Developer', 'Content Manager'],
-      disableIframe: false,
+      disableIframe: true,
     },
   },
   {
@@ -114,7 +114,7 @@ const deckOfCards = [
       siteUrl: 'https://ingriffin.com/',
       techStack: ['WordPress', 'PHP', 'JavaScript', 'HTML', 'CSS', 'Sass', 'Gulp', 'Docker'],
       roles: ['Frontend Developer', 'Theme Developer', 'Plugin Developer'],
-      disableIframe: false,
+      disableIframe: true,
     },
   },
   {
@@ -127,7 +127,7 @@ const deckOfCards = [
       siteUrl: 'https://rhonda-haran.com/',
       techStack: ['WordPress', 'PHP', 'JavaScript', 'HTML', 'CSS', 'Sass', 'Gulp', 'Docker'],
       roles: ['Frontend Developer', 'Theme Developer', 'Plugin Developer'],
-      disableIframe: false,
+      disableIframe: true,
     },
   },
   {
@@ -140,7 +140,7 @@ const deckOfCards = [
       siteUrl: 'https://seaislandproperties.com/',
       techStack: ['WordPress', 'PHP', 'JavaScript', 'HTML', 'CSS', 'Sass', 'Gulp', 'Docker'],
       roles: ['Frontend Developer', 'Theme Developer', 'Plugin Developer'],
-      disableIframe: false,
+      disableIframe: true,
     },
   },
   {

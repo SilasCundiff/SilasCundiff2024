@@ -3,7 +3,7 @@ import useScroll from '../../helpers/hooks/useScroll'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithubAlt, faLinkedin } from '@fortawesome/free-brands-svg-icons'
 
-import logo from '../../../public/img/logo.png'
+import logo from '../../../public/img/8-bit-logo.png'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import Image from 'next/image'
 
