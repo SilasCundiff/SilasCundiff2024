@@ -247,6 +247,7 @@ export default function Card({ cardId, position, rotation, scale, projectData }:
               <mesh castShadow receiveShadow geometry={nodes.Plane_1.geometry} material={materials.Borders}>
                 <meshStandardMaterial {...materials.Back} map={texture} color='white' />
               </mesh>
+              {/* @ts-ignore */}
               <mesh castShadow receiveShadow geometry={nodes.Plane.geometry} material={materials.Back} />
 
               <Text
