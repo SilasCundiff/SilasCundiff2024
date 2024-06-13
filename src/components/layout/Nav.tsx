@@ -13,7 +13,7 @@ export default function Nav() {
   const [navOpen, setNavOpen] = useState(false)
 
   useEffect(() => {
-    console.log(scrollPosition.y)
+    // console.log(scrollPosition.y)
     if (scrollPosition.y > 600) {
       setIsSticky(true)
     } else {
