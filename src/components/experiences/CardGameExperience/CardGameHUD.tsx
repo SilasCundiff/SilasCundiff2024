@@ -37,13 +37,13 @@ export default function CardGameHUD({
           })}
           <mesh position={[0, 0, 1]} rotation={[0, 0, 0.2]}>
             {/* @ts-ignore */}
-            <mesh castShadow receiveShadow geometry={nodes.Plane.geometry}>
-              <meshStandardMaterial {...materials.Front} map={discardTexture} color='white' />
+            <mesh castShadow receiveShadow geometry={nodes.Plane_1.geometry}>
+              <meshStandardMaterial {...materials.Back} map={texture} color='white' />
             </mesh>
             {/* @ts-ignore */}
-            <mesh castShadow receiveShadow geometry={nodes.Plane_1.geometry} material={materials.Borders} />
+            <mesh castShadow receiveShadow geometry={nodes.Plane.geometry} material={materials.Back} />
             {/* @ts-ignore */}
-            <mesh castShadow receiveShadow geometry={nodes.Plane_2.geometry} material={materials.Back} />
+            <mesh castShadow receiveShadow geometry={nodes.Plane_2.geometry} material={materials.Front} />
           </mesh>
           <mesh position={[0, 0, 0.2]} rotation={[0, 0, 0.2]}>
             <Text
@@ -85,13 +85,13 @@ export default function CardGameHUD({
           })}
           <mesh position={[0, 0, 1]} rotation={[0, 0, -0.1]}>
             {/* @ts-ignore */}
-            <mesh castShadow receiveShadow geometry={nodes.Plane.geometry}>
-              <meshStandardMaterial {...materials.Front} map={discardTexture} color='white' />
+            <mesh castShadow receiveShadow geometry={nodes.Plane_1.geometry}>
+              <meshStandardMaterial {...materials.Back} map={texture} color='white' />
             </mesh>
             {/* @ts-ignore */}
-            <mesh castShadow receiveShadow geometry={nodes.Plane_1.geometry} material={materials.Borders} />
+            <mesh castShadow receiveShadow geometry={nodes.Plane.geometry} material={materials.Back} />
             {/* @ts-ignore */}
-            <mesh castShadow receiveShadow geometry={nodes.Plane_2.geometry} material={materials.Back} />
+            <mesh castShadow receiveShadow geometry={nodes.Plane_2.geometry} material={materials.Front} />
           </mesh>
           <mesh position={[0, -0.05, 0.2]} rotation={[0, 0, -0.1]}>
             <Text
@@ -117,16 +117,16 @@ export default function CardGameHUD({
           <meshBasicMaterial color={'#fff'} side={DoubleSide} />
         </Text>
       </group>
-      {/* <group position={new Vector3(-5, -5.75, 1)} onClick={handleLockControls}>
+      <group position={new Vector3(-5, -7.25, 1)} onClick={handleLockControls}>
         <mesh>
-          <planeGeometry args={[0.99, 0.33, 1]} />
+          <planeGeometry args={[3.33, 0.66, 1]} />
           <meshBasicMaterial color={'#55e'} side={DoubleSide} />
         </mesh>
         <Text
           anchorX={'center'}
           anchorY={'middle'}
           font='/fonts/PressStart2P-Regular.ttf'
-          fontSize={0.1}
+          fontSize={0.2}
           position={[0, 0, 0.01]}
           outlineColor={'#000'}
           outlineWidth={0.02}
@@ -134,19 +134,19 @@ export default function CardGameHUD({
           {areControlsLocked ? 'Unlock Controls' : 'Lock Controls'}
           <meshBasicMaterial color={'#fff'} side={DoubleSide} />
         </Text>
-      </group> */}
-      <group position={new Vector3(5, -5.75, 1)} onClick={handleEndTurn}>
+      </group>
+      <group position={new Vector3(5, -7.25, 1)} onClick={handleEndTurn}>
         <mesh>
-          <planeGeometry args={[0.99, 0.33, 1]} />
+          <planeGeometry args={[1.99, 0.66, 1]} />
           <meshBasicMaterial color={'#20d3c8'} side={DoubleSide} />
         </mesh>
         <Text
           anchorX={'center'}
           anchorY={'middle'}
           font='/fonts/PressStart2P-Regular.ttf'
-          fontSize={0.1}
+          fontSize={0.2}
           position={[0, 0, 0.01]}
-          outlineColor={'#000'}
+          outlineColor={'#211f27'}
           outlineWidth={0.02}
         >
           End Turn

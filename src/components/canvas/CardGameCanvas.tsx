@@ -58,7 +58,7 @@ export default function CardGameCanvas() {
   }
 
   return (
-    <div className='cardGameRoot relative h-svh md:max-h-[calc(100svh-96px)] w-full my-auto'>
+    <div className='cardGameRoot relative h-svh md:max-h-[calc(90svh-180px)] mt-16 w-full my-auto'>
       <Canvas
         // @ts-ignore
         ref={canvasRef}
@@ -90,8 +90,8 @@ export default function CardGameCanvas() {
           makeDefault
           enabled={!disableControls}
           enableDamping
-          minZoom={40}
-          maxZoom={130}
+          minZoom={30}
+          maxZoom={100}
           maxPolarAngle={Math.PI / 1.5}
           minPolarAngle={Math.PI / 4}
           maxAzimuthAngle={Math.PI / 4}

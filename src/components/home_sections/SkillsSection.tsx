@@ -3,6 +3,7 @@ import Container from '@/components/layout/Container'
 import Section from '@/components/layout/Section'
 import { useEffect, useState } from 'react'
 import { Tooltip } from 'react-tooltip'
+import Nav from '../layout/Nav'
 
 type ColumnPositionsKey = 0 | 1 | 2
 type RowPositionsKey = 0 | 1 | 2 | 3 | 4 | 5
@@ -333,12 +334,13 @@ export default function SkillsSection() {
   return (
     <>
       <Section id='skills'>
+        <Nav />
         <Container>
-          <h2 className='text-6xl font-bold col-span-full row-start-1 font-alagard text-center'>Skill Tree</h2>
-          <h3 className='uppercase text-1xl col-span-full row-start-2 text-center font-pressStart'>
+          <h2 className='text-6xl font-bold col-span-full  font-alagard text-center pb-2 mt-12'>Skill Tree</h2>
+          <h3 className='uppercase text-1xl col-span-full row-start-2 text-center font-pressStart mb-6'>
             Chosen class: Full-stack Developer
           </h3>
-          <div className='bg-white w-full col-span-full row-start-3 flex flex-wrap gap-4 text-white'>
+          <div className=' w-full flex flex-wrap justify-between text-white'>
             <SkillTree title='Design' imgUrl='aurora.png' treeData={skillsDesign}></SkillTree>
             <SkillTree title='Programming' imgUrl='mountain.png' treeData={skillsProgramming}></SkillTree>
             <SkillTree title='Tooling' imgUrl='ocean.png' treeData={skillsTooling}></SkillTree>
@@ -372,14 +374,12 @@ const SkillTree = ({ title, imgUrl, treeData }: { title: string; imgUrl: string;
     <div
       className={`flex-1 img-border-blue p-2 md:p-4 relative z-10 ${
         imgUrl === 'aurora.png' ? 'text-white' : 'text-black'
-      } ${imgUrl === 'ocean.png' && 'img-border-red'} ${
-        imgUrl === 'mountain.png' && 'img-border-green'
-      } max-w-[360px] m-auto`}
+      } ${imgUrl === 'ocean.png' && 'img-border-red'} ${imgUrl === 'mountain.png' && 'img-border-green'} max-w-[360px]`}
     >
       <div className='absolute inset-2.5  -z-10'>
         <img className='h-full object-cover' src={`./img/${imgUrl}`} alt='background' />
       </div>
-      <p className='uppercase text-center  text-sm mt-2 md:mb-4 mb-2'>{title}</p>
+      <p className='uppercase text-center text-sm mt-2 md:mb-4 mb-2'>{title}</p>
       <div className='svg-container flex justify-center items-center'>
         <div className='svg-wrapper h-full min-h-[400px] min-w-72'>
           <Tooltip

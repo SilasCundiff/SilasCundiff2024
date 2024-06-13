@@ -9,19 +9,18 @@ export default function HomeSection() {
     <>
       <header id='home' className='scroll-snap-child flex h-svh flex-col font-alagard'>
         <Background backgroundImage={heroBackground} />
-        <Container gap={false}>
+        <div className='container m-auto'>
           <h1 className='text-shadow-blue text-outline col-span-12 transform-gpu text-center text-4xl font-bold leading-tight sm:text-6xl md:col-span-6 md:col-start-4 md:text-8xl mt-44'>
             Silas&apos;s Saga
           </h1>
-          <p className='text-shadow-blue-dark col-span-12 row-start-2 pb-8 text-center font-pressStart text-xl leading-tight sm:text-2xl md:col-span-6 md:col-start-4 md:text-2xl'>
+          <p className='max-w-xl mx-auto text-shadow-blue-dark col-span-12 row-start-2 pb-8 text-center font-pressStart text-xl leading-tight sm:text-2xl md:col-span-6 md:col-start-4 md:text-2xl'>
             A tale of my adventure through the world of web development!
           </p>
           {/* <div className='col-span-12 row-start-3 space-x-8  md:col-span-6 md:col-start-4'>
             <LinkButton href='#projects'>Projects</LinkButton>
             <LinkButton href='#contact'>Contact</LinkButton>
           </div> */}
-        </Container>
-        <Nav />
+        </div>
       </header>
     </>
   )

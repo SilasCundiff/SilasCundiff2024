@@ -36,7 +36,7 @@ const ProjectStage = ({
               <Html transform prepend zIndexRange={[0, 0]} distanceFactor={distanceFactor * 3.6}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  className='max-w-[1180px] max-h-[600px]  border-4 img-border-black'
+                  className='max-w-[1168px] max-h-[800px]  border-4 img-border-black'
                   src={`./cards/${imageUrl}`}
                   alt={`image of ${title} website`}
                 />
@@ -63,10 +63,10 @@ const ProjectStage = ({
                 </Html>
               </group>
             )}
-            <Html zIndexRange={[0, 0]} position={[0, -1.5 * distanceFactor, 0]} transform>
-              <div className='flex rounded-sm space-x-1 justify-end bg-[#211f27] border-1 img-border-black--small px-2 py-2'>
+            <Html zIndexRange={[0, 0]} position={[4.35 * distanceFactor, -1.75 * distanceFactor, 4]} transform>
+              <div className='flex rounded-sm space-x-1 justify-end bg-[#211f27] border-2 img-border-black--small p-1'>
                 <a
-                  className={`text-white rounded-full flex hover:text-slate-200 ${
+                  className={`text-white rounded-full text-2xl flex hover:text-slate-200 ${
                     !siteUrl && 'cursor-not-allowed opacity-15 pointer-events-none'
                   }`}
                   href={siteUrl ? siteUrl : ''}
@@ -78,7 +78,7 @@ const ProjectStage = ({
                 </a>
 
                 <a
-                  className={`text-white  rounded-full flex  hover:text-slate-200 ${
+                  className={`text-white text-2xl rounded-full flex  hover:text-slate-200 ${
                     !githubUrl && 'cursor-not-allowed opacity-25 pointer-events-none'
                   }`}
                   title={githubUrl ? 'View on GitHub' : 'Source code not available'}
@@ -101,9 +101,9 @@ const ProjectStage = ({
               alt={`image of ${title} website`}
               url={`./cards/thumbnail-${imageUrl}`}
             />
-            <mesh position={new Vector3(0, 0, 0.02)}>
+            <mesh position={new Vector3(0, 0, 0.002)}>
               <planeGeometry args={[10, 10, 1]} />
-              <meshBasicMaterial color='#000' opacity={0.5} transparent={true} side={DoubleSide} />
+              <meshBasicMaterial color='#000' opacity={0.125} transparent={true} side={DoubleSide} />
             </mesh>
           </>
         )}

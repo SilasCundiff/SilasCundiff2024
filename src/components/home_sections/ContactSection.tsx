@@ -6,7 +6,8 @@ export default function ContactSection() {
     <>
       <Section id='contact'>
         <Container>
-          <h2 className='text-4xl font-bold'>/whisper</h2>
+          <h2 className='text-4xl font-bold w-full bg-red-500'>\whisper (Contact)</h2>
+          <form action='' className='bg-red-500'></form>
         </Container>
       </Section>
     </>

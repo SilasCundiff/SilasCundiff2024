@@ -215,7 +215,6 @@ body {
   border-image-source: url('../../public/img/borders/pixel-border-black.png');
   border-style: solid;
   max-width: 400px;
-  
 }
 
 .svg-wrapper .node-tooltip .arrow {
@@ -231,9 +230,9 @@ body {
 }
 .img-border-black--small {
   border-image-slice: 10 10 10 10;
-  border-image-width: 8px 8px 8px 8px;
+  border-image-width: 6px 6px 6px 6px;
   border-image-outset: 0px 0px 0px 0px;
-  border-image-source: url('../../public/img/borders/pixel-border-black.png');
+  border-image-source: url('../../public/img/borders/pixel-border-cyan.png');
   border-style: solid;
 }
 .img-border-blue {
@@ -266,15 +265,15 @@ body {
 }
 .img-border-pink {
   border-image-slice: 10 10 10 10;
-  border-image-width: 8px 8px 8px 8px;
-  border-image-outset: 0px 0px 0px 0px;
+  border-image-width: 16px 16px 16px 16px;
+  border-image-inset: 0px 0px 0px 0px;
   border-image-source: url('../../public/img/borders/pixel-border-pink.png');
   border-style: solid;
 }
 .img-border-quartz {
   border-image-slice: 10 10 10 10;
   border-image-width: 12px 12px 12px 12px;
-  border-image-outset: 12px 12px 12px 12px;
+  border-image-outset: 0 4px 0 4px;
   border-image-source: url('../../public/img/borders/pixel-border-quartz.png');
   border-style: solid;
 }
@@ -293,10 +292,10 @@ body {
   border-style: solid;
 }
 
-.page-wrapper {
+.section-wrapper {
   border-image-slice: 10 10 10 10;
   border-image-width: 10px 10px 10px 10px;
-  border-image-outset: 3px 3px 3px 3px;
+  border-image-outset: 10px 10px 10px 10px;
   border-image-source: url('../../public/img/borders/pixel-border-cyan.png');
   border-style: solid;
 }

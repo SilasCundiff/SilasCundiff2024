@@ -10,11 +10,11 @@ export default function Page() {
   return (
     <>
       <HomeSection />
-      <div className='page-wrapper max-w-[1180px] bg-white mx-auto'>
+      <div className='page-wrapper max-w-[1168px] mx-auto mt-96 '>
         <SkillsSection />
         <ProjectsSection />
         <AboutSection />
-        <ContactSection />
+        {/* <ContactSection /> */}
       </div>
     </>
   )
