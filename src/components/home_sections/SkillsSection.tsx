@@ -334,10 +334,11 @@ export default function SkillsSection() {
   return (
     <>
       <Section id='skills'>
-        <Nav />
         <Container>
-          <h2 className='text-6xl font-bold col-span-full  font-alagard text-center pb-2 mt-12'>Skill Tree</h2>
-          <h3 className='uppercase text-1xl col-span-full row-start-2 text-center font-pressStart mb-6'>
+          <h2 className='text-6xl font-bold col-span-full  font-alagard text-center pb-2 mt-12 text-shadow-lg'>
+            Skill Tree
+          </h2>
+          <h3 className='uppercase text-1xl col-span-full row-start-2 text-center font-pressStart mb-6 text-shadow-sm'>
             Chosen class: Full-stack Developer
           </h3>
           <div className=' w-full flex flex-wrap justify-between text-white'>
