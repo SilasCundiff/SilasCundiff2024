@@ -1,21 +1,19 @@
 'use client'
-import SectionSpacer from '@/components/common/SectionSpacer'
 import HomeSection from '@/components/home_sections/HomeSection'
 import SkillsSection from '@/components/home_sections/SkillsSection'
 import ProjectsSection from '@/components/home_sections/ProjectsSection'
 import AboutSection from '@/components/home_sections/AboutSection'
-import ContactSection from '@/components/home_sections/ContactSection'
+import Background from '@/components/common/Background'
+import heroBackground from '../../public/img/new_background.png'
 
 export default function Page() {
   return (
     <>
+      <Background backgroundImage={heroBackground} />
       <HomeSection />
-      <div className='page-wrapper max-w-[1168px] mx-auto mt-96 '>
-        <SkillsSection />
-        <ProjectsSection />
-        <AboutSection />
-        {/* <ContactSection /> */}
-      </div>
+      <SkillsSection />
+      <ProjectsSection />
+      <AboutSection />
     </>
   )
 }

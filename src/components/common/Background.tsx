@@ -10,7 +10,7 @@ export default function Background({
   parallaxStrength?: number
 }) {
   return (
-    <div className='absolute inset-0 -z-10 max-h-svh '>
+    <div className='fixed inset-0 -z-10 max-h-svh '>
       <Image
         src={backgroundImage}
         className='h-auto w-full object-cover object-center'

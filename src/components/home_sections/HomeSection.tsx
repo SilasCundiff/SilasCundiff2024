@@ -1,25 +1,20 @@
-import Background from '@/components/common/Background'
 import LinkButton from '@/components/common/LinkButton'
-import Container from '@/components/layout/Container'
-import Nav from '@/components/layout/Nav'
-import heroBackground from '../../../public/img/new_background.png'
 
 export default function HomeSection() {
   return (
     <>
-      <header id='home' className='scroll-snap-child flex h-svh flex-col font-alagard'>
-        <Background backgroundImage={heroBackground} />
-        <div className='container m-auto'>
-          <h1 className='text-shadow-blue text-outline col-span-12 transform-gpu text-center text-4xl font-bold leading-tight sm:text-6xl md:col-span-6 md:col-start-4 md:text-8xl mt-44'>
+      <header id='home' className='scroll-snap-child flex p-4 h-svh flex-col font-alagard'>
+        <div className='container m-auto flex flex-col'>
+          <h1 className='text-shadow-blue text-outline text-black transform-gpu text-center text-7xl font-bold'>
             Silas&apos;s Saga
           </h1>
-          <p className='max-w-xl mx-auto text-shadow-blue-dark col-span-12 row-start-2 pb-8 text-center font-pressStart text-xl leading-tight sm:text-2xl md:col-span-6 md:col-start-4 md:text-2xl'>
+          <p className=' mx-auto text-shadow-blue-dark text-center font-pressStart text-slate-800 text-xl leading-tight max-w-2xl '>
             A tale of my adventure through the world of web development!
           </p>
-          {/* <div className='col-span-12 row-start-3 space-x-8  md:col-span-6 md:col-start-4'>
+          <div className='mx-auto pt-4 flex flex-wrap gap-4 '>
             <LinkButton href='#projects'>Projects</LinkButton>
-            <LinkButton href='#contact'>Contact</LinkButton>
-          </div> */}
+            <LinkButton href='https://github.com/SilasCundiff'>Github</LinkButton>
+          </div>
         </div>
       </header>
     </>
