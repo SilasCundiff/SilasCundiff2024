@@ -117,6 +117,7 @@ body,
 
   --button-background: #30bce2;
   --secondary-button-background: #27c9f5;
+  --inventory-background: #4c4449;
   --shadow-color: #336fa0;
 
   --text-primary: #30bce2;
@@ -372,8 +373,8 @@ body {
 .inventory-border {
   border-image-slice: 26 26 26 26;
   border-image-width: 26px 26px 26px 26px;
-  border-image-outset: 10px 10px 10px 10px;
-  border-image-source: url('../../public/img/borders/Inventory_9Slices.png');
+  border-image-outset: 12px 12px 12px 12px;
+  border-image-source: url('../../public/img/borders/inventory_background.png');
   border-style: solid;
 }
 
@@ -387,9 +388,9 @@ body {
 
 .nav-inventory-grid {
   display: grid;
-  grid-template-columns: repeat(9, minmax(3rem, 1fr));
+  grid-template-columns: repeat(9, minmax(4rem, 1fr));
   grid-auto-rows: 1fr;
-  background: var(--color-primary);
+  background: var(--inventory-background);
 }
 
 .nav-inventory-grid::before {
@@ -405,7 +406,7 @@ body {
   grid-column: 1 / 1;
 }
 .nav-inventory-grid > * {
-  background: #071233;
+  background: #5c5459;
 }
 .inventory-item {
   /* display: flex; */
