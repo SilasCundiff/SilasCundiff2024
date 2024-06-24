@@ -12,7 +12,7 @@ export default function DrawDiscardCard({
   nodes: any
 }) {
   const texture = useTexture(`img/project-image.png`)
-  console.log(texture)
+
   texture.flipY = true
   texture.offset.x = 0.1
   return (

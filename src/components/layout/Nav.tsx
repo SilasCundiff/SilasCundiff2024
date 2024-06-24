@@ -1,17 +1,41 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
 import { faBars } from '@fortawesome/free-solid-svg-icons'
-import Link from 'next/link'
-import { GithubIcon, LinkedInIcon } from '../common/icons'
+import Image from 'next/image'
 
 export default function Nav() {
   const inventoryItems = [
-    { name: 'home', url: '#home' },
-    { name: 'skills', url: '#skills' },
-    { name: 'projects', url: '#projects' },
-    { name: 'lore', url: '#about' },
-    { name: 'GitHub', url: 'github.com/SilasCundiff', target: '_blank', icon: <GithubIcon /> },
-    { name: 'LinkedIn', url: 'linkedin.com/in/silas-cundiff', target: '_blank', icon: <LinkedInIcon /> },
+    {
+      name: 'home',
+      url: '#home',
+      icon: <Image src='/icons/nav-icons/home-icon.png' width={48} height={48} alt='home icon' />,
+    },
+    {
+      name: 'skills',
+      url: '#skills',
+      icon: <Image src='/icons/nav-icons/skills-icon.png' width={48} height={48} alt='skills icon' />,
+    },
+    {
+      name: 'projects',
+      url: '#projects',
+      icon: <Image src='/icons/nav-icons/projects-icon.png' width={48} height={48} alt='projects icon' />,
+    },
+    {
+      name: 'lore',
+      url: '#about',
+      icon: <Image src='/icons/nav-icons/lore-icon.png' width={48} height={48} alt='lore icon' />,
+    },
+    {
+      name: 'GitHub',
+      url: 'github.com/SilasCundiff',
+      target: '_blank',
+      icon: <Image src={'/icons/nav-icons/github-icon.png'} width={48} height={48} alt='github icon' />,
+    },
+    {
+      name: 'LinkedIn',
+      url: 'linkedin.com/in/silas-cundiff',
+      target: '_blank',
+      icon: <Image src='/icons/nav-icons/linkedin-icon.png' width={48} height={48} alt='linkedin icon' />,
+    },
   ]
 
   const fillInventory = () => {
@@ -24,7 +48,7 @@ export default function Nav() {
             <div className='flex items-center justify-center mx-auto sm:mb-1 w-7/12'>
               {inventoryItems[i].icon ? inventoryItems[i].icon : null}
             </div>
-            <div className='sm:block hidden'>{inventoryItems[i].name}</div>
+            <div className='block'>{inventoryItems[i].name.toUpperCase()}</div>
           </NavItem>,
         )
       } else {
@@ -45,7 +69,7 @@ export default function Nav() {
              select-none  font-pressStart
              max-w-[680px] inventory-border w-full p-0 py-.5`}
       >
-        <ul className='nav-inventory-grid gap-1'>{fillInventory()}</ul>
+        <ul className='nav-inventory-grid gap-0.5'>{fillInventory()}</ul>
       </nav>
     </div>
   )
