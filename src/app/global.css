@@ -232,7 +232,14 @@ html {
   background: var(--inventory-background);
 }
 .nav-inventory-grid--mobile {
-  grid-template-columns: repeat(4, minmax(4rem, 1fr));
+  grid-template-columns: repeat(6, minmax(4rem, 1fr));
+}
+
+/* media query to change grid-template-columns: repeat(6, minmax(4rem, 1fr)); to grid-template-columns: repeat(3, minmax(4rem, 1fr)); at 480px  */
+@media (max-width: 480px) {
+  .nav-inventory-grid--mobile {
+    grid-template-columns: repeat(3, minmax(4rem, 1fr));
+  }
 }
 
 .inventory-bg {

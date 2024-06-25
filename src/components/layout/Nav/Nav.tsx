@@ -1,10 +1,10 @@
 import Image from 'next/image'
 import NavItem from './NavItem'
 import React from 'react'
-import { isMobile, isDesktop } from 'react-device-detect'
 import { AspectRatio } from '@radix-ui/react-aspect-ratio'
 import CharacterAnimationCanvas from '@/components/canvas/CharacterAnimationCanvas'
 import NavToggle from './NavToggle'
+import useIsMobile from '@/helpers/hooks/useIsMobile'
 
 const inventoryItems = [
   {
@@ -40,8 +40,10 @@ const inventoryItems = [
     icon: <Image src='/icons/nav-icons/linkedin-icon.png' width={48} height={48} alt='linkedin icon' />,
   },
 ]
+
 export default function Nav({ sectionInView }: { sectionInView: string }) {
   const [open, setOpen] = React.useState(false)
+  const isMobile = useIsMobile()
   const fillInventory = () => {
     const slots = 9
     const inventory = []
@@ -74,7 +76,7 @@ export default function Nav({ sectionInView }: { sectionInView: string }) {
 
   const fillMobileInventory = () => {
     const inventory = []
-    const slots = 12
+    const slots = 6
     for (let i = 0; i < slots; i++) {
       if (inventoryItems[i]) {
         inventory.push(
@@ -103,7 +105,7 @@ export default function Nav({ sectionInView }: { sectionInView: string }) {
 
   return (
     <>
-      {isDesktop && (
+      {!isMobile && (
         <div className='flex justify-center items-center fixed bottom-4 left-[50%] -translate-x-[50%] z-40 bg-transparent'>
           <nav
             className={` 
@@ -114,7 +116,7 @@ export default function Nav({ sectionInView }: { sectionInView: string }) {
           </nav>
         </div>
       )}
-      {isMobile === false && (
+      {isMobile && (
         <>
           <div
             className={`fixed z-40 w-full h-full bg-transparent transition-transform p-3 ${
@@ -127,14 +129,14 @@ export default function Nav({ sectionInView }: { sectionInView: string }) {
                 <AspectRatio ratio={2 / 1}>
                   <CharacterAnimationCanvas />
                 </AspectRatio>
-                <nav className='inventory-border inventory-bg w-full'>
+                {/* <nav className='inventory-border inventory-bg w-full select-none '>
                   <ul className='nav-inventory-grid nav-inventory-grid--mobile gap-0.5'>{fillMobileInventory()}</ul>
-                </nav>
+                </nav> */}
               </div>
             </div>
-            {/* <nav className='inventory-border inventory-bg'>
+            <nav className='inventory-border inventory-bg'>
               <ul className='nav-inventory-grid nav-inventory-grid--mobile gap-0.5'>{fillMobileInventory()}</ul>
-            </nav> */}
+            </nav>
           </div>
           <NavToggle
             onClick={() => {
