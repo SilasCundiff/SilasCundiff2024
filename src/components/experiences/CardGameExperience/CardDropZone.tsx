@@ -1,5 +1,5 @@
 import { useCardDropZoneContext } from '@/lib/contexts/CardDropZoneContext'
-import { Html, Text } from '@react-three/drei'
+import { Text } from '@react-three/drei'
 import { CARD_HEIGHT, CARD_WIDTH } from '@/lib/constants'
 import { DoubleSide, FrontSide, Vector3 } from 'three'
 
@@ -7,9 +7,9 @@ export default function CardDropZone() {
   const { cardDropZonePosition, cardInDropZone } = useCardDropZoneContext()
   return (
     <mesh position={cardDropZonePosition}>
-      <planeGeometry args={[CARD_WIDTH, CARD_HEIGHT, 1]} />
+      <planeGeometry args={[CARD_WIDTH * 5, CARD_HEIGHT * 2, 1]} />
       <meshBasicMaterial
-        color='#000'
+        color='#6c6469'
         opacity={cardInDropZone ? 0.0 : 0.4}
         transparent={true}
         side={cardInDropZone ? FrontSide : DoubleSide}

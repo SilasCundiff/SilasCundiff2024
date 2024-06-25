@@ -19,8 +19,7 @@ export default function CardGameExperience({
   handleLockControls: () => void
   areControlsLocked: boolean
 }) {
-  const viewport = useThree((state) => state.viewport)
-  const gameScalingFactor = Math.min(Math.max(window.innerWidth / 1900, 0.65), 1.1)
+  const gameScalingFactor = Math.min(Math.max(window.innerWidth / 1162, 0.5), 1)
 
   return (
     <>

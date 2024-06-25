@@ -58,25 +58,26 @@ export default function CardGameCanvas() {
   }
 
   return (
-    <div className='cardGameRoot relative h-svh md:max-h-[calc(90svh-180px)] mt-16 w-full my-auto'>
+    <div className='cardGameRoot relative w-full inventory-border-md bg-inventory h-[calc(90svh-200px)]'>
       <Canvas
+        className='w-full h-full'
         // @ts-ignore
         ref={canvasRef}
         eventSource={bodyRef && bodyRef.current}
-        resize={{ scroll: false }}
+        resize={{ scroll: true, debounce: { scroll: 50, resize: 0 } }}
         orthographic
         dpr={[1, 2]}
-        camera={{ position: [0, 0, 10], zoom: 100 }}
+        camera={{ position: [0, 0, 10], zoom: 40, near: 0.01, far: 10 }}
       >
-        <Bounds clip fit observe>
-          <CardGameExperience
-            drawPile={drawPile}
-            discardPile={discardPile}
-            handleEndTurn={handleEndTurn}
-            handleLockControls={handleLockControls}
-            areControlsLocked={areControlsLocked}
-          />
-        </Bounds>
+        {/* <Bounds clip fit observe> */}
+        <CardGameExperience
+          drawPile={drawPile}
+          discardPile={discardPile}
+          handleEndTurn={handleEndTurn}
+          handleLockControls={handleLockControls}
+          areControlsLocked={areControlsLocked}
+        />
+        {/* </Bounds> */}
         <Environment
           background={false} // can be true, false or "only" (which only sets the background) (default: false) // optional blur factor between 0 and 1 (default: 0, only works with three 0.146 and up)
           files={['px.png', 'nx.png', 'py.png', 'ny.png', 'pz.png', 'nz.png']}

@@ -238,6 +238,14 @@ body::-webkit-scrollbar-thumb:hover {
   border-style: solid;
 }
 
+.inventory-border-md {
+  border-image-slice: 16 16 16 16;
+  border-image-width: 16px 16px 16px 16px;
+  border-image-outset: 8px 8px 8px 8px;
+  border-image-source: url('../../public/img/borders/inventory_background.png');
+  border-style: solid;
+}
+
 .inventory-border-sm {
   border-image-slice: 26 26 26 26;
   border-image-width: 26px 26px 26px 26px;

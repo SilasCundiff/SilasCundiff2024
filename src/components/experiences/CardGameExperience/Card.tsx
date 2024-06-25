@@ -3,7 +3,7 @@ import { useGesture } from '@use-gesture/react'
 
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { DoubleSide, Euler, Vector3, Vector3Tuple, Color } from 'three'
-import { MeshPortalMaterial, Text, useFont, useGLTF, useTexture } from '@react-three/drei'
+import { Image, MeshPortalMaterial, Text, useFont, useGLTF, useTexture } from '@react-three/drei'
 import { useCardDropZoneContext } from '@/lib/contexts/CardDropZoneContext'
 import { useSpring, animated, SpringValue } from '@react-spring/three'
 import { useCardDraggingContext } from '@/lib/contexts/CardDraggingContext'
@@ -27,7 +27,6 @@ export default function Card({ cardId, position, rotation, scale, projectData }:
   const { setIsCardBeingDragged } = useCardDraggingContext()
   const { nodes, materials } = useGLTF('/models/card.glb')
   const texture = useTexture(`img/project-image.png`)
-  const discardTexture = useTexture(`img/8-bit-logo.png`)
   const [iFrameLoaded, setIFrameLoaded] = useState(false)
   const { title, description, disableIframe, imageUrl, roles, siteUrl, githubUrl, techStack } = projectData
 
@@ -132,117 +131,38 @@ export default function Card({ cardId, position, rotation, scale, projectData }:
   if (materials) {
     // @ts-ignore
     // materials.Front.color = new Color(0xffffff)
+    console.log('materials', nodes)
   }
 
   return (
     // @ts-ignore
     <animated.group position={cardPosition} rotation={cardRotation} scale={cardScale} {...bind()} ref={cardRef}>
-      <mesh scale={1.5}>
+      <mesh scale={1}>
         <mesh position={[0, 0, 1]} rotation={[0, 0, 0]}>
           {/* @ts-ignore */}
-          <mesh castShadow receiveShadow geometry={nodes.Plane_2.geometry}>
-            {isCardActive && (
-              <group>
-                {(iFrameLoaded || disableIframe) && (
-                  <group>
-                    <Text
-                      font='/fonts/alagard.ttf'
-                      fontSize={0.55}
-                      maxWidth={5}
-                      anchorY={'top-baseline'}
-                      anchorX={'center'}
-                      position={new Vector3(0, 0.9, 0.01)}
-                      outlineColor={'white'}
-                      color={'#211f27'}
-                      outlineWidth={0.03}
-                      textAlign='center'
-                    >
-                      {title}
-                      <meshBasicMaterial color={'#fff'} side={DoubleSide} />
-                    </Text>
-                    <Text
-                      font='/fonts/PressStart2P-Regular.ttf'
-                      fontSize={0.18}
-                      maxWidth={5}
-                      anchorY={'top-baseline'}
-                      anchorX={'center'}
-                      position={new Vector3(0, 0.5, 0.03)}
-                      outlineColor={'white'}
-                      outlineWidth={0.03}
-                      textAlign='center'
-                      color={'#211f27'}
-                    >
-                      {description}
-                      <meshBasicMaterial color={'#fff'} side={DoubleSide} />
-                    </Text>
-                    <Text
-                      font='/fonts/PressStart2P-Regular.ttf'
-                      fontSize={0.12}
-                      // maxWidth={3.5}
-                      anchorY={'top-baseline'}
-                      anchorX={'center'}
-                      position={new Vector3(0, -0.25, 0.03)}
-                      outlineColor={'white'}
-                      outlineWidth={0.03}
-                      textAlign='center'
-                      color={'#211f27'}
-                      lineHeight={2}
-                    >
-                      My roles:{' '}
-                      {roles?.map((role, i, { length }) => {
-                        return role + (i !== length - 1 ? ', ' : '')
-                      })}
-                      <meshBasicMaterial color={'#fff'} side={DoubleSide} />
-                    </Text>
-                    <Text
-                      font='/fonts/PressStart2P-Regular.ttf'
-                      fontSize={0.1}
-                      maxWidth={4}
-                      anchorY={'top-baseline'}
-                      anchorX={'center'}
-                      position={new Vector3(0, -0.9, 0.03)}
-                      outlineColor={'white'}
-                      outlineWidth={0.03}
-                      textAlign='center'
-                      color={'#211f27'}
-                      lineHeight={2}
-                    >
-                      Tech stack:{' '}
-                      {techStack?.map((tech, i, { length }) => {
-                        return tech + (i !== length - 1 ? ', ' : '')
-                      })}
-                      <meshBasicMaterial color={'#fff'} side={DoubleSide} />
-                    </Text>
-                  </group>
-                )}
-                {!iFrameLoaded && !disableIframe && (
-                  <Text
-                    font='/fonts/PressStart2P-Regular.ttf'
-                    fontSize={0.28}
-                    maxWidth={3}
-                    anchorY={'top-baseline'}
-                    anchorX={'center'}
-                    position={new Vector3(0, -1, 1)}
-                    outlineColor={'white'}
-                    outlineWidth={0.03}
-                    textAlign='center'
-                    color={'#211f27'}
-                    lineHeight={2}
-                  >
-                    loading...
-                    <meshBasicMaterial color={'#fff'} side={DoubleSide} />
-                  </Text>
-                )}
-              </group>
-            )}
-            <MeshPortalMaterial side={DoubleSide}>
+          {isCardActive && (
+            <mesh castShadow receiveShadow>
               <ProjectStage projectData={projectData} isCardActive={isCardActive} setIFrameLoaded={setIFrameLoaded} />
-            </MeshPortalMaterial>
-          </mesh>
+            </mesh>
+          )}
           {!isCardActive && (
-            <group>
+            <group scale={1.5}>
               {/* @ts-ignore */}
+              <mesh castShadow receiveShadow geometry={nodes.Plane_2.geometry} material={materials.Front}>
+                <mesh position={new Vector3(0, 0, 0.002)}>
+                  <Image
+                    scale={1}
+                    position={[0, 0, 0.01]}
+                    // @ts-ignore
+                    alt={`image of ${title} website`}
+                    url={`./cards/thumbnail-${imageUrl}`}
+                  >
+                    <planeGeometry args={[2, 1.5, 1]} />
+                  </Image>
+                </mesh>
+              </mesh>
 
+              {/* @ts-ignore */}
               <mesh castShadow receiveShadow geometry={nodes.Plane_1.geometry} material={materials.Borders}>
                 <meshStandardMaterial {...materials.Back} map={texture} color='white' />
               </mesh>
@@ -255,7 +175,7 @@ export default function Card({ cardId, position, rotation, scale, projectData }:
                 anchorY={'top-baseline'}
                 anchorX={'left'}
                 position={new Vector3(-0.88, 0.88, 0.01)}
-                outlineColor={'white'}
+                outlineColor={'#cb983c'}
                 color={'#211f27'}
                 outlineWidth={0.03}
               >
@@ -270,7 +190,7 @@ export default function Card({ cardId, position, rotation, scale, projectData }:
                 anchorY={'top-baseline'}
                 anchorX={'left'}
                 position={new Vector3(-0.88, -0.95, 0.03)}
-                outlineColor={'#fff'}
+                outlineColor={'#cb983c'}
                 color={'#211f27'}
                 outlineWidth={0.01}
               >
@@ -278,10 +198,6 @@ export default function Card({ cardId, position, rotation, scale, projectData }:
                 <meshBasicMaterial color={'#fff'} side={DoubleSide} />
               </Text>
             </group>
-          )}
-          {!isCardActive && (
-            // @ts-ignore
-            <mesh castShadow receiveShadow geometry={nodes.Plane.geometry} material={materials.Back} />
           )}
         </mesh>
       </mesh>

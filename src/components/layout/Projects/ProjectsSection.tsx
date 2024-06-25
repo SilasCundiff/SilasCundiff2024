@@ -9,13 +9,15 @@ import CardGameCanvas from '../../experiences/CardGameExperience/CardGameCanvas'
 export default function ProjectsSection() {
   return (
     <>
-      <Container>
-        <div className='absolute left-[50%] top-[40%] -translate-x-[50%] -translate-y-[40%]'>
-          <h2 className='text-6xl font-bold col-span-full  font-alagard text-center pb-2'>Projects</h2>
-          <h3 className='uppercase text-sm col-span-full row-start-2 text-center font-pressStart mb-6'>
+      <div className='container pb-4'>
+        <div className=''>
+          <h2 className='text-6xl font-bold  font-alagard text-center pb-2 text-white text-shadow-lg'>Projects</h2>
+          <h3 className='uppercase text-sm row-start-2 text-center font-pressStart mb-0 text-white text-shadow-md'>
             Drag a card to the <br></br>Card Drop Zone to view more!
           </h3>
         </div>
+      </div>
+      <div className='p-4 container'>
         <DeckAndHandContextProvider>
           <CardDraggingContextProvider>
             <CardDropZoneContextProvider>
@@ -23,7 +25,7 @@ export default function ProjectsSection() {
             </CardDropZoneContextProvider>
           </CardDraggingContextProvider>
         </DeckAndHandContextProvider>
-      </Container>
+      </div>
     </>
   )
 }
