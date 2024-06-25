@@ -69,15 +69,15 @@ export default function CardGameCanvas() {
         dpr={[1, 2]}
         camera={{ position: [0, 0, 10], zoom: 40, near: 0.01, far: 10 }}
       >
-        {/* <Bounds clip fit observe> */}
-        <CardGameExperience
-          drawPile={drawPile}
-          discardPile={discardPile}
-          handleEndTurn={handleEndTurn}
-          handleLockControls={handleLockControls}
-          areControlsLocked={areControlsLocked}
-        />
-        {/* </Bounds> */}
+        <Bounds clip fit observe>
+          <CardGameExperience
+            drawPile={drawPile}
+            discardPile={discardPile}
+            handleEndTurn={handleEndTurn}
+            handleLockControls={handleLockControls}
+            areControlsLocked={areControlsLocked}
+          />
+        </Bounds>
         <Environment
           background={false} // can be true, false or "only" (which only sets the background) (default: false) // optional blur factor between 0 and 1 (default: 0, only works with three 0.146 and up)
           files={['px.png', 'nx.png', 'py.png', 'ny.png', 'pz.png', 'nz.png']}

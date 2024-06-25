@@ -18,7 +18,8 @@ export default function CardGameHUD({
 }) {
   const { nodes, materials } = useGLTF('/models/card.glb')
   const texture = useTexture(`img/project-image.png`)
-  const discardTexture = useTexture(`img/project-image.png`)
+
+  const gameScalingFactor = Math.min(Math.max(window.innerWidth / 1100, 0.5), 1.2)
 
   return (
     <group>
@@ -117,7 +118,7 @@ export default function CardGameHUD({
           <meshBasicMaterial color={'#fff'} side={DoubleSide} />
         </Text>
       </group>
-      <group position={new Vector3(-5, -7.25, 1)} onClick={handleLockControls}>
+      {/* <group position={new Vector3(-5, -7.25, 1)} onClick={handleLockControls}>
         <mesh>
           <planeGeometry args={[3.33, 0.66, 1]} />
           <meshBasicMaterial color={'#55e'} side={DoubleSide} />
@@ -134,8 +135,8 @@ export default function CardGameHUD({
           {areControlsLocked ? 'Unlock Controls' : 'Lock Controls'}
           <meshBasicMaterial color={'#fff'} side={DoubleSide} />
         </Text>
-      </group>
-      <group position={new Vector3(5, -7.25, 1)} onClick={handleEndTurn}>
+      </group> */}
+      <group position={new Vector3(5, -2.5, 1.2)} onClick={handleEndTurn}>
         <mesh>
           <planeGeometry args={[1.99, 0.66, 1]} />
           <meshBasicMaterial color={'#20d3c8'} side={DoubleSide} />

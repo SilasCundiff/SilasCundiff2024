@@ -23,14 +23,14 @@ const ProjectStage = ({
   projectData: ProjectData
   setIFrameLoaded: (value: boolean) => void
 }) => {
-  const [z, setZ] = useState(0)
-  const viewport = useThree((state) => state.viewport)
-
   const { title, description, siteUrl, imageUrl, githubUrl, techStack, roles, disableIframe } = projectData
-  const { cardDropZonePosition } = useCardDropZoneContext()
 
-  const gameScalingFactor = Math.min(Math.max(window.innerWidth / 1100, 0.5), 1.2)
-  console.log('gameScalingFactor', gameScalingFactor * 5)
+  let gameScalingFactor = Math.min(Math.max(window.innerWidth / 1100, 0.5), 1.2)
+
+  // if the screen is less than 600px wide, increase the scaling factor
+  if (window.innerWidth < 600) {
+    gameScalingFactor *= 3
+  }
 
   return (
     <>
@@ -38,18 +38,17 @@ const ProjectStage = ({
         {/* <planeGeometry args={[10, 14, 1]} /> */}
         <group>
           <group>
-            <Html transform prepend zIndexRange={[0, 0]} distanceFactor={gameScalingFactor * 4.6}>
+            <Html transform prepend zIndexRange={[0, 0]} distanceFactor={gameScalingFactor * 5}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                className='max-w-[1168px] max-h-[800px]  border-4 inventory-border-md'
+                className='max-w-[768px]  border-4 inventory-border-md'
                 src={`./cards/${imageUrl}`}
                 alt={`image of ${title} website`}
               />
-              {/* <span className='font-alagard text-white text-2xl'>Please visit the live site for full demo!</span> */}
             </Html>
           </group>
 
-          <Html zIndexRange={[0, 0]} position={[5.5 * gameScalingFactor, -2.1 * gameScalingFactor, 4]} transform>
+          <Html zIndexRange={[0, 0]} position={[-4.75 * gameScalingFactor, -2.5 * gameScalingFactor, 4]} transform>
             <div className='flex rounded-sm space-x-1 justify-end bg-inventory border-2 inventory-border-md p-2'>
               <a
                 className={`text-white rounded-full text-xl flex hover:text-slate-200 ${
