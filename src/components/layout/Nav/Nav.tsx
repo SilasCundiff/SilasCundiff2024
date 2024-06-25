@@ -133,7 +133,7 @@ export default function Nav({ sectionInView }: { sectionInView: string }) {
             ${!isMobile ? 'h-1/2 w-1/2 right-0' : 'h-full'}
             `}
           >
-            <div className='inventory-border inventory-bg mb-6 flex flex-wrap'>
+            <div className='inventory-border inventory-bg mb-6 flex flex-wrap container max-w-[600px]'>
               <h3 className='text-6xl font-bold font-alagard text-center text-white text-shadow-lg mt-4  w-full basis-full '>
                 Inventory
               </h3>
