@@ -118,6 +118,7 @@ body,
   --button-background: #30bce2;
   --secondary-button-background: #27c9f5;
   --inventory-background: #4c4449;
+  --inventory-slot-background: #6c6469;
   --shadow-color: #336fa0;
 
   --text-primary: #30bce2;
@@ -219,6 +220,22 @@ html {
   border-style: solid;
 }
 
+.inventory-character-border {
+  border-image-slice: 20 20 20 20;
+  border-image-width: 20px 20px 20px 20px;
+  border-image-outset: 8px 8px 8px 8px;
+  border-image-source: url('../../public/img/borders/inventory-slot.png');
+  border-style: solid;
+}
+.inventory-slot-border {
+  border-image-slice: 8 8 8 8;
+  border-image-width: 8px 8px 8px 8px;
+  border-image-outset: 0px 0px 0px 0px;
+  padding: 0.5rem;
+  border-image-source: url('../../public/img/borders/inventory-slot.png');
+  border-style: solid;
+}
+
 .nav-inventory-grid {
   display: grid;
   grid-template-columns: repeat(9, minmax(4rem, 1fr));
@@ -259,15 +276,6 @@ html {
 .inventory-grid > *:first-child {
   grid-row: 1 / 1;
   grid-column: 1 / 1;
-}
-/* .nav-inventory-grid > * {
-  background: ;
-} */
-.inventory-item {
-  /* display: flex; */
-  /* justify-content: center; */
-  /* align-items: center; */
-  /* border: 1px solid var(--color-primary); */
 }
 
 .lvl1 {

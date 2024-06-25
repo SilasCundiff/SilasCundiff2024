@@ -123,15 +123,17 @@ export default function Nav({ sectionInView }: { sectionInView: string }) {
               open ? '  inset-0' : 'translate-x-full'
             }`}
           >
-            <div className='inventory-border inventory-bg mb-6'>
-              <h3 className='text-6xl font-bold font-alagard text-center text-white text-shadow-lg mt-4'>Inventory</h3>
-              <div className='flex w-full flex-wrap'>
-                <AspectRatio ratio={2 / 1}>
+            <div className='inventory-border inventory-bg mb-6 flex flex-wrap'>
+              <h3 className='text-6xl font-bold font-alagard text-center text-white text-shadow-lg mt-4  w-full basis-full '>
+                Inventory
+              </h3>
+              <div className='flex w-full basis-1/3 flex-wrap p-3 mx-auto'>
+                <AspectRatio ratio={1 / 1.75}>
                   <CharacterAnimationCanvas />
                 </AspectRatio>
-                {/* <nav className='inventory-border inventory-bg w-full select-none '>
-                  <ul className='nav-inventory-grid nav-inventory-grid--mobile gap-0.5'>{fillMobileInventory()}</ul>
-                </nav> */}
+              </div>
+              <div className='basis-2/3 w-full my-auto p-3  mx-auto'>
+                <Inventory />
               </div>
             </div>
             <nav className='inventory-border inventory-bg'>
@@ -151,13 +153,24 @@ export default function Nav({ sectionInView }: { sectionInView: string }) {
 
 const Inventory = () => {
   return (
-    <div className='flex flex-col flex-1 gap-0.5 justify-center items-center bg-cyan-500 w-full inventory-grid'>
-      <div className='bg-red-500'>test lorem</div>
-      <div className='bg-red-500'>test</div>
-      <div className='bg-red-500'>test</div>
-      <div className='bg-red-500'>test</div>
-      <div className='bg-red-500'>test</div>
-      <div className='bg-red-500'>test</div>
+    <div className='flex flex-col flex-1 gap-0.5 justify-center items-center bg-cyan-500 w-full inventory-grid mt-auto'>
+      <InventorySlot />
+      <InventorySlot />
+      <InventorySlot />
+      <InventorySlot />
+      <InventorySlot />
+      <InventorySlot />
+      <InventorySlot />
+      <InventorySlot />
+      <InventorySlot />
+    </div>
+  )
+}
+
+const InventorySlot = () => {
+  return (
+    <div className='inventory-slot-border h-full'>
+      <div className=' bg-inventorySlot w-full h-full'></div>
     </div>
   )
 }
