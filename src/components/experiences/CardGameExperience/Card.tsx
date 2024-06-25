@@ -4,11 +4,11 @@ import { useGesture } from '@use-gesture/react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { DoubleSide, Euler, Vector3, Vector3Tuple, Color } from 'three'
 import { MeshPortalMaterial, Text, useFont, useGLTF, useTexture } from '@react-three/drei'
-import { useCardDropZoneContext } from '@/helpers/contexts/CardDropZoneContext'
+import { useCardDropZoneContext } from '@/lib/contexts/CardDropZoneContext'
 import { useSpring, animated, SpringValue } from '@react-spring/three'
-import { useCardDraggingContext } from '@/helpers/contexts/CardDraggingContext'
+import { useCardDraggingContext } from '@/lib/contexts/CardDraggingContext'
 
-import { ProjectData } from '@/helpers/hooks/useCardsFromDeckAndHand'
+import { ProjectData } from '@/lib/hooks/useCardsFromDeckAndHand'
 import ProjectStage from './ProjectStage'
 
 type CardProps = {

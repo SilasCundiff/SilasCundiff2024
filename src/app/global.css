@@ -127,7 +127,7 @@ body,
 
   --color-primary: #30bce2;
   --color-secondary: #ffcdcc;
-  --gold-border: #cb983c;
+  --gold-inventory: #cb983c;
 }
 
 /* Global styles */
@@ -139,7 +139,7 @@ html {
 /* style the text select to have the gold-border as background color and the color-primary as the text */
 ::selection {
   background: var(--inventory-slot-background);
-  color: var(--gold-border);
+  color: var(--gold-inventory);
 }
 
 /* style the scrollbar to be thin on the body element, use the inventory-background for the track and thwe gold-border for the thumb */
@@ -149,7 +149,7 @@ body::-webkit-scrollbar {
 }
 
 body::-webkit-scrollbar-thumb {
-  background: var(--gold-border);
+  background: var(--gold-inventory);
   border-radius: 2px;
 }
 
@@ -227,7 +227,7 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 .svg-wrapper .node-tooltip .arrow {
-  background-color: var(--gold-border);
+  background-color: var(--gold-inventory);
 }
 
 .inventory-border {

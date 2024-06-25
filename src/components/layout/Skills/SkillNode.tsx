@@ -1,6 +1,6 @@
-import { Skill } from '@/helpers/Skills'
-import { SKILL_NODE_PADDING, SKILL_NODE_SIZE } from '@/helpers/constants'
-import { getStrokeColor } from '@/helpers/utils'
+import { Skill } from '@/lib/Skills'
+import { SKILL_NODE_PADDING, SKILL_NODE_SIZE } from '@/lib/constants'
+import { getStrokeColor } from '@/lib/utils'
 
 const SkillNode = ({ name, position, linkPosition, iconUrl, description, unlocks, tree }: Skill) => {
   const xPos = position[0]

@@ -1,6 +1,6 @@
 import Container from '@/components/layout/Container'
 
-import { skillsDesign, skillsProgramming, skillsTooling } from '@/helpers/Skills'
+import { skillsDesign, skillsProgramming, skillsTooling } from '@/lib/Skills'
 import SkillTree from './SkillTree'
 
 export default function SkillsSection() {

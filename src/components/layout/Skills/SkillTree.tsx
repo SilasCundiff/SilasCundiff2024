@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { Tooltip } from 'react-tooltip'
 import SkillNode from './SkillNode'
-import { Skill } from '@/helpers/Skills'
+import { Skill } from '@/lib/Skills'
 const SkillTree = ({ title, imgUrl, treeData }: { title: string; imgUrl: string; treeData: Skill[] }) => {
   const calculateSVGSize = (padding: number) => {
     if (typeof window === 'undefined') return 300

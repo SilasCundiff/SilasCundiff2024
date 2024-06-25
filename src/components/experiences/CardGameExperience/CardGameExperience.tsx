@@ -2,9 +2,9 @@ import { useThree } from '@react-three/fiber'
 import CardDropZone from './CardDropZone'
 import Hand from './Hand'
 import CardGameHUD from './CardGameHUD'
-import { Card } from '@/helpers/hooks/useCardsFromDeckAndHand'
+import { Card } from '@/lib/hooks/useCardsFromDeckAndHand'
 import { PresentationControls } from '@react-three/drei'
-import { useCardDraggingContext } from '@/helpers/contexts/CardDraggingContext'
+import { useCardDraggingContext } from '@/lib/contexts/CardDraggingContext'
 
 export default function CardGameExperience({
   drawPile,

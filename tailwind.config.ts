@@ -25,6 +25,7 @@ const config = {
         background: 'hsl(var(--background))',
         inventory: 'var(--inventory-background)',
         inventorySlot: 'var(--inventory-slot-background)',
+        goldInventory: 'var(--gold-inventory)',
         foreground: 'hsl(var(--foreground))',
         primary: {
           DEFAULT: 'hsl(var(--primary))',

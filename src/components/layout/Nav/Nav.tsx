@@ -3,7 +3,7 @@ import NavItem from './NavItem'
 import React from 'react'
 import { AspectRatio } from '@radix-ui/react-aspect-ratio'
 import NavToggle from './NavToggle'
-import useIsMobile from '@/helpers/hooks/useIsMobile'
+import useIsMobile from '@/lib/hooks/useIsMobile'
 import CharacterAnimationCanvas from '@/components/experiences/CharacterAnimationExperience/CharacterAnimationCanvas'
 
 const inventoryItems = [
@@ -128,8 +128,10 @@ export default function Nav({ sectionInView }: { sectionInView: string }) {
         <>
           <div
             className={`fixed z-40 w-full h-full bg-transparent transition-transform p-3 ${
-              open ? '  inset-0' : 'translate-x-full'
-            }`}
+              open ? ' right-0' : 'translate-x-full'
+            }
+            ${!isMobile ? 'h-1/2 w-1/2 right-0' : 'h-full'}
+            `}
           >
             <div className='inventory-border inventory-bg mb-6 flex flex-wrap'>
               <h3 className='text-6xl font-bold font-alagard text-center text-white text-shadow-lg mt-4  w-full basis-full '>
@@ -144,9 +146,11 @@ export default function Nav({ sectionInView }: { sectionInView: string }) {
                 <Inventory />
               </div>
             </div>
-            <nav className='inventory-border inventory-bg'>
-              <ul className='nav-inventory-grid nav-inventory-grid--mobile gap-0.5'>{fillMobileInventory()}</ul>
-            </nav>
+            {isMobile && (
+              <nav className='inventory-border inventory-bg'>
+                <ul className='nav-inventory-grid nav-inventory-grid--mobile gap-0.5'>{fillMobileInventory()}</ul>
+              </nav>
+            )}
           </div>
           <NavToggle
             onClick={() => {

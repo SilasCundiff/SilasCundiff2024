@@ -1,6 +1,6 @@
 import { Text, useFont, useGLTF, useTexture } from '@react-three/drei'
 import { DoubleSide, Vector3 } from 'three'
-import { Card } from '@/helpers/hooks/useCardsFromDeckAndHand'
+import { Card } from '@/lib/hooks/useCardsFromDeckAndHand'
 import DrawDiscardCard from './DrawDiscardCard'
 
 export default function CardGameHUD({

@@ -1,7 +1,7 @@
 import { Euler, Vector3 } from 'three'
 import Card from './Card'
-import { useDeckAndHandContext } from '@/helpers/contexts/DeckAndHandContext'
-import { CARD_HEIGHT, CARD_WIDTH } from '@/helpers/constants'
+import { useDeckAndHandContext } from '@/lib/contexts/DeckAndHandContext'
+import { CARD_HEIGHT, CARD_WIDTH } from '@/lib/constants'
 import { useSpringRef, useTransition } from '@react-spring/three'
 import { useEffect } from 'react'
 

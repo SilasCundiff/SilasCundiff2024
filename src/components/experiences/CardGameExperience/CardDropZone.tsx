@@ -1,6 +1,6 @@
-import { useCardDropZoneContext } from '@/helpers/contexts/CardDropZoneContext'
+import { useCardDropZoneContext } from '@/lib/contexts/CardDropZoneContext'
 import { Html, Text } from '@react-three/drei'
-import { CARD_HEIGHT, CARD_WIDTH } from '@/helpers/constants'
+import { CARD_HEIGHT, CARD_WIDTH } from '@/lib/constants'
 import { DoubleSide, FrontSide, Vector3 } from 'three'
 
 export default function CardDropZone() {

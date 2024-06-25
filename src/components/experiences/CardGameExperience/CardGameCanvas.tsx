@@ -12,10 +12,10 @@ import {
   Text,
   useFont,
 } from '@react-three/drei'
-import { useCardDropZoneContext } from '@/helpers/contexts/CardDropZoneContext'
+import { useCardDropZoneContext } from '@/lib/contexts/CardDropZoneContext'
 import { use, useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { useDeckAndHandContext } from '@/helpers/contexts/DeckAndHandContext'
-import { useCardDraggingContext } from '@/helpers/contexts/CardDraggingContext'
+import { useDeckAndHandContext } from '@/lib/contexts/DeckAndHandContext'
+import { useCardDraggingContext } from '@/lib/contexts/CardDraggingContext'
 
 export default function CardGameCanvas() {
   const { hand, drawPile, discardPile, drawUntilHandIsFull } = useDeckAndHandContext()

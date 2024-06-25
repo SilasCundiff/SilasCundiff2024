@@ -1,4 +1,4 @@
-import { ProjectData } from '@/helpers/hooks/useCardsFromDeckAndHand'
+import { ProjectData } from '@/lib/hooks/useCardsFromDeckAndHand'
 import { faChrome, faGithub } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Html, Image, useTexture } from '@react-three/drei'
@@ -6,7 +6,7 @@ import { useThree } from '@react-three/fiber'
 import { useState } from 'react'
 import { DoubleSide, Vector3 } from 'three'
 
-import deckOfCards from '@/helpers/Projects'
+import deckOfCards from '@/lib/Projects'
 
 deckOfCards.forEach((card) => {
   useTexture.preload(`./cards/thumbnail-${card.projectData.imageUrl}`)
