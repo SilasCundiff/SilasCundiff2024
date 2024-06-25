@@ -9,6 +9,7 @@ import Nav from '@/components/layout/Nav/Nav'
 
 import { useState } from 'react'
 import Section from '@/components/layout/Section'
+import Footer from '@/components/layout/Footer'
 const sections = [
   { id: 'home', title: 'Home', component: <HomeSection /> },
   { id: 'skills', title: 'Skills', component: <SkillsSection /> },
@@ -27,6 +28,7 @@ export default function Page() {
           {section.component}
         </Section>
       ))}
+      <Footer />
     </>
   )
 }
