@@ -1,0 +1,152 @@
+{
+  "bodyTypeName": "male",
+  "url": "https://sanderfrenken.github.io/Universal-LPC-Spritesheet-Character-Generator/#?body=Body_color_light&head=Human_male_light&animation=any&shadow=none&eyebrows=Thick_Eyebrows_dark_brown&eyes=Eyes_brown&beard=Basic_Beard_dark_brown&hair=Parted_dark_brown&hat=Round_bascinet_raised_steel&accessory=Plumage_blue&shoulders=Mantal_blue&arms=Armour_steel&armour=Plate_steel&backpack=none&cape=Solid_black&legs=Armour_steel&shoes=Rim_Boots_steel&shoes_plate=Boots_Metal_Plating_steel&weapon=S_staff_steel&weapon_magic_crystal=none&neck=none",
+  "spritesheets": "https://sanderfrenken.github.io/Universal-LPC-Spritesheet-Character-Generator/spritesheets/",
+  "version": 1,
+  "datetime": "6/24/2024, 6:17:50 PM",
+  "credits": "Authors: bluecarrot16, Benjamin K. Smith (BenCreating), Evert, Eliza Wyatt (ElizaWy), TheraHedwig, MuffinElZangano, Durrani, Johannes Sj?lund (wulax), Stephen Challener (Redshrike), JaidynReiman, Matthew Krohn (makrohn), ElizaWy, Carlo Enrico Victoria (Nemisys), Joe White, Manuel Riecke (MrBeast), Sander Frenken (castelonia), Michael Whitlock (bigbeargames), Johannes Sjölund (wulax), Nila122, LordNeo\n\n- body/bodies/male/light.png: by bluecarrot16, Benjamin K. Smith (BenCreating), Evert, Eliza Wyatt (ElizaWy), TheraHedwig, MuffinElZangano, Durrani, Johannes Sj?lund (wulax), Stephen Challener (Redshrike). License(s): CC-BY-SA 3.0, GPL 3.0. see details at https://opengameart.org/content/lpc-character-bases; 'Thick' Male Revised Run/Climb by JaidynReiman (based on ElizaWy's LPC Revised)\n    - https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles\n    - https://opengameart.org/content/lpc-medieval-fantasy-character-sprites\n    - https://opengameart.org/content/lpc-male-jumping-animation-by-durrani\n    - https://opengameart.org/content/lpc-runcycle-and-diagonal-walkcycle\n    - https://opengameart.org/content/lpc-revised-character-basics\n\n- head/heads/human/male/light.png: by bluecarrot16, Benjamin K. Smith (BenCreating), Stephen Challener (Redshrike). License(s): OGA-BY 3.0, CC-BY-SA 3.0, GPL 3.0. original head by Redshrike; tweaks by BenCreating; modular version by bluecarrot16\n    - https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles\n    - https://opengameart.org/content/lpc-character-bases\n\n- eyes/human/adult/brown.png: by JaidynReiman, Matthew Krohn (makrohn), Stephen Challener (Redshrike). License(s): OGA-BY 3.0, CC-BY-SA 3.0, GPL 3.0. original by Redshrike, mapped to all frames by Matthew Krohn & JaidynReiman\n    - https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles\n\n- eyes/eyebrows/thick/adult/dark_brown.png: by ElizaWy. License(s): OGA-BY 3.0. \n    - https://github.com/ElizaWy/LPC/tree/main/Characters/Hair\n\n- beards/beard/basic/dark_brown.png: by JaidynReiman, Carlo Enrico Victoria (Nemisys). License(s): CC-BY-SA 3.0, GPL 3.0. Original by Nemisys, repositioning by JaidynReiman.\n    - https://opengameart.org/content/lpc-white-beard\n\n- hair/parted/male/dark_brown.png: by JaidynReiman, Joe White, Manuel Riecke (MrBeast). License(s): CC-BY-SA 3.0, GPL 3.0. down 4 and 5 added by JaidynReiman; recolors by Joe White; original by Manuel Riecke (MrBeast)\n    - https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles\n    - https://github.com/jrconway3/Universal-LPC-spritesheet/commit/46ddcf05a0e43e7aa6ffd47d350eef0eb529ac24\n\n- hat/helmet/bascinet_round_raised/adult/steel.png: by bluecarrot16, ElizaWy, Sander Frenken (castelonia). License(s): OGA-BY 3.0, CC-BY-SA 4.0, CC-BY-SA 3.0, GPL 3.0. \n    - https://opengameart.org/content/lpc-realistic-helmet-pack\n    - https://opengameart.org/content/lpc-helmets-mega-pack\n\n- hat/accessory/plumage/adult/blue.png: by ElizaWy. License(s): OGA-BY 3.0, CC-BY-SA 3.0, CC-BY-SA 4.0, GPL 3.0 . \n    - https://opengameart.org/content/lpc-realistic-helmet-pack\n\n- shoulders/mantal/male/blue.png: by bluecarrot16. License(s): CC-BY-SA 3.0. \n    - https://opengameart.org/content/lpc-pirates\n\n- arms/armour/plate/male/steel.png: by Michael Whitlock (bigbeargames), Matthew Krohn (makrohn), Johannes Sjölund (wulax). License(s): OGA-BY 3.0, CC-BY-SA 3.0, GPL 3.0. \n    - https://opengameart.org/content/lpc-medieval-fantasy-character-sprites\n    - http://opengameart.org/content/lpc-clothing-updates\n\n- torso/armour/plate/male/steel.png: by Michael Whitlock (bigbeargames), Johannes Sjölund (wulax). License(s): CC-BY-SA 3.0, GPL 3.0. \n    - https://opengameart.org/content/lpc-medieval-fantasy-character-sprites\n    - https://opengameart.org/content/lpc-combat-armor-for-women\n\n- cape/solid/female/black.png: by bluecarrot16, JaidynReiman. License(s): OGA-BY 3.0, CC-BY-SA 3.0, GPL 3.0. \n    - https://opengameart.org/content/lpc-curly-hair-elven-ears-white-cape-with-blue-trim-and-more\n    - https://opengameart.org/content/lpc-roman-armor\n    - http://opengameart.org/content/lpc-clothing-updates\n\n- cape/solid_behind/black.png: by Nila122, JaidynReiman. License(s): OGA-BY 3.0, CC-BY-SA 3.0, GPL 3.0. \n    - https://opengameart.org/content/lpc-curly-hair-elven-ears-white-cape-with-blue-trim-and-more\n    - https://opengameart.org/content/lpc-roman-armor\n\n- legs/armour/plate/male/steel.png: by bluecarrot16, Michael Whitlock (bigbeargames), Johannes Sjölund (wulax). License(s): OGA-BY 3.0, CC-BY-SA 3.0, GPL 3.0. \n    - https://opengameart.org/content/lpc-medieval-fantasy-character-sprites\n\n- feet/boots_rim/universal/male/steel.png: by JaidynReiman. License(s): OGA-BY 3.0+, CC-BY 3.0+, GPL 3.0. \n    - https://opengameart.org/content/lpc-relm-outfit-pieces-2-kimonos-2-sleeves-2-boots-tabi-socks\n\n- feet/boots_plating/universal/male/steel.png: by JaidynReiman. License(s): OGA-BY 3.0+, CC-BY 3.0+, GPL 3.0. \n    - https://opengameart.org/content/lpc-relm-outfit-pieces-2-kimonos-2-sleeves-2-boots-tabi-socks\n\n- weapon/magic/s/universal/foreground/steel.png: by LordNeo, Michael Whitlock (bigbeargames), bluecarrot16. License(s): CC0. \n    - https://opengameart.org/content/staff-64-x64\n    - https://opengameart.org/content/lpc-magic-staff\n\n- weapon/magic/s/universal/background/steel.png: by LordNeo, Michael Whitlock (bigbeargames), bluecarrot16. License(s): CC0. \n    - https://opengameart.org/content/staff-64-x64\n    - https://opengameart.org/content/lpc-magic-staff\n\n- weapon/magic/s/thrust/foreground/steel.png: by LordNeo, Michael Whitlock (bigbeargames), bluecarrot16. License(s): CC0. \n    - https://opengameart.org/content/staff-64-x64\n    - https://opengameart.org/content/lpc-magic-staff\n\n- weapon/magic/s/thrust/background/steel.png: by LordNeo, Michael Whitlock (bigbeargames), bluecarrot16. License(s): CC0. \n    - https://opengameart.org/content/staff-64-x64\n    - https://opengameart.org/content/lpc-magic-staff",
+  "layers": [
+    {
+      "fileName": "weapon/magic/s/thrust/background/steel.png",
+      "zPos": -1,
+      "custom_animation": "thrust_oversize",
+      "parentName": "weapon",
+      "name": "S staff",
+      "variant": "steel"
+    },
+    {
+      "fileName": "cape/solid_behind/black.png",
+      "zPos": 5,
+      "parentName": "cape",
+      "name": "Solid",
+      "variant": "black"
+    },
+    {
+      "fileName": "weapon/magic/s/universal/background/steel.png",
+      "zPos": 9,
+      "parentName": "weapon",
+      "name": "S staff",
+      "variant": "steel"
+    },
+    {
+      "fileName": "body/bodies/male/light.png",
+      "zPos": 10,
+      "parentName": "body",
+      "name": "Body color",
+      "variant": "light"
+    },
+    {
+      "fileName": "feet/boots_rim/universal/male/steel.png",
+      "zPos": 15,
+      "parentName": "shoes",
+      "name": "Rim Boots",
+      "variant": "steel"
+    },
+    {
+      "fileName": "feet/boots_plating/universal/male/steel.png",
+      "zPos": 16,
+      "parentName": "shoes_plate",
+      "name": "Boots Metal Plating",
+      "variant": "steel"
+    },
+    {
+      "fileName": "legs/armour/plate/male/steel.png",
+      "zPos": 20,
+      "parentName": "legs",
+      "name": "Armour",
+      "variant": "steel"
+    },
+    {
+      "fileName": "arms/armour/plate/male/steel.png",
+      "zPos": 60,
+      "parentName": "arms",
+      "name": "Armour",
+      "variant": "steel"
+    },
+    {
+      "fileName": "torso/armour/plate/male/steel.png",
+      "zPos": 60,
+      "parentName": "armour",
+      "name": "Plate",
+      "variant": "steel"
+    },
+    {
+      "fileName": "shoulders/mantal/male/blue.png",
+      "zPos": 75,
+      "parentName": "shoulders",
+      "name": "Mantal",
+      "variant": "blue"
+    },
+    {
+      "fileName": "cape/solid/female/black.png",
+      "zPos": 85,
+      "parentName": "cape",
+      "name": "Solid",
+      "variant": "black"
+    },
+    {
+      "fileName": "head/heads/human/male/light.png",
+      "zPos": 100,
+      "parentName": "head",
+      "name": "Human male",
+      "variant": "light"
+    },
+    {
+      "fileName": "eyes/human/adult/brown.png",
+      "zPos": 105,
+      "parentName": "eyes",
+      "name": "Eyes",
+      "variant": "brown"
+    },
+    {
+      "fileName": "eyes/eyebrows/thick/adult/dark_brown.png",
+      "zPos": 106,
+      "parentName": "eyebrows",
+      "name": "Thick Eyebrows",
+      "variant": "dark brown"
+    },
+    {
+      "fileName": "beards/beard/basic/dark_brown.png",
+      "zPos": 110,
+      "parentName": "beard",
+      "name": "Basic Beard",
+      "variant": "dark brown"
+    },
+    {
+      "fileName": "hair/parted/male/dark_brown.png",
+      "zPos": 120,
+      "parentName": "hair",
+      "name": "Parted",
+      "variant": "dark brown"
+    },
+    {
+      "fileName": "hat/helmet/bascinet_round_raised/adult/steel.png",
+      "zPos": 130,
+      "parentName": "hat",
+      "name": "Round bascinet raised",
+      "variant": "steel"
+    },
+    {
+      "fileName": "hat/accessory/plumage/adult/blue.png",
+      "zPos": 139,
+      "parentName": "accessory",
+      "name": "Plumage",
+      "variant": "blue"
+    },
+    {
+      "fileName": "weapon/magic/s/universal/foreground/steel.png",
+      "zPos": 140,
+      "parentName": "weapon",
+      "name": "S staff",
+      "variant": "steel"
+    },
+    {
+      "fileName": "weapon/magic/s/thrust/foreground/steel.png",
+      "zPos": 150,
+      "custom_animation": "thrust_oversize",
+      "parentName": "weapon",
+      "name": "S staff",
+      "variant": "steel"
+    }
+  ]
+}

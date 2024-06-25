@@ -26,13 +26,15 @@
     "lucide-react": "^0.396.0",
     "next": "14.0.1",
     "react": "^18",
+    "react-device-detect": "^2.2.3",
     "react-dom": "^18",
     "react-intersection-observer": "^9.10.3",
     "react-tooltip": "^5.26.2",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
     "three": "^0.160.0",
-    "three-stdlib": "^2.28.9"
+    "three-stdlib": "^2.28.9",
+    "use-spritesheet": "^0.1.2"
   },
   "devDependencies": {
     "@types/node": "^20",
