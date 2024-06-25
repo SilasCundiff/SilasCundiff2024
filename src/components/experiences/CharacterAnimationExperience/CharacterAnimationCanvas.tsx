@@ -10,7 +10,7 @@ export default function CharacterAnimationCanvas() {
     <>
       <Canvas className='w-full h-full inventory-character-border' camera={{ position: [0, 0, 10], fov: 50 }}>
         <CharacterAnimationExperience AnimationPaused={AnimationPaused} />
-        <Stats />
+        {/* <Stats /> */}
       </Canvas>
       <Button
         variant={'ghost'}
