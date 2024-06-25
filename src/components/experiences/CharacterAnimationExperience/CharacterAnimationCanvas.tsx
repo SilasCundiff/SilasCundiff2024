@@ -1,5 +1,5 @@
 import { Canvas } from '@react-three/fiber'
-import CharacterAnimationExperience from '../experiences/CharacterAnimationExperience/CharacterAnimationExperience'
+import CharacterAnimationExperience from './CharacterAnimationExperience'
 import { Stats } from '@react-three/drei'
 
 export default function CharacterAnimationCanvas() {

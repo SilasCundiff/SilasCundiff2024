@@ -1,10 +1,10 @@
 import Container from '@/components/layout/Container'
 import Section from '@/components/layout/Section'
-import CardGameCanvas from '../canvas/CardGameCanvas'
 
 import { CardDraggingContextProvider } from '@/helpers/contexts/CardDraggingContext'
 import { CardDropZoneContextProvider } from '@/helpers/contexts/CardDropZoneContext'
 import DeckAndHandContextProvider from '@/helpers/contexts/DeckAndHandContext'
+import CardGameCanvas from '../../experiences/CardGameExperience/CardGameCanvas'
 
 export default function ProjectsSection() {
   return (

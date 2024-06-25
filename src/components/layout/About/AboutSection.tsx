@@ -1,5 +1,5 @@
 import Container from '@/components/layout/Container'
-import SilvanusLoader from '../godot/silvanus_loader'
+import SilvanusLoader from '@/components/godot/SilvanusLoader'
 
 export default function AboutSection() {
   return (

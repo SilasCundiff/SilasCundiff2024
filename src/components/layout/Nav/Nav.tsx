@@ -2,9 +2,9 @@ import Image from 'next/image'
 import NavItem from './NavItem'
 import React from 'react'
 import { AspectRatio } from '@radix-ui/react-aspect-ratio'
-import CharacterAnimationCanvas from '@/components/canvas/CharacterAnimationCanvas'
 import NavToggle from './NavToggle'
 import useIsMobile from '@/helpers/hooks/useIsMobile'
+import CharacterAnimationCanvas from '@/components/experiences/CharacterAnimationExperience/CharacterAnimationCanvas'
 
 const inventoryItems = [
   {
@@ -103,6 +103,14 @@ export default function Nav({ sectionInView }: { sectionInView: string }) {
     return inventory
   }
 
+  React.useEffect(() => {
+    if (open) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'auto'
+    }
+  }, [open])
+
   return (
     <>
       {!isMobile && (
@@ -116,7 +124,7 @@ export default function Nav({ sectionInView }: { sectionInView: string }) {
           </nav>
         </div>
       )}
-      {isMobile && (
+      {
         <>
           <div
             className={`fixed z-40 w-full h-full bg-transparent transition-transform p-3 ${
@@ -146,7 +154,7 @@ export default function Nav({ sectionInView }: { sectionInView: string }) {
             }}
           />
         </>
-      )}
+      }
     </>
   )
 }

@@ -136,6 +136,32 @@ html {
   scroll-behavior: smooth !important;
 }
 
+/* style the text select to have the gold-border as background color and the color-primary as the text */
+::selection {
+  background: var(--inventory-slot-background);
+  color: var(--gold-border);
+}
+
+/* style the scrollbar to be thin on the body element, use the inventory-background for the track and thwe gold-border for the thumb */
+body::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: var(--gold-border);
+  border-radius: 2px;
+}
+
+body::-webkit-scrollbar-track {
+  background: var(--inventory-slot-background);
+}
+
+/*  make the scrollbar slightly brighter on hover */
+body::-webkit-scrollbar-thumb:hover {
+  background: #d4a24f;
+}
+
 .project-html--wrapper {
   position: relative;
   width: 100%;

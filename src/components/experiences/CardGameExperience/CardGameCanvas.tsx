@@ -1,6 +1,6 @@
 'use client'
 import { Canvas } from '@react-three/fiber'
-import CardGameExperience from '../experiences/CardGameExperience/CardGameExperience'
+import CardGameExperience from './CardGameExperience'
 
 import {
   Bounds,
