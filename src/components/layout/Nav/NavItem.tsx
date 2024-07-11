@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 
 const HighlightedIndicator = () => {
-  const stroke = 'var(--gold-border)'
+  const stroke = 'var(--gold-inventory)'
   return (
     <svg viewBox='0 0 100 100' width='100%'>
       <path d='M25,2 L2,2 L2,25' fill='none' stroke={stroke} strokeWidth='2' />

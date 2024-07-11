@@ -131,7 +131,7 @@ export default function Card({ cardId, position, rotation, scale, projectData }:
   if (materials) {
     // @ts-ignore
     // materials.Front.color = new Color(0xffffff)
-    console.log('materials', nodes)
+    // console.log('materials', nodes)
   }
 
   return (
